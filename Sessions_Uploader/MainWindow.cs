@@ -32,6 +32,37 @@ namespace Sessions_Uploader
             MessageBox.Show(message);
         }
 
+        private void clearBtn_Click(object sender, EventArgs e)
+        {
+            string tempDirectory = @"C:\ReadyToUpload\";
+
+            if (!clearTemp.Checked)
+            {
+                MessageBox.Show("Please select checkbox");
+            }
+            else
+            {
+                if (Directory.GetDirectories(tempDirectory).Length == 0 &&
+                    Directory.GetFiles(tempDirectory, "*", SearchOption.AllDirectories).Length == 0)
+                {
+                    MessageBox.Show("Temp location is empty");
+                }
+                else
+                {
+                    DirectoryInfo di = new DirectoryInfo(tempDirectory);
+                    foreach (FileInfo file in di.GetFiles())
+                    {
+                        file.Delete();
+                    }
+                    foreach (DirectoryInfo dir in di.GetDirectories())
+                    {
+                        dir.Delete(true);
+                    }
+                    MessageBox.Show("All files has been deleted");
+                }
+            }
+        }
+
         private void CheckSelectedServer()
         {
             if (string.IsNullOrEmpty(comboBoxServers.Text))
@@ -53,7 +84,7 @@ namespace Sessions_Uploader
                         break;
                     case "triss-2":
                         uploader.UploadToServer(@"\\ecgfftt-13hq05.corp.medicalgorithmics.com\Servertriss-2\Root\FTP\PDA");
-                       break;
+                        break;
                     case "triss-1":
                         uploader.UploadToServer(@"\\ecgfftt-13hq05.corp.medicalgorithmics.com\Servertriss-1\Root\FTP\PDA");
                         break;
@@ -98,5 +129,6 @@ namespace Sessions_Uploader
         {
 
         }
+
     }
 }

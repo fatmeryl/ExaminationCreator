@@ -39,6 +39,10 @@
             this.panelInterval = new System.Windows.Forms.Panel();
             this.labelFilesInterval = new System.Windows.Forms.Label();
             this.howManyTimes = new System.Windows.Forms.NumericUpDown();
+            this.directorySearcher1 = new System.DirectoryServices.DirectorySearcher();
+            this.label1 = new System.Windows.Forms.Label();
+            this.clearTemp = new System.Windows.Forms.CheckBox();
+            this.clearBtn = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panelInterval.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.howManyTimes)).BeginInit();
@@ -58,6 +62,7 @@
             this.comboBoxServers.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxServers.FormattingEnabled = true;
             this.comboBoxServers.Items.AddRange(new object[] {
+            "testowa lokalizacja",
             "triss-3",
             "triss-2",
             "triss-1",
@@ -71,7 +76,7 @@
             "klatch-2",
             "uberwald-1",
             "quirm-1",
-            "testowa lokalizacja"});
+            });
             this.comboBoxServers.Location = new System.Drawing.Point(25, 30);
             this.comboBoxServers.Name = "comboBoxServers";
             this.comboBoxServers.Size = new System.Drawing.Size(227, 21);
@@ -81,7 +86,7 @@
             // btnUploadSession
             // 
             this.btnUploadSession.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.btnUploadSession.Location = new System.Drawing.Point(43, 154);
+            this.btnUploadSession.Location = new System.Drawing.Point(43, 197);
             this.btnUploadSession.Name = "btnUploadSession";
             this.btnUploadSession.Size = new System.Drawing.Size(186, 27);
             this.btnUploadSession.TabIndex = 2;
@@ -100,7 +105,7 @@
             // labMedical
             // 
             this.labMedical.AutoSize = true;
-            this.labMedical.Location = new System.Drawing.Point(22, 202);
+            this.labMedical.Location = new System.Drawing.Point(22, 246);
             this.labMedical.Name = "labMedical";
             this.labMedical.Size = new System.Drawing.Size(78, 13);
             this.labMedical.TabIndex = 3;
@@ -109,7 +114,7 @@
             // pictureBox1
             // 
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(125, 196);
+            this.pictureBox1.Location = new System.Drawing.Point(125, 246);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(127, 19);
             this.pictureBox1.TabIndex = 5;
@@ -145,14 +150,14 @@
             // 
             // howManyTimes
             // 
-            this.howManyTimes.Location = new System.Drawing.Point(125, 105);
+            this.howManyTimes.Location = new System.Drawing.Point(174, 159);
             this.howManyTimes.Minimum = new decimal(new int[] {
             1,
             0,
             0,
             0});
             this.howManyTimes.Name = "howManyTimes";
-            this.howManyTimes.Size = new System.Drawing.Size(120, 20);
+            this.howManyTimes.Size = new System.Drawing.Size(55, 20);
             this.howManyTimes.TabIndex = 8;
             this.howManyTimes.Value = new decimal(new int[] {
             1,
@@ -160,12 +165,50 @@
             0,
             0});
             // 
+            // directorySearcher1
+            // 
+            this.directorySearcher1.ClientTimeout = System.TimeSpan.Parse("-00:00:01");
+            this.directorySearcher1.ServerPageTimeLimit = System.TimeSpan.Parse("-00:00:01");
+            this.directorySearcher1.ServerTimeLimit = System.TimeSpan.Parse("-00:00:01");
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(40, 161);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(124, 13);
+            this.label1.TabIndex = 9;
+            this.label1.Text = "How many examinations:";
+            // 
+            // clearTemp
+            // 
+            this.clearTemp.AutoSize = true;
+            this.clearTemp.Location = new System.Drawing.Point(50, 109);
+            this.clearTemp.Name = "clearTemp";
+            this.clearTemp.Size = new System.Drawing.Size(75, 17);
+            this.clearTemp.TabIndex = 10;
+            this.clearTemp.Text = "clear temp";
+            this.clearTemp.UseVisualStyleBackColor = true;
+            // 
+            // clearBtn
+            // 
+            this.clearBtn.Location = new System.Drawing.Point(154, 105);
+            this.clearBtn.Name = "clearBtn";
+            this.clearBtn.Size = new System.Drawing.Size(75, 23);
+            this.clearBtn.TabIndex = 11;
+            this.clearBtn.Text = "Clear";
+            this.clearBtn.UseVisualStyleBackColor = true;
+            this.clearBtn.Click += new System.EventHandler(this.clearBtn_Click);
+            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.ClientSize = new System.Drawing.Size(272, 289);
+            this.Controls.Add(this.clearBtn);
+            this.Controls.Add(this.clearTemp);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.howManyTimes);
             this.Controls.Add(this.panelInterval);
             this.Controls.Add(this.pictureBox1);
@@ -198,6 +241,10 @@
         private System.Windows.Forms.Panel panelInterval;
         private System.Windows.Forms.Label labelFilesInterval;
         private System.Windows.Forms.NumericUpDown howManyTimes;
+        private System.DirectoryServices.DirectorySearcher directorySearcher1;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.CheckBox clearTemp;
+        private System.Windows.Forms.Button clearBtn;
     }
 }
 
