@@ -1,0 +1,1 @@
+<clientmessage v="3"><from>20180629121817_P7057940403073537057940403</from><to>server</to><request><file><name>ExamInfo_20180629121817.rtl</name><type>log</type><format>txt</format><starttime>2018/06/29U12:18:19.678</starttime></file></request></clientmessage>

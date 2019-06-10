@@ -1,0 +1,102 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.IO;
+using System.Linq;
+using System.Net;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Button;
+
+
+namespace Sessions_Uploader
+{
+    public partial class MainWindow : Form
+    {
+
+        public MainWindow()
+        {
+            InitializeComponent();
+        }
+
+        private void btnUploadSession_Click(object sender, EventArgs e)
+        {
+            for (int i = 1; i <= howManyTimes.Value; i++)
+            {
+                CheckSelectedServer();
+            }
+            string message = "Session(s) successfully uploaded!\n";
+            MessageBox.Show(message);
+        }
+
+        private void CheckSelectedServer()
+        {
+            if (string.IsNullOrEmpty(comboBoxServers.Text))
+            {
+                MessageBox.Show("No Item is Selected");
+            }
+            else
+            {
+                var uploader = new Uploader(DateTime.Now.ToLocalTime() - TimeSpan.FromHours(Int32.Parse(textBoxInterval.Text)), @"..\..\..\Sessions_Uploader\20180629121817_P7057940403073537057940403\", @"C:\ReadyToUpload\");
+
+                comboBoxServers.SelectedItem = "";
+                switch (comboBoxServers.SelectedItem.ToString())
+                {
+                    case "testowa lokalizacja":
+                        uploader.UploadToServer(@"C:\Users\kherlinger\Desktop\Aktualne testy\Badania\ZmienioneID\test");
+                        break;
+                    case "triss-3":
+                        uploader.UploadToServer(@"\\ecgfftt-13hq05.corp.medicalgorithmics.com\Servertriss-3\Root\FTP\PDA");
+                        break;
+                    case "triss-2":
+                        uploader.UploadToServer(@"\\ecgfftt-13hq05.corp.medicalgorithmics.com\Servertriss-2\Root\FTP\PDA");
+                       break;
+                    case "triss-1":
+                        uploader.UploadToServer(@"\\ecgfftt-13hq05.corp.medicalgorithmics.com\Servertriss-1\Root\FTP\PDA");
+                        break;
+                    case "yennefer-3":
+                        uploader.UploadToServer(@"\\ecgfftt-13hq05.corp.medicalgorithmics.com\Serveryennefer-3\Root\FTP\PDA");
+                        break;
+                    case "yennefer-2":
+                        uploader.UploadToServer(@"\\ecgfftt-13hq05.corp.medicalgorithmics.com\Serveryennefer-2\Root\FTP\PDA");
+                        break;
+                    case "yennefer-1":
+                        uploader.UploadToServer(@"\\ecgfftt-13hq05.corp.medicalgorithmics.com\Serveryennefer-1\Root\FTP\PDA");
+                        break;
+                    case "fringilla-3":
+                        uploader.UploadToServer(@"\\ecgfftt-13hq05.corp.medicalgorithmics.com\Serverfringilla-3\Root\FTP\PDA");
+                        break;
+                    case "fringilla-2":
+                        uploader.UploadToServer(@"\\ecgfftt-13hq05.corp.medicalgorithmics.com\Serverfringilla-2\Root\FTP\PDA");
+                        break;
+                    case "fringilla-1":
+                        uploader.UploadToServer(@"\\ecgfftt-13hq05.corp.medicalgorithmics.com\Serverfringilla-1\Root\FTP\PDA");
+                        break;
+                    case "klatch-1":
+                        uploader.UploadToServer(@"\\ecgfftt-13hq04.corp.medicalgorithmics.com\Serverklatch-1\Root\FTP\PDA");
+                        break;
+                    case "klatch-2":
+                        uploader.UploadToServer(@"\\ecgfftt-13hq04.corp.medicalgorithmics.com\Serverklatch-2\Root\FTP\PDA");
+                        break;
+                    case "uberwald-1":
+                        uploader.UploadToServer(@"\\ecgfftt-13hq04.corp.medicalgorithmics.com\Serveruberwald-1\Root\FTP\PDA");
+                        break;
+                    case "quirm-1":
+                        uploader.UploadToServer(@"\\ecgfftt-13hq04.corp.medicalgorithmics.com\Serverquirm-1\Root\FTP\PDA");
+                        break;
+                    default:
+                        MessageBox.Show("Please choose one of the item" + Uploader.NewExaminationId);
+                        break;
+                }
+            }
+        }
+
+        private void comboBoxServers_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+    }
+}
