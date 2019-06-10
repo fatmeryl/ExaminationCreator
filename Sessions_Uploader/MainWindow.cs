@@ -71,13 +71,16 @@ namespace Sessions_Uploader
             }
             else
             {
-                var uploader = new Uploader(DateTime.Now.ToLocalTime() - TimeSpan.FromHours(Int32.Parse(textBoxInterval.Text)), @"..\..\..\Sessions_Uploader\20180629121817_P7057940403073537057940403\", @"C:\ReadyToUpload\");
+                var uploader = new Uploader(
+                    DateTime.Now.ToLocalTime() - TimeSpan.FromHours(Int32.Parse(textBoxInterval.Text)),
+                    directorySourceTextBox.Text,
+                    @"C:\ReadyToUpload\");
 
-                comboBoxServers.SelectedItem = "";
+                comboBoxServers.SelectedItem = string.Empty;
                 switch (comboBoxServers.SelectedItem.ToString())
                 {
-                    case "testowa lokalizacja":
-                        uploader.UploadToServer(@"C:\Users\kherlinger\Desktop\Aktualne testy\Badania\ZmienioneID\test");
+                    case "Examination Creator":
+                        uploader.UploadToServer(directoryOutputTextBox.Text);
                         break;
                     case "triss-3":
                         uploader.UploadToServer(@"\\ecgfftt-13hq05.corp.medicalgorithmics.com\Servertriss-3\Root\FTP\PDA");
@@ -124,24 +127,24 @@ namespace Sessions_Uploader
                 }
             }
         }
-
-        private void comboBoxServers_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void groupBox1_Enter(object sender, EventArgs e)
-        {
-
-        }
-
-        private void Browse_Click(object sender, EventArgs e)
+        
+        private void BrowseSource_Click(object sender, EventArgs e)
         {
             FolderBrowserDialog dialogTree = new FolderBrowserDialog();
             dialogTree.SelectedPath = directorySourceTextBox.Text;
             if (dialogTree.ShowDialog() == DialogResult.OK)
             {
-                directorySourceTextBox.Text = dialogTree.SelectedPath;
+                directorySourceTextBox.Text = $@"{dialogTree.SelectedPath}\";
+            }
+        }
+        
+        private void BrowseOutput_Click(object sender, EventArgs e)
+        {
+            FolderBrowserDialog dialogTree = new FolderBrowserDialog();
+            dialogTree.SelectedPath = directoryOutputTextBox.Text;
+            if (dialogTree.ShowDialog() == DialogResult.OK)
+            {
+                directoryOutputTextBox.Text = dialogTree.SelectedPath;
             }
         }
     }
