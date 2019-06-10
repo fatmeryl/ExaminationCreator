@@ -43,9 +43,13 @@
             this.label1 = new System.Windows.Forms.Label();
             this.clearTemp = new System.Windows.Forms.CheckBox();
             this.clearBtn = new System.Windows.Forms.Button();
+            this.Browse = new System.Windows.Forms.Button();
+            this.directorySourceTextBox = new System.Windows.Forms.TextBox();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panelInterval.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.howManyTimes)).BeginInit();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // lblChooseServer
@@ -75,8 +79,7 @@
             "klatch-1",
             "klatch-2",
             "uberwald-1",
-            "quirm-1",
-            });
+            "quirm-1"});
             this.comboBoxServers.Location = new System.Drawing.Point(25, 30);
             this.comboBoxServers.Name = "comboBoxServers";
             this.comboBoxServers.Size = new System.Drawing.Size(227, 21);
@@ -183,7 +186,7 @@
             // clearTemp
             // 
             this.clearTemp.AutoSize = true;
-            this.clearTemp.Location = new System.Drawing.Point(50, 109);
+            this.clearTemp.Location = new System.Drawing.Point(50, 130);
             this.clearTemp.Name = "clearTemp";
             this.clearTemp.Size = new System.Drawing.Size(75, 17);
             this.clearTemp.TabIndex = 10;
@@ -192,7 +195,7 @@
             // 
             // clearBtn
             // 
-            this.clearBtn.Location = new System.Drawing.Point(154, 105);
+            this.clearBtn.Location = new System.Drawing.Point(154, 124);
             this.clearBtn.Name = "clearBtn";
             this.clearBtn.Size = new System.Drawing.Size(75, 23);
             this.clearBtn.TabIndex = 11;
@@ -200,12 +203,41 @@
             this.clearBtn.UseVisualStyleBackColor = true;
             this.clearBtn.Click += new System.EventHandler(this.clearBtn_Click);
             // 
+            // Browse
+            // 
+            this.Browse.Location = new System.Drawing.Point(485, 17);
+            this.Browse.Name = "Browse";
+            this.Browse.Size = new System.Drawing.Size(75, 23);
+            this.Browse.TabIndex = 12;
+            this.Browse.Text = "Browse";
+            this.Browse.UseVisualStyleBackColor = true;
+            this.Browse.Click += new System.EventHandler(this.Browse_Click);
+            // 
+            // directorySourceTextBox
+            // 
+            this.directorySourceTextBox.Location = new System.Drawing.Point(6, 19);
+            this.directorySourceTextBox.Name = "directorySourceTextBox";
+            this.directorySourceTextBox.Size = new System.Drawing.Size(473, 20);
+            this.directorySourceTextBox.TabIndex = 13;
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.directorySourceTextBox);
+            this.groupBox1.Controls.Add(this.Browse);
+            this.groupBox1.Location = new System.Drawing.Point(4, 288);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(566, 54);
+            this.groupBox1.TabIndex = 14;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Source directory";
+            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.ClientSize = new System.Drawing.Size(272, 289);
+            this.ClientSize = new System.Drawing.Size(582, 505);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.clearBtn);
             this.Controls.Add(this.clearTemp);
             this.Controls.Add(this.label1);
@@ -224,6 +256,8 @@
             this.panelInterval.ResumeLayout(false);
             this.panelInterval.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.howManyTimes)).EndInit();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -245,6 +279,9 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.CheckBox clearTemp;
         private System.Windows.Forms.Button clearBtn;
+        private System.Windows.Forms.Button Browse;
+        private System.Windows.Forms.TextBox directorySourceTextBox;
+        private System.Windows.Forms.GroupBox groupBox1;
     }
 }
 

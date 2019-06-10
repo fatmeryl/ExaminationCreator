@@ -130,5 +130,19 @@ namespace Sessions_Uploader
 
         }
 
+        private void groupBox1_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Browse_Click(object sender, EventArgs e)
+        {
+            FolderBrowserDialog dialogTree = new FolderBrowserDialog();
+            dialogTree.SelectedPath = directorySourceTextBox.Text;
+            if (dialogTree.ShowDialog() == DialogResult.OK)
+            {
+                directorySourceTextBox.Text = dialogTree.SelectedPath;
+            }
+        }
     }
 }
