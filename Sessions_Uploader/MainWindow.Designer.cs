@@ -44,12 +44,13 @@
             this.directorySourceTextBox = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.openTempBtn = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.automaticIntervalCheckBox = new System.Windows.Forms.CheckBox();
             this.OutputGroupBox = new System.Windows.Forms.GroupBox();
             this.directoryOutputTextBox = new System.Windows.Forms.TextBox();
             this.BrowseOutput = new System.Windows.Forms.Button();
             this.examinationCreatorSwithCheckBox = new System.Windows.Forms.CheckBox();
-            this.openTempBtn = new System.Windows.Forms.Button();
             this.panelInterval.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.howManyTimes)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -140,16 +141,16 @@
             // 
             // howManyTimes
             // 
-            this.howManyTimes.Location = new System.Drawing.Point(153, 103);
+            this.howManyTimes.Location = new System.Drawing.Point(144, 103);
             this.howManyTimes.Minimum = new decimal(new int[] {
             1,
             0,
             0,
             0});
             this.howManyTimes.Name = "howManyTimes";
-            this.howManyTimes.Size = new System.Drawing.Size(41, 20);
+            this.howManyTimes.Size = new System.Drawing.Size(39, 20);
             this.howManyTimes.TabIndex = 8;
-            this.howManyTimes.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.howManyTimes.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.howManyTimes.Value = new decimal(new int[] {
             1,
             0,
@@ -225,8 +226,20 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Options";
             // 
+            // openTempBtn
+            // 
+            this.openTempBtn.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.openTempBtn.Location = new System.Drawing.Point(45, 58);
+            this.openTempBtn.Name = "openTempBtn";
+            this.openTempBtn.Size = new System.Drawing.Size(118, 23);
+            this.openTempBtn.TabIndex = 12;
+            this.openTempBtn.Text = "Open temp location";
+            this.openTempBtn.UseVisualStyleBackColor = false;
+            this.openTempBtn.Click += new System.EventHandler(this.openTempBtn_Click);
+            // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.automaticIntervalCheckBox);
             this.groupBox3.Controls.Add(this.lblChooseServer);
             this.groupBox3.Controls.Add(this.comboBoxServers);
             this.groupBox3.Controls.Add(this.label1);
@@ -234,10 +247,23 @@
             this.groupBox3.Controls.Add(this.panelInterval);
             this.groupBox3.Location = new System.Drawing.Point(4, 167);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(279, 146);
+            this.groupBox3.Size = new System.Drawing.Size(317, 146);
             this.groupBox3.TabIndex = 16;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Settings";
+            // 
+            // automaticIntervalCheckBox
+            // 
+            this.automaticIntervalCheckBox.AutoSize = true;
+            this.automaticIntervalCheckBox.Checked = true;
+            this.automaticIntervalCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.automaticIntervalCheckBox.Location = new System.Drawing.Point(201, 62);
+            this.automaticIntervalCheckBox.Name = "automaticIntervalCheckBox";
+            this.automaticIntervalCheckBox.Size = new System.Drawing.Size(109, 17);
+            this.automaticIntervalCheckBox.TabIndex = 10;
+            this.automaticIntervalCheckBox.Text = "automatic interval";
+            this.automaticIntervalCheckBox.UseVisualStyleBackColor = true;
+            this.automaticIntervalCheckBox.CheckedChanged += new System.EventHandler(this.automaticIntervalCheckBox_CheckedChanged);
             // 
             // OutputGroupBox
             // 
@@ -278,17 +304,6 @@
             this.examinationCreatorSwithCheckBox.Text = "Examination creator";
             this.examinationCreatorSwithCheckBox.UseVisualStyleBackColor = true;
             this.examinationCreatorSwithCheckBox.CheckedChanged += new System.EventHandler(this.examinationCreatorSwithCheckBox_CheckedChanged);
-            // 
-            // openTempBtn
-            // 
-            this.openTempBtn.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.openTempBtn.Location = new System.Drawing.Point(45, 58);
-            this.openTempBtn.Name = "openTempBtn";
-            this.openTempBtn.Size = new System.Drawing.Size(118, 23);
-            this.openTempBtn.TabIndex = 12;
-            this.openTempBtn.Text = "Open temp location";
-            this.openTempBtn.UseVisualStyleBackColor = false;
-            this.openTempBtn.Click += new System.EventHandler(this.openTempBtn_Click);
             // 
             // MainWindow
             // 
@@ -347,6 +362,7 @@
         private System.Windows.Forms.Button BrowseOutput;
         private System.Windows.Forms.CheckBox examinationCreatorSwithCheckBox;
         private System.Windows.Forms.Button openTempBtn;
+        private System.Windows.Forms.CheckBox automaticIntervalCheckBox;
     }
 }
 

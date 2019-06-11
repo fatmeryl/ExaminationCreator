@@ -77,7 +77,7 @@ namespace Sessions_Uploader
             {
                 var uploader = new Uploader(
                     DateTime.Now.ToLocalTime() - TimeSpan.FromHours(Int32.Parse(textBoxInterval.Text)),
-                    directorySourceTextBox.Text,
+                    $@"{directorySourceTextBox.Text}\",
                     tempDirectory);
 
                 comboBoxServers.SelectedItem = string.Empty;
@@ -130,8 +130,7 @@ namespace Sessions_Uploader
                         break;
                 }
 
-                string message = "Session(s) successfully uploaded!\n";
-                MessageBox.Show(message);
+                MessageBox.Show("Session(s) successfully uploaded!\n");
             }
         }
         
@@ -141,7 +140,7 @@ namespace Sessions_Uploader
             dialogTree.SelectedPath = directorySourceTextBox.Text;
             if (dialogTree.ShowDialog() == DialogResult.OK)
             {
-                directorySourceTextBox.Text = $@"{dialogTree.SelectedPath}\";
+                directorySourceTextBox.Text = dialogTree.SelectedPath;
             }
         }
 
@@ -172,5 +171,15 @@ namespace Sessions_Uploader
         {
             System.Diagnostics.Process.Start(tempDirectory);
         }
+
+        private void automaticIntervalCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            if (automaticIntervalCheckBox.Checked)
+            {
+                textBoxInterval.Text = "12";
+            }
+        }
+
+        
     }
 }
