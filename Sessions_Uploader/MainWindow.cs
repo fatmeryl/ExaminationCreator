@@ -24,12 +24,19 @@ namespace Sessions_Uploader
 
         private void btnUploadSession_Click(object sender, EventArgs e)
         {
-            for (int i = 1; i <= howManyTimes.Value; i++)
+            if (directorySourceTextBox.Text == String.Empty)
             {
-                CheckSelectedServer();
+                MessageBox.Show("Please enter a valid source directory");
             }
-            string message = "Session(s) successfully uploaded!\n";
-            MessageBox.Show(message);
+            else
+            {
+                for (int i = 1; i <= howManyTimes.Value; i++)
+                {
+                    CheckSelectedServer();
+                }
+                string message = "Session(s) successfully uploaded!\n";
+                MessageBox.Show(message);
+            }
         }
 
         private void clearBtn_Click(object sender, EventArgs e)
