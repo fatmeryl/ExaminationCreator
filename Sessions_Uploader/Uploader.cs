@@ -68,9 +68,6 @@ namespace Sessions_Uploader
                 }
             }
 
-
-
-            //  wszystkie pliki z katalogu OutExaminationPath przekopiowac na (ServerPath + @"\" + NewExaminationId)
             CreateFolder(serverPath);
             UploadStudy(serverPath);
         }
@@ -86,10 +83,8 @@ namespace Sessions_Uploader
         private void ShiftDates(string xmlFilePath, string outPath, TimeSpan interval)
         {
             var doc = XDocument.Load(xmlFilePath);
-
              
             var timeNodes = new string[] { "starttime", "endtime", "last_modified_time", "log_time" }.SelectMany(tag => doc.Descendants(tag));
-
 
             foreach (var node in timeNodes)
             {

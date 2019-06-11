@@ -16,6 +16,7 @@ namespace Sessions_Uploader
 {
     public partial class MainWindow : Form
     {
+        string tempDirectory = @"C:\ReadyToUpload\";
 
         public MainWindow()
         {
@@ -41,8 +42,6 @@ namespace Sessions_Uploader
 
         private void clearBtn_Click(object sender, EventArgs e)
         {
-            string tempDirectory = @"C:\ReadyToUpload\";
-
             if (!clearTemp.Checked)
             {
                 MessageBox.Show("Please select checkbox");
@@ -81,7 +80,7 @@ namespace Sessions_Uploader
                 var uploader = new Uploader(
                     DateTime.Now.ToLocalTime() - TimeSpan.FromHours(Int32.Parse(textBoxInterval.Text)),
                     directorySourceTextBox.Text,
-                    @"C:\ReadyToUpload\");
+                    tempDirectory);
 
                 comboBoxServers.SelectedItem = string.Empty;
                 switch (comboBoxServers.SelectedItem.ToString())
@@ -158,8 +157,6 @@ namespace Sessions_Uploader
             }
         }
 
-
-
         private void BrowseOutput_Click(object sender, EventArgs e)
         {
             FolderBrowserDialog dialogTree = new FolderBrowserDialog();
@@ -170,6 +167,9 @@ namespace Sessions_Uploader
             }
         }
 
-        
+        private void openTempBtn_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start(tempDirectory);
+        }
     }
 }
