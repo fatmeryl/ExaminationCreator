@@ -37,7 +37,6 @@
             this.panelInterval = new System.Windows.Forms.Panel();
             this.labelFilesInterval = new System.Windows.Forms.Label();
             this.howManyTimes = new System.Windows.Forms.NumericUpDown();
-            this.directorySearcher1 = new System.DirectoryServices.DirectorySearcher();
             this.label1 = new System.Windows.Forms.Label();
             this.clearTemp = new System.Windows.Forms.CheckBox();
             this.clearBtn = new System.Windows.Forms.Button();
@@ -46,15 +45,16 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.OutputGroupBox = new System.Windows.Forms.GroupBox();
             this.directoryOutputTextBox = new System.Windows.Forms.TextBox();
             this.BrowseOutput = new System.Windows.Forms.Button();
+            this.examinationCreatorSwithCheckBox = new System.Windows.Forms.CheckBox();
             this.panelInterval.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.howManyTimes)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
-            this.groupBox4.SuspendLayout();
+            this.OutputGroupBox.SuspendLayout();
             this.SuspendLayout();
             // 
             // lblChooseServer
@@ -154,12 +154,6 @@
             0,
             0});
             // 
-            // directorySearcher1
-            // 
-            this.directorySearcher1.ClientTimeout = System.TimeSpan.Parse("-00:00:01");
-            this.directorySearcher1.ServerPageTimeLimit = System.TimeSpan.Parse("-00:00:01");
-            this.directorySearcher1.ServerTimeLimit = System.TimeSpan.Parse("-00:00:01");
-            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -242,16 +236,17 @@
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Settings";
             // 
-            // groupBox4
+            // OutputGroupBox
             // 
-            this.groupBox4.Controls.Add(this.directoryOutputTextBox);
-            this.groupBox4.Controls.Add(this.BrowseOutput);
-            this.groupBox4.Location = new System.Drawing.Point(4, 87);
-            this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(566, 54);
-            this.groupBox4.TabIndex = 17;
-            this.groupBox4.TabStop = false;
-            this.groupBox4.Text = "Output directory";
+            this.OutputGroupBox.Controls.Add(this.directoryOutputTextBox);
+            this.OutputGroupBox.Controls.Add(this.BrowseOutput);
+            this.OutputGroupBox.Enabled = false;
+            this.OutputGroupBox.Location = new System.Drawing.Point(4, 98);
+            this.OutputGroupBox.Name = "OutputGroupBox";
+            this.OutputGroupBox.Size = new System.Drawing.Size(566, 54);
+            this.OutputGroupBox.TabIndex = 17;
+            this.OutputGroupBox.TabStop = false;
+            this.OutputGroupBox.Text = "Output directory (for examination creator)";
             // 
             // directoryOutputTextBox
             // 
@@ -270,13 +265,25 @@
             this.BrowseOutput.UseVisualStyleBackColor = true;
             this.BrowseOutput.Click += new System.EventHandler(this.BrowseOutput_Click);
             // 
+            // examinationCreatorSwithCheckBox
+            // 
+            this.examinationCreatorSwithCheckBox.AutoSize = true;
+            this.examinationCreatorSwithCheckBox.Location = new System.Drawing.Point(4, 75);
+            this.examinationCreatorSwithCheckBox.Name = "examinationCreatorSwithCheckBox";
+            this.examinationCreatorSwithCheckBox.Size = new System.Drawing.Size(119, 17);
+            this.examinationCreatorSwithCheckBox.TabIndex = 18;
+            this.examinationCreatorSwithCheckBox.Text = "Examination creator";
+            this.examinationCreatorSwithCheckBox.UseVisualStyleBackColor = true;
+            this.examinationCreatorSwithCheckBox.CheckedChanged += new System.EventHandler(this.examinationCreatorSwithCheckBox_CheckedChanged);
+            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.ClientSize = new System.Drawing.Size(582, 505);
-            this.Controls.Add(this.groupBox4);
+            this.Controls.Add(this.examinationCreatorSwithCheckBox);
+            this.Controls.Add(this.OutputGroupBox);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
@@ -294,8 +301,8 @@
             this.groupBox2.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
-            this.groupBox4.ResumeLayout(false);
-            this.groupBox4.PerformLayout();
+            this.OutputGroupBox.ResumeLayout(false);
+            this.OutputGroupBox.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -311,7 +318,6 @@
         private System.Windows.Forms.Panel panelInterval;
         private System.Windows.Forms.Label labelFilesInterval;
         private System.Windows.Forms.NumericUpDown howManyTimes;
-        private System.DirectoryServices.DirectorySearcher directorySearcher1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.CheckBox clearTemp;
         private System.Windows.Forms.Button clearBtn;
@@ -320,9 +326,10 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.GroupBox groupBox3;
-        private System.Windows.Forms.GroupBox groupBox4;
+        private System.Windows.Forms.GroupBox OutputGroupBox;
         private System.Windows.Forms.TextBox directoryOutputTextBox;
         private System.Windows.Forms.Button BrowseOutput;
+        private System.Windows.Forms.CheckBox examinationCreatorSwithCheckBox;
     }
 }
 

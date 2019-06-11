@@ -137,7 +137,22 @@ namespace Sessions_Uploader
                 directorySourceTextBox.Text = $@"{dialogTree.SelectedPath}\";
             }
         }
-        
+
+        private void examinationCreatorSwithCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            if (examinationCreatorSwithCheckBox.Checked == false)
+            {
+                OutputGroupBox.Enabled = false;
+            }
+
+            if (examinationCreatorSwithCheckBox.Checked)
+            {
+                OutputGroupBox.Enabled = true;
+            }
+        }
+
+
+
         private void BrowseOutput_Click(object sender, EventArgs e)
         {
             FolderBrowserDialog dialogTree = new FolderBrowserDialog();
@@ -147,5 +162,7 @@ namespace Sessions_Uploader
                 directoryOutputTextBox.Text = dialogTree.SelectedPath;
             }
         }
+
+        
     }
 }
