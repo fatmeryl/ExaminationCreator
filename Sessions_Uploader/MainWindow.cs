@@ -180,6 +180,9 @@ namespace Sessions_Uploader
             }
         }
 
-        
+        private void textBoxInterval_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = !char.IsDigit((e.KeyChar)) && !char.IsControl(e.KeyChar);
+        }
     }
 }

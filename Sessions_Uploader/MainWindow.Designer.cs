@@ -119,6 +119,7 @@
             this.textBoxInterval.TabIndex = 6;
             this.textBoxInterval.Text = "1";
             this.textBoxInterval.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.textBoxInterval.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxInterval_KeyPress);
             // 
             // panelInterval
             // 
