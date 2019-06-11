@@ -1,1 +1,0 @@
-<clientmessage v="2"><from>20180629121817_P7057940403073537057940403</from><to>server</to><request><stoprec>20180629121817_P7057940403073537057940403</stoprec></request></clientmessage>

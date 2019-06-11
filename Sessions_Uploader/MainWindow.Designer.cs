@@ -140,15 +140,16 @@
             // 
             // howManyTimes
             // 
-            this.howManyTimes.Location = new System.Drawing.Point(142, 103);
+            this.howManyTimes.Location = new System.Drawing.Point(153, 103);
             this.howManyTimes.Minimum = new decimal(new int[] {
             1,
             0,
             0,
             0});
             this.howManyTimes.Name = "howManyTimes";
-            this.howManyTimes.Size = new System.Drawing.Size(55, 20);
+            this.howManyTimes.Size = new System.Drawing.Size(41, 20);
             this.howManyTimes.TabIndex = 8;
+            this.howManyTimes.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.howManyTimes.Value = new decimal(new int[] {
             1,
             0,
@@ -302,7 +303,9 @@
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.lblStatusChanging);
             this.Controls.Add(this.btnUploadSession);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
             this.Name = "MainWindow";
             this.Text = "Sessions Uploder";
             this.panelInterval.ResumeLayout(false);

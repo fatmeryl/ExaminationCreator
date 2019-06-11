@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-16"?>
-<BeatProcessingSettings xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <MaxRecordingDurationFromEnrollmentInDays>0</MaxRecordingDurationFromEnrollmentInDays>
-  <SplitFilesStamp>0</SplitFilesStamp>
-  <DurationLimitInS>0</DurationLimitInS>
-  <LastBeatIndex>0</LastBeatIndex>
-  <Completed>true</Completed>
-</BeatProcessingSettings>

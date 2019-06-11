@@ -25,7 +25,7 @@ namespace Sessions_Uploader
 
         private void btnUploadSession_Click(object sender, EventArgs e)
         {
-            if (directorySourceTextBox.Text == String.Empty)
+            if (!Directory.Exists(directorySourceTextBox.Text))
             {
                 MessageBox.Show("Please enter a valid source directory");
             }
@@ -35,8 +35,6 @@ namespace Sessions_Uploader
                 {
                     CheckSelectedServer();
                 }
-                string message = "Session(s) successfully uploaded!\n";
-                MessageBox.Show(message);
             }
         }
 
@@ -73,7 +71,7 @@ namespace Sessions_Uploader
         {
             if (string.IsNullOrEmpty(comboBoxServers.Text))
             {
-                MessageBox.Show("No Item is Selected");
+                MessageBox.Show("Please choose server to upload files");
             }
             else
             {
@@ -131,6 +129,9 @@ namespace Sessions_Uploader
                         MessageBox.Show("Please choose one of the item" + Uploader.NewExaminationId);
                         break;
                 }
+
+                string message = "Session(s) successfully uploaded!\n";
+                MessageBox.Show(message);
             }
         }
         
