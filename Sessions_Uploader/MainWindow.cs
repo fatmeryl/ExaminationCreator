@@ -1,15 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
+using System.Globalization;
 using System.IO;
 using System.Linq;
-using System.Net;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.Button;
 
 
 namespace Sessions_Uploader
@@ -129,11 +123,10 @@ namespace Sessions_Uploader
                         MessageBox.Show("Please choose one of the item" + Uploader.NewExaminationId);
                         break;
                 }
-
                 MessageBox.Show("Session(s) successfully uploaded!\n");
             }
         }
-        
+
         private void BrowseSource_Click(object sender, EventArgs e)
         {
             FolderBrowserDialog dialogTree = new FolderBrowserDialog();
@@ -169,17 +162,43 @@ namespace Sessions_Uploader
 
         private void openTempBtn_Click(object sender, EventArgs e)
         {
-            System.Diagnostics.Process.Start(tempDirectory);
+            if (Directory.Exists(tempDirectory))
+            {
+                System.Diagnostics.Process.Start(tempDirectory);
+            }
+            else
+            {
+                MessageBox.Show("Temporary directory does not exist",String.Empty,MessageBoxButtons.OK,MessageBoxIcon.Asterisk);
+            }
         }
 
         private void automaticIntervalCheckBox_CheckedChanged(object sender, EventArgs e)
         {
             if (automaticIntervalCheckBox.Checked)
             {
-                textBoxInterval.Text = "12";
+                var interval = CalculateExaminationDurationRoundedToHours();
+
+                textBoxInterval.Text = (Math.Ceiling(interval).ToString());
             }
         }
 
+        private double CalculateExaminationDurationRoundedToHours()
+        {
+            var files = Directory.GetFiles(directorySourceTextBox.Text, "*", SearchOption.AllDirectories)
+                .Where(s => s.EndsWith((".ann")));
+
+            var firstAnn = Path.GetFileNameWithoutExtension(files.First());
+            var lastAnn = Path.GetFileNameWithoutExtension(files.Last());
+
+            var firstAnnDate = DateTime.ParseExact(firstAnn.Substring(0, 14), "yyyyMMddHHmmss", CultureInfo.InvariantCulture)
+                .ToUniversalTime();
+            var lastAnnDate = DateTime.ParseExact(lastAnn.Substring(0, 14), "yyyyMMddHHmmss", CultureInfo.InvariantCulture)
+                .ToUniversalTime();
+
+            var interval = (lastAnnDate - firstAnnDate).TotalHours;
+            return interval;
+        }
+        
         private void textBoxInterval_KeyPress(object sender, KeyPressEventArgs e)
         {
             e.Handled = !char.IsDigit((e.KeyChar)) && !char.IsControl(e.KeyChar);

@@ -256,8 +256,6 @@
             // automaticIntervalCheckBox
             // 
             this.automaticIntervalCheckBox.AutoSize = true;
-            this.automaticIntervalCheckBox.Checked = true;
-            this.automaticIntervalCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
             this.automaticIntervalCheckBox.Location = new System.Drawing.Point(201, 62);
             this.automaticIntervalCheckBox.Name = "automaticIntervalCheckBox";
             this.automaticIntervalCheckBox.Size = new System.Drawing.Size(109, 17);
