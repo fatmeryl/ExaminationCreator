@@ -15,6 +15,13 @@ namespace Sessions_Uploader
         public MainWindow()
         {
             InitializeComponent();
+
+            directorySourceTextBox.ModifiedChanged += DirectorySourceTextBoxOnModifiedChanged;
+        }
+
+        private void DirectorySourceTextBoxOnModifiedChanged(object sender, EventArgs e)
+        {
+            MessageBox.Show("test");
         }
 
         private void btnUploadSession_Click(object sender, EventArgs e)
@@ -30,8 +37,14 @@ namespace Sessions_Uploader
                     CheckSelectedServer();
                 }
             }
-        }
 
+            if (Directory.Exists(directoryOutputTextBox.Text) || comboBoxServers.SelectedItem != "Examination Creator")
+            {
+                MessageBox.Show("Session(s) successfully uploaded!\n");
+            }
+            
+        }
+        
         private void clearBtn_Click(object sender, EventArgs e)
         {
             if (!clearTemp.Checked)
@@ -78,7 +91,14 @@ namespace Sessions_Uploader
                 switch (comboBoxServers.SelectedItem.ToString())
                 {
                     case "Examination Creator":
-                        uploader.UploadToServer(directoryOutputTextBox.Text);
+                        if (Directory.Exists(directoryOutputTextBox.Text))
+                        {
+                            uploader.UploadToServer(directoryOutputTextBox.Text);
+                        }
+                        else
+                        {
+                            MessageBox.Show("Please provide output directory");
+                        }
                         break;
                     case "triss-3":
                         uploader.UploadToServer(@"\\ecgfftt-13hq05.corp.medicalgorithmics.com\Servertriss-3\Root\FTP\PDA");
@@ -123,7 +143,7 @@ namespace Sessions_Uploader
                         MessageBox.Show("Please choose one of the item" + Uploader.NewExaminationId);
                         break;
                 }
-                MessageBox.Show("Session(s) successfully uploaded!\n");
+
             }
         }
 
@@ -168,7 +188,7 @@ namespace Sessions_Uploader
             }
             else
             {
-                MessageBox.Show("Temporary directory does not exist",String.Empty,MessageBoxButtons.OK,MessageBoxIcon.Asterisk);
+                MessageBox.Show("Temporary directory does not exist", String.Empty, MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
             }
         }
 
@@ -198,7 +218,7 @@ namespace Sessions_Uploader
             var interval = (lastAnnDate - firstAnnDate).TotalHours;
             return interval;
         }
-        
+
         private void textBoxInterval_KeyPress(object sender, KeyPressEventArgs e)
         {
             e.Handled = !char.IsDigit((e.KeyChar)) && !char.IsControl(e.KeyChar);

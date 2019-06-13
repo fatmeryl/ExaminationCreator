@@ -117,7 +117,7 @@
             this.textBoxInterval.Name = "textBoxInterval";
             this.textBoxInterval.Size = new System.Drawing.Size(41, 20);
             this.textBoxInterval.TabIndex = 6;
-            this.textBoxInterval.Text = "1";
+            this.textBoxInterval.Text = "0";
             this.textBoxInterval.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.textBoxInterval.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxInterval_KeyPress);
             // 
