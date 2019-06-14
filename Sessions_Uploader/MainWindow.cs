@@ -38,11 +38,29 @@ namespace Sessions_Uploader
                 }
             }
 
+            if (clearTempOptionCheckBox.Checked)
+            {
+                ClearTempDirectory();
+            }
+
             if (Directory.Exists(directoryOutputTextBox.Text) || comboBoxServers.SelectedItem != "Examination Creator")
             {
                 MessageBox.Show("Session(s) successfully uploaded!\n");
             }
 
+        }
+
+        private void ClearTempDirectory()
+        {
+            DirectoryInfo di = new DirectoryInfo(tempDirectory);
+            foreach (FileInfo file in di.GetFiles())
+            {
+                file.Delete();
+            }
+            foreach (DirectoryInfo dir in di.GetDirectories())
+            {
+                dir.Delete(true);
+            }
         }
 
         private void clearBtn_Click(object sender, EventArgs e)
@@ -60,15 +78,7 @@ namespace Sessions_Uploader
                 }
                 else
                 {
-                    DirectoryInfo di = new DirectoryInfo(tempDirectory);
-                    foreach (FileInfo file in di.GetFiles())
-                    {
-                        file.Delete();
-                    }
-                    foreach (DirectoryInfo dir in di.GetDirectories())
-                    {
-                        dir.Delete(true);
-                    }
+                    ClearTempDirectory();
                     MessageBox.Show("All files has been deleted");
                 }
             }

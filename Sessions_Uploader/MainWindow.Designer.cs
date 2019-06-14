@@ -53,6 +53,7 @@
             this.directoryOutputTextBox = new System.Windows.Forms.TextBox();
             this.BrowseOutput = new System.Windows.Forms.Button();
             this.examinationCreatorSwithCheckBox = new System.Windows.Forms.CheckBox();
+            this.clearTempOptionCheckBox = new System.Windows.Forms.CheckBox();
             this.panelInterval.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.howManyTimes)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -97,7 +98,7 @@
             // btnUploadSession
             // 
             this.btnUploadSession.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.btnUploadSession.Location = new System.Drawing.Point(384, 321);
+            this.btnUploadSession.Location = new System.Drawing.Point(205, 394);
             this.btnUploadSession.Name = "btnUploadSession";
             this.btnUploadSession.Size = new System.Drawing.Size(186, 27);
             this.btnUploadSession.TabIndex = 2;
@@ -243,6 +244,7 @@
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.clearTempOptionCheckBox);
             this.groupBox3.Controls.Add(this.tempFolderCheckBox);
             this.groupBox3.Controls.Add(this.tempFolderTekstBox);
             this.groupBox3.Controls.Add(this.automaticIntervalCheckBox);
@@ -253,7 +255,7 @@
             this.groupBox3.Controls.Add(this.panelInterval);
             this.groupBox3.Location = new System.Drawing.Point(4, 167);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(317, 192);
+            this.groupBox3.Size = new System.Drawing.Size(317, 221);
             this.groupBox3.TabIndex = 16;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Settings";
@@ -263,16 +265,16 @@
             this.tempFolderCheckBox.AutoSize = true;
             this.tempFolderCheckBox.Location = new System.Drawing.Point(8, 132);
             this.tempFolderCheckBox.Name = "tempFolderCheckBox";
-            this.tempFolderCheckBox.Size = new System.Drawing.Size(85, 17);
+            this.tempFolderCheckBox.Size = new System.Drawing.Size(135, 17);
             this.tempFolderCheckBox.TabIndex = 13;
-            this.tempFolderCheckBox.Text = "Temp. folder";
+            this.tempFolderCheckBox.Text = "Temoporary folder path";
             this.tempFolderCheckBox.UseVisualStyleBackColor = true;
             this.tempFolderCheckBox.CheckedChanged += new System.EventHandler(this.tempFolderCheckBox_CheckedChanged);
             // 
             // tempFolderTekstBox
             // 
             this.tempFolderTekstBox.Enabled = false;
-            this.tempFolderTekstBox.Location = new System.Drawing.Point(6, 155);
+            this.tempFolderTekstBox.Location = new System.Drawing.Point(8, 157);
             this.tempFolderTekstBox.Name = "tempFolderTekstBox";
             this.tempFolderTekstBox.Size = new System.Drawing.Size(288, 20);
             this.tempFolderTekstBox.TabIndex = 11;
@@ -331,12 +333,22 @@
             this.examinationCreatorSwithCheckBox.UseVisualStyleBackColor = true;
             this.examinationCreatorSwithCheckBox.CheckedChanged += new System.EventHandler(this.examinationCreatorSwithCheckBox_CheckedChanged);
             // 
+            // clearTempOptionCheckBox
+            // 
+            this.clearTempOptionCheckBox.AutoSize = true;
+            this.clearTempOptionCheckBox.Location = new System.Drawing.Point(8, 186);
+            this.clearTempOptionCheckBox.Name = "clearTempOptionCheckBox";
+            this.clearTempOptionCheckBox.Size = new System.Drawing.Size(167, 17);
+            this.clearTempOptionCheckBox.TabIndex = 14;
+            this.clearTempOptionCheckBox.Text = "Clear temp. folder after upload";
+            this.clearTempOptionCheckBox.UseVisualStyleBackColor = true;
+            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.ClientSize = new System.Drawing.Size(582, 371);
+            this.ClientSize = new System.Drawing.Size(582, 442);
             this.Controls.Add(this.examinationCreatorSwithCheckBox);
             this.Controls.Add(this.OutputGroupBox);
             this.Controls.Add(this.groupBox3);
@@ -391,6 +403,7 @@
         private System.Windows.Forms.CheckBox automaticIntervalCheckBox;
         private System.Windows.Forms.CheckBox tempFolderCheckBox;
         private System.Windows.Forms.TextBox tempFolderTekstBox;
+        private System.Windows.Forms.CheckBox clearTempOptionCheckBox;
     }
 }
 
