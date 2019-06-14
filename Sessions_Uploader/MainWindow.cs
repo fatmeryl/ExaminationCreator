@@ -3,6 +3,7 @@ using System.Data;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 
@@ -15,7 +16,7 @@ namespace Sessions_Uploader
         public MainWindow()
         {
             InitializeComponent();
-            tempDirectory = tempFolderTekstBox.Text;
+            tempDirectory = $@"{tempFolderTekstBox.Text}\";
         }
 
         private void btnUploadSession_Click(object sender, EventArgs e)
@@ -29,6 +30,11 @@ namespace Sessions_Uploader
                 for (int i = 1; i <= howManyTimes.Value; i++)
                 {
                     CheckSelectedServer();
+
+                    if (howManyTimes.Value > 1)
+                    {
+                        Task.Delay(1000).Wait();
+                    }
                 }
             }
 

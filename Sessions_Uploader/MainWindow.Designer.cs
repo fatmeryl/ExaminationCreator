@@ -46,13 +46,13 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.openTempBtn = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.tempFolderCheckBox = new System.Windows.Forms.CheckBox();
+            this.tempFolderTekstBox = new System.Windows.Forms.TextBox();
             this.automaticIntervalCheckBox = new System.Windows.Forms.CheckBox();
             this.OutputGroupBox = new System.Windows.Forms.GroupBox();
             this.directoryOutputTextBox = new System.Windows.Forms.TextBox();
             this.BrowseOutput = new System.Windows.Forms.Button();
             this.examinationCreatorSwithCheckBox = new System.Windows.Forms.CheckBox();
-            this.tempFolderTekstBox = new System.Windows.Forms.TextBox();
-            this.tempFolderCheckBox = new System.Windows.Forms.CheckBox();
             this.panelInterval.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.howManyTimes)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -258,9 +258,31 @@
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Settings";
             // 
+            // tempFolderCheckBox
+            // 
+            this.tempFolderCheckBox.AutoSize = true;
+            this.tempFolderCheckBox.Location = new System.Drawing.Point(8, 132);
+            this.tempFolderCheckBox.Name = "tempFolderCheckBox";
+            this.tempFolderCheckBox.Size = new System.Drawing.Size(85, 17);
+            this.tempFolderCheckBox.TabIndex = 13;
+            this.tempFolderCheckBox.Text = "Temp. folder";
+            this.tempFolderCheckBox.UseVisualStyleBackColor = true;
+            this.tempFolderCheckBox.CheckedChanged += new System.EventHandler(this.tempFolderCheckBox_CheckedChanged);
+            // 
+            // tempFolderTekstBox
+            // 
+            this.tempFolderTekstBox.Enabled = false;
+            this.tempFolderTekstBox.Location = new System.Drawing.Point(6, 155);
+            this.tempFolderTekstBox.Name = "tempFolderTekstBox";
+            this.tempFolderTekstBox.Size = new System.Drawing.Size(288, 20);
+            this.tempFolderTekstBox.TabIndex = 11;
+            this.tempFolderTekstBox.Text = "C:\\ReadyToUpload";
+            // 
             // automaticIntervalCheckBox
             // 
             this.automaticIntervalCheckBox.AutoSize = true;
+            this.automaticIntervalCheckBox.Checked = true;
+            this.automaticIntervalCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
             this.automaticIntervalCheckBox.Location = new System.Drawing.Point(201, 62);
             this.automaticIntervalCheckBox.Name = "automaticIntervalCheckBox";
             this.automaticIntervalCheckBox.Size = new System.Drawing.Size(109, 17);
@@ -308,26 +330,6 @@
             this.examinationCreatorSwithCheckBox.Text = "Examination creator";
             this.examinationCreatorSwithCheckBox.UseVisualStyleBackColor = true;
             this.examinationCreatorSwithCheckBox.CheckedChanged += new System.EventHandler(this.examinationCreatorSwithCheckBox_CheckedChanged);
-            // 
-            // tempFolderTekstBox
-            // 
-            this.tempFolderTekstBox.Enabled = false;
-            this.tempFolderTekstBox.Location = new System.Drawing.Point(6, 155);
-            this.tempFolderTekstBox.Name = "tempFolderTekstBox";
-            this.tempFolderTekstBox.Size = new System.Drawing.Size(288, 20);
-            this.tempFolderTekstBox.TabIndex = 11;
-            this.tempFolderTekstBox.Text = "C:\\ReadyToUpload";
-            // 
-            // tempFolderCheckBox
-            // 
-            this.tempFolderCheckBox.AutoSize = true;
-            this.tempFolderCheckBox.Location = new System.Drawing.Point(8, 132);
-            this.tempFolderCheckBox.Name = "tempFolderCheckBox";
-            this.tempFolderCheckBox.Size = new System.Drawing.Size(85, 17);
-            this.tempFolderCheckBox.TabIndex = 13;
-            this.tempFolderCheckBox.Text = "Temp. folder";
-            this.tempFolderCheckBox.UseVisualStyleBackColor = true;
-            this.tempFolderCheckBox.CheckedChanged += new System.EventHandler(this.tempFolderCheckBox_CheckedChanged);
             // 
             // MainWindow
             // 
