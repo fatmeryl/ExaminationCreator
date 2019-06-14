@@ -15,15 +15,8 @@ namespace Sessions_Uploader
         public MainWindow()
         {
             InitializeComponent();
-
-            directorySourceTextBox.ModifiedChanged += DirectorySourceTextBoxOnModifiedChanged;
         }
-
-        private void DirectorySourceTextBoxOnModifiedChanged(object sender, EventArgs e)
-        {
-            MessageBox.Show("test");
-        }
-
+        
         private void btnUploadSession_Click(object sender, EventArgs e)
         {
             if (!Directory.Exists(directorySourceTextBox.Text))
@@ -42,9 +35,9 @@ namespace Sessions_Uploader
             {
                 MessageBox.Show("Session(s) successfully uploaded!\n");
             }
-            
+
         }
-        
+
         private void clearBtn_Click(object sender, EventArgs e)
         {
             if (!clearTemp.Checked)
@@ -143,7 +136,6 @@ namespace Sessions_Uploader
                         MessageBox.Show("Please choose one of the item" + Uploader.NewExaminationId);
                         break;
                 }
-
             }
         }
 
@@ -156,7 +148,7 @@ namespace Sessions_Uploader
                 directorySourceTextBox.Text = dialogTree.SelectedPath;
             }
         }
-
+        
         private void examinationCreatorSwithCheckBox_CheckedChanged(object sender, EventArgs e)
         {
             if (examinationCreatorSwithCheckBox.Checked == false)
@@ -196,16 +188,20 @@ namespace Sessions_Uploader
         {
             if (automaticIntervalCheckBox.Checked)
             {
-                var interval = CalculateExaminationDurationRoundedToHours();
-
-                textBoxInterval.Text = (Math.Ceiling(interval).ToString());
+                SetAutomatedCalculatedInterval();
             }
         }
-
+        
         private double CalculateExaminationDurationRoundedToHours()
         {
             var files = Directory.GetFiles(directorySourceTextBox.Text, "*", SearchOption.AllDirectories)
-                .Where(s => s.EndsWith((".ann")));
+                .Where(s => s.EndsWith((".ann"))).ToList();
+
+            if (files.Count() < 2)
+            {
+                MessageBox.Show("Source directory does not contains any .ann files\nPlease provide valid directory.");
+                return 0;
+            }
 
             var firstAnn = Path.GetFileNameWithoutExtension(files.First());
             var lastAnn = Path.GetFileNameWithoutExtension(files.Last());
@@ -222,6 +218,21 @@ namespace Sessions_Uploader
         private void textBoxInterval_KeyPress(object sender, KeyPressEventArgs e)
         {
             e.Handled = !char.IsDigit((e.KeyChar)) && !char.IsControl(e.KeyChar);
+        }
+
+        private void directorySourceTextBox_TextChanged(object sender, EventArgs e)
+        {
+            if (Directory.Exists(directorySourceTextBox.Text) && automaticIntervalCheckBox.Checked)
+            {
+                SetAutomatedCalculatedInterval();
+            }
+        }
+
+        private void SetAutomatedCalculatedInterval()
+        {
+            var interval = CalculateExaminationDurationRoundedToHours();
+
+            textBoxInterval.Text = (Math.Ceiling(interval).ToString());
         }
     }
 }

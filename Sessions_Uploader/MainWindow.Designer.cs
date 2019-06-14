@@ -203,6 +203,7 @@
             this.directorySourceTextBox.Name = "directorySourceTextBox";
             this.directorySourceTextBox.Size = new System.Drawing.Size(473, 20);
             this.directorySourceTextBox.TabIndex = 13;
+            this.directorySourceTextBox.TextChanged += new System.EventHandler(this.directorySourceTextBox_TextChanged);
             // 
             // groupBox1
             // 
