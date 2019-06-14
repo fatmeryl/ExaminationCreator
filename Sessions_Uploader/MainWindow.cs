@@ -10,13 +10,14 @@ namespace Sessions_Uploader
 {
     public partial class MainWindow : Form
     {
-        string tempDirectory = @"C:\ReadyToUpload\";
+        private string tempDirectory;
 
         public MainWindow()
         {
             InitializeComponent();
+            tempDirectory = tempFolderTekstBox.Text;
         }
-        
+
         private void btnUploadSession_Click(object sender, EventArgs e)
         {
             if (!Directory.Exists(directorySourceTextBox.Text))
@@ -148,15 +149,14 @@ namespace Sessions_Uploader
                 directorySourceTextBox.Text = dialogTree.SelectedPath;
             }
         }
-        
+
         private void examinationCreatorSwithCheckBox_CheckedChanged(object sender, EventArgs e)
         {
-            if (examinationCreatorSwithCheckBox.Checked == false)
+            if (!examinationCreatorSwithCheckBox.Checked)
             {
                 OutputGroupBox.Enabled = false;
             }
-
-            if (examinationCreatorSwithCheckBox.Checked)
+            else
             {
                 OutputGroupBox.Enabled = true;
             }
@@ -184,14 +184,6 @@ namespace Sessions_Uploader
             }
         }
 
-        private void automaticIntervalCheckBox_CheckedChanged(object sender, EventArgs e)
-        {
-            if (automaticIntervalCheckBox.Checked)
-            {
-                SetAutomatedCalculatedInterval();
-            }
-        }
-        
         private double CalculateExaminationDurationRoundedToHours()
         {
             var files = Directory.GetFiles(directorySourceTextBox.Text, "*", SearchOption.AllDirectories)
@@ -233,6 +225,26 @@ namespace Sessions_Uploader
             var interval = CalculateExaminationDurationRoundedToHours();
 
             textBoxInterval.Text = (Math.Ceiling(interval).ToString());
+        }
+
+        private void tempFolderCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            if (tempFolderCheckBox.Checked)
+            {
+                tempFolderTekstBox.Enabled = true;
+            }
+            else
+            {
+                tempFolderTekstBox.Enabled = false;
+            }
+        }
+
+        private void automaticIntervalCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            if (automaticIntervalCheckBox.Checked)
+            {
+                SetAutomatedCalculatedInterval();
+            }
         }
     }
 }
