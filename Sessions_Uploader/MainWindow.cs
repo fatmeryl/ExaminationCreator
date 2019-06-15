@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Globalization;
 using System.IO;
@@ -200,11 +201,8 @@ namespace Sessions_Uploader
             }
         }
 
-        private double CalculateExaminationDurationRoundedToHours()
+        private double CalculateExaminationDurationRoundedToHours(IEnumerable<string> files)
         {
-            var files = Directory.GetFiles(directorySourceTextBox.Text, "*", SearchOption.AllDirectories)
-                .Where(s => s.EndsWith((".ann"))).ToList();
-
             if (files.Count() < 2)
             {
                 MessageBox.Show("Source directory does not contains any .ann files\nPlease provide valid directory.");
@@ -223,22 +221,32 @@ namespace Sessions_Uploader
             return interval;
         }
 
-        private void textBoxInterval_KeyPress(object sender, KeyPressEventArgs e)
+        private IEnumerable<string> GetAnnFilesNames()
         {
-            e.Handled = !char.IsDigit((e.KeyChar)) && !char.IsControl(e.KeyChar);
+            var files = Directory.GetFiles(directorySourceTextBox.Text, "*", SearchOption.AllDirectories)
+                .Where(s => s.EndsWith((".ann"))).ToList();
+            return files;
+        }
+
+        private void automaticIntervalCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            if (automaticIntervalCheckBox.Checked)
+            {
+                SetAutomatedCalculatedInterval(GetAnnFilesNames());
+            }
         }
 
         private void directorySourceTextBox_TextChanged(object sender, EventArgs e)
         {
             if (Directory.Exists(directorySourceTextBox.Text) && automaticIntervalCheckBox.Checked)
             {
-                SetAutomatedCalculatedInterval();
+                SetAutomatedCalculatedInterval(GetAnnFilesNames());
             }
         }
 
-        private void SetAutomatedCalculatedInterval()
+        private void SetAutomatedCalculatedInterval(IEnumerable<string>files)
         {
-            var interval = CalculateExaminationDurationRoundedToHours();
+            var interval = CalculateExaminationDurationRoundedToHours(files);
 
             textBoxInterval.Text = (Math.Ceiling(interval).ToString());
         }
@@ -255,12 +263,10 @@ namespace Sessions_Uploader
             }
         }
 
-        private void automaticIntervalCheckBox_CheckedChanged(object sender, EventArgs e)
+
+        private void textBoxInterval_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (automaticIntervalCheckBox.Checked)
-            {
-                SetAutomatedCalculatedInterval();
-            }
+            e.Handled = !char.IsDigit((e.KeyChar)) && !char.IsControl(e.KeyChar);
         }
     }
 }
