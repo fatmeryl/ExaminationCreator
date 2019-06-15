@@ -72,8 +72,12 @@ namespace Sessions_Uploader
             }
             else
             {
-                if (Directory.GetDirectories(tempDirectory).Length == 0 &&
-                    Directory.GetFiles(tempDirectory, "*", SearchOption.AllDirectories).Length == 0)
+                if (!Directory.Exists(tempDirectory))
+                {
+                    MsgTempDirectoryNotExist();
+                    //return;
+                }
+                if (Directory.GetFiles(tempDirectory, "*", SearchOption.AllDirectories).Length == 0)
                 {
                     MessageBox.Show("Temp location is empty");
                 }
@@ -82,7 +86,13 @@ namespace Sessions_Uploader
                     ClearTempDirectory();
                     MessageBox.Show("All files has been deleted");
                 }
+
             }
+        }
+
+        private static void MsgTempDirectoryNotExist()
+        {
+            MessageBox.Show("Temporary directory does not exist", String.Empty, MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
         }
 
         private void CheckSelectedServer()
@@ -185,7 +195,7 @@ namespace Sessions_Uploader
             }
             else
             {
-                MessageBox.Show("Temporary directory does not exist", String.Empty, MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                MsgTempDirectoryNotExist();
             }
         }
 
@@ -232,7 +242,7 @@ namespace Sessions_Uploader
             }
         }
 
-        private void SetAutomatedCalculatedInterval(IEnumerable<string>files)
+        private void SetAutomatedCalculatedInterval(IEnumerable<string> files)
         {
             var interval = CalculateExaminationDurationRoundedToHours(files);
 

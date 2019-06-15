@@ -308,7 +308,7 @@
             this.OutputGroupBox.Controls.Add(this.directoryOutputTextBox);
             this.OutputGroupBox.Controls.Add(this.BrowseOutput);
             this.OutputGroupBox.Enabled = false;
-            this.OutputGroupBox.Location = new System.Drawing.Point(4, 91);
+            this.OutputGroupBox.Location = new System.Drawing.Point(4, 85);
             this.OutputGroupBox.Name = "OutputGroupBox";
             this.OutputGroupBox.Size = new System.Drawing.Size(566, 54);
             this.OutputGroupBox.TabIndex = 17;
