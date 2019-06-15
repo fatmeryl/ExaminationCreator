@@ -46,14 +46,13 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.openTempBtn = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.clearTempOptionCheckBox = new System.Windows.Forms.CheckBox();
             this.tempFolderCheckBox = new System.Windows.Forms.CheckBox();
             this.tempFolderTekstBox = new System.Windows.Forms.TextBox();
             this.automaticIntervalCheckBox = new System.Windows.Forms.CheckBox();
             this.OutputGroupBox = new System.Windows.Forms.GroupBox();
             this.directoryOutputTextBox = new System.Windows.Forms.TextBox();
             this.BrowseOutput = new System.Windows.Forms.Button();
-            this.examinationCreatorSwithCheckBox = new System.Windows.Forms.CheckBox();
-            this.clearTempOptionCheckBox = new System.Windows.Forms.CheckBox();
             this.panelInterval.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.howManyTimes)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -94,11 +93,12 @@
             this.comboBoxServers.Name = "comboBoxServers";
             this.comboBoxServers.Size = new System.Drawing.Size(227, 21);
             this.comboBoxServers.TabIndex = 1;
+            this.comboBoxServers.TextChanged += new System.EventHandler(this.comboBoxServers_TextChanged);
             // 
             // btnUploadSession
             // 
             this.btnUploadSession.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.btnUploadSession.Location = new System.Drawing.Point(205, 394);
+            this.btnUploadSession.Location = new System.Drawing.Point(205, 400);
             this.btnUploadSession.Name = "btnUploadSession";
             this.btnUploadSession.Size = new System.Drawing.Size(186, 27);
             this.btnUploadSession.TabIndex = 2;
@@ -260,6 +260,16 @@
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Settings";
             // 
+            // clearTempOptionCheckBox
+            // 
+            this.clearTempOptionCheckBox.AutoSize = true;
+            this.clearTempOptionCheckBox.Location = new System.Drawing.Point(8, 186);
+            this.clearTempOptionCheckBox.Name = "clearTempOptionCheckBox";
+            this.clearTempOptionCheckBox.Size = new System.Drawing.Size(167, 17);
+            this.clearTempOptionCheckBox.TabIndex = 14;
+            this.clearTempOptionCheckBox.Text = "Clear temp. folder after upload";
+            this.clearTempOptionCheckBox.UseVisualStyleBackColor = true;
+            // 
             // tempFolderCheckBox
             // 
             this.tempFolderCheckBox.AutoSize = true;
@@ -298,12 +308,12 @@
             this.OutputGroupBox.Controls.Add(this.directoryOutputTextBox);
             this.OutputGroupBox.Controls.Add(this.BrowseOutput);
             this.OutputGroupBox.Enabled = false;
-            this.OutputGroupBox.Location = new System.Drawing.Point(4, 98);
+            this.OutputGroupBox.Location = new System.Drawing.Point(4, 91);
             this.OutputGroupBox.Name = "OutputGroupBox";
             this.OutputGroupBox.Size = new System.Drawing.Size(566, 54);
             this.OutputGroupBox.TabIndex = 17;
             this.OutputGroupBox.TabStop = false;
-            this.OutputGroupBox.Text = "Output directory (for examination creator)";
+            this.OutputGroupBox.Text = "Output directory (for examination creator - choose from server list)";
             // 
             // directoryOutputTextBox
             // 
@@ -322,34 +332,12 @@
             this.BrowseOutput.UseVisualStyleBackColor = true;
             this.BrowseOutput.Click += new System.EventHandler(this.BrowseOutput_Click);
             // 
-            // examinationCreatorSwithCheckBox
-            // 
-            this.examinationCreatorSwithCheckBox.AutoSize = true;
-            this.examinationCreatorSwithCheckBox.Location = new System.Drawing.Point(4, 75);
-            this.examinationCreatorSwithCheckBox.Name = "examinationCreatorSwithCheckBox";
-            this.examinationCreatorSwithCheckBox.Size = new System.Drawing.Size(119, 17);
-            this.examinationCreatorSwithCheckBox.TabIndex = 18;
-            this.examinationCreatorSwithCheckBox.Text = "Examination creator";
-            this.examinationCreatorSwithCheckBox.UseVisualStyleBackColor = true;
-            this.examinationCreatorSwithCheckBox.CheckedChanged += new System.EventHandler(this.examinationCreatorSwithCheckBox_CheckedChanged);
-            // 
-            // clearTempOptionCheckBox
-            // 
-            this.clearTempOptionCheckBox.AutoSize = true;
-            this.clearTempOptionCheckBox.Location = new System.Drawing.Point(8, 186);
-            this.clearTempOptionCheckBox.Name = "clearTempOptionCheckBox";
-            this.clearTempOptionCheckBox.Size = new System.Drawing.Size(167, 17);
-            this.clearTempOptionCheckBox.TabIndex = 14;
-            this.clearTempOptionCheckBox.Text = "Clear temp. folder after upload";
-            this.clearTempOptionCheckBox.UseVisualStyleBackColor = true;
-            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.ClientSize = new System.Drawing.Size(582, 442);
-            this.Controls.Add(this.examinationCreatorSwithCheckBox);
             this.Controls.Add(this.OutputGroupBox);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
@@ -398,7 +386,6 @@
         private System.Windows.Forms.GroupBox OutputGroupBox;
         private System.Windows.Forms.TextBox directoryOutputTextBox;
         private System.Windows.Forms.Button BrowseOutput;
-        private System.Windows.Forms.CheckBox examinationCreatorSwithCheckBox;
         private System.Windows.Forms.Button openTempBtn;
         private System.Windows.Forms.CheckBox automaticIntervalCheckBox;
         private System.Windows.Forms.CheckBox tempFolderCheckBox;

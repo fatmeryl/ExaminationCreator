@@ -167,18 +167,6 @@ namespace Sessions_Uploader
             }
         }
 
-        private void examinationCreatorSwithCheckBox_CheckedChanged(object sender, EventArgs e)
-        {
-            if (!examinationCreatorSwithCheckBox.Checked)
-            {
-                OutputGroupBox.Enabled = false;
-            }
-            else
-            {
-                OutputGroupBox.Enabled = true;
-            }
-        }
-
         private void BrowseOutput_Click(object sender, EventArgs e)
         {
             FolderBrowserDialog dialogTree = new FolderBrowserDialog();
@@ -267,6 +255,18 @@ namespace Sessions_Uploader
         private void textBoxInterval_KeyPress(object sender, KeyPressEventArgs e)
         {
             e.Handled = !char.IsDigit((e.KeyChar)) && !char.IsControl(e.KeyChar);
+        }
+
+        private void comboBoxServers_TextChanged(object sender, EventArgs e)
+        {
+            if (comboBoxServers.Text == "Examination Creator")
+            {
+                OutputGroupBox.Enabled = true;
+            }
+            else
+            {
+                OutputGroupBox.Enabled = false;
+            }
         }
     }
 }
