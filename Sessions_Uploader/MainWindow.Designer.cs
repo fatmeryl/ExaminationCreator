@@ -75,6 +75,7 @@
             this.comboBoxServers.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxServers.FormattingEnabled = true;
             this.comboBoxServers.Items.AddRange(new object[] {
+            "",
             "Examination Creator",
             "triss-3",
             "triss-2",

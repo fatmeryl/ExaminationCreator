@@ -25,12 +25,14 @@ namespace Sessions_Uploader
             if (!Directory.Exists(directorySourceTextBox.Text))
             {
                 MessageBox.Show("Please enter a valid source directory");
+                return;
             }
             else
             {
                 if (string.IsNullOrEmpty(comboBoxServers.Text))
                 {
                     MessageBox.Show("Please choose server to upload files");
+                    return;
                 }
                 else
                 {
@@ -53,7 +55,7 @@ namespace Sessions_Uploader
 
             if (Directory.Exists(directoryOutputTextBox.Text)
                 || (comboBoxServers.SelectedItem != "Examination Creator"
-                 && comboBoxServers.SelectedItem != null))
+                 && comboBoxServers.SelectedItem != null ))
             {
                 MessageBox.Show("Session(s) successfully uploaded!\n");
             }
@@ -112,7 +114,7 @@ namespace Sessions_Uploader
                     $@"{directorySourceTextBox.Text}\",
                     tempDirectory);
 
-                comboBoxServers.SelectedItem = string.Empty;
+                //comboBoxServers.SelectedItem = string.Empty;
                 switch (comboBoxServers.SelectedItem.ToString())
                 {
                     case "Examination Creator":
