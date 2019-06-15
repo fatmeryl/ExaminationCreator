@@ -28,13 +28,20 @@ namespace Sessions_Uploader
             }
             else
             {
-                for (int i = 1; i <= howManyTimes.Value; i++)
+                if (string.IsNullOrEmpty(comboBoxServers.Text))
                 {
-                    CheckSelectedServer();
-
-                    if (howManyTimes.Value > 1)
+                    MessageBox.Show("Please choose server to upload files");
+                }
+                else
+                {
+                    for (int i = 1; i <= howManyTimes.Value; i++)
                     {
-                        Task.Delay(1000).Wait();
+                        CheckSelectedServer();
+
+                        if (howManyTimes.Value > 1)
+                        {
+                            Task.Delay(1000).Wait();
+                        }
                     }
                 }
             }
@@ -44,11 +51,12 @@ namespace Sessions_Uploader
                 ClearTempDirectory();
             }
 
-            if (Directory.Exists(directoryOutputTextBox.Text) || comboBoxServers.SelectedItem != "Examination Creator")
+            if (Directory.Exists(directoryOutputTextBox.Text)
+                || (comboBoxServers.SelectedItem != "Examination Creator"
+                 && comboBoxServers.SelectedItem != null))
             {
                 MessageBox.Show("Session(s) successfully uploaded!\n");
             }
-
         }
 
         private void ClearTempDirectory()
@@ -75,18 +83,18 @@ namespace Sessions_Uploader
                 if (!Directory.Exists(tempDirectory))
                 {
                     MsgTempDirectoryNotExist();
-                    //return;
+                    return;
                 }
+
                 if (Directory.GetFiles(tempDirectory, "*", SearchOption.AllDirectories).Length == 0)
                 {
-                    MessageBox.Show("Temp location is empty");
+                    MessageBox.Show("Temporary location is empty");
                 }
                 else
                 {
                     ClearTempDirectory();
                     MessageBox.Show("All files has been deleted");
                 }
-
             }
         }
 
@@ -97,11 +105,7 @@ namespace Sessions_Uploader
 
         private void CheckSelectedServer()
         {
-            if (string.IsNullOrEmpty(comboBoxServers.Text))
-            {
-                MessageBox.Show("Please choose server to upload files");
-            }
-            else
+
             {
                 var uploader = new Uploader(
                     DateTime.Now.ToLocalTime() - TimeSpan.FromHours(Int32.Parse(textBoxInterval.Text)),

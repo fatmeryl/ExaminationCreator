@@ -112,7 +112,9 @@ namespace Sessions_Uploader
             string network_path = ServerPath + @"\" + NewExaminationId;
 
             if (!Directory.Exists(network_path))
+            {
                 Directory.CreateDirectory(network_path);
+            }
         }
 
         public void UploadStudy(String ServerPath)
