@@ -45,24 +45,41 @@ namespace Sessions_Uploader
             if (!Directory.Exists(directorySourceTextBox.Text))
             {
                 MessageBox.Show("Please enter a valid source directory");
+                return;
             }
-            else
-            {
-                if (string.IsNullOrEmpty(comboBoxServers.Text))
-                {
-                    MessageBox.Show("Please choose server to upload files");
-                }
-                else
-                {
-                    for (int i = 1; i <= howManyTimes.Value; i++)
-                    {
-                        CheckSelectedServer(listOfServers);
 
-                        if (howManyTimes.Value > 1)
-                        {
-                            Task.Delay(1000).Wait();
-                        }
-                    }
+            if (string.IsNullOrEmpty(comboBoxServers.Text))
+            {
+                MessageBox.Show("Please choose server to upload files");
+                return;
+            }
+
+            string serverpath;
+            listOfServers.TryGetValue((comboBoxServers.Text), out serverpath);
+
+            if (!Directory.Exists(serverpath) && serverpath != "Examination Creator")
+            {
+                MessageBox.Show("There was a problem with connection to selected server.\n" +
+                                "Check your network connection.");
+                return;
+            }
+
+            if (serverpath == "Examination Creator")
+            {
+                if (!Directory.Exists(directoryOutputTextBox.Text))
+                {
+                    MessageBox.Show("Please provide valid output directory");
+                    return;
+                }
+            }
+
+            for (int i = 1; i <= howManyTimes.Value; i++)
+            {
+                CheckSelectedServer(listOfServers);
+
+                if (howManyTimes.Value > 1)
+                {
+                    Task.Delay(1000).Wait();
                 }
             }
 
@@ -71,12 +88,7 @@ namespace Sessions_Uploader
                 ClearTempDirectory();
             }
 
-            if (Directory.Exists(directoryOutputTextBox.Text)
-                || (comboBoxServers.SelectedItem != "Examination Creator"
-                 && comboBoxServers.SelectedItem != null ))
-            {
-                MessageBox.Show("Session(s) successfully uploaded!\n");
-            }
+            MessageBox.Show("Session(s) successfully uploaded!\n");
         }
 
         private void ClearTempDirectory()
@@ -123,10 +135,10 @@ namespace Sessions_Uploader
             MessageBox.Show("Temporary directory does not exist", String.Empty, MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
         }
 
-        
 
 
-        private void CheckSelectedServer(Dictionary<string,string> ListOfServers)
+
+        private void CheckSelectedServer(Dictionary<string, string> ListOfServers)
         {
             {
                 var uploader = new Uploader(
@@ -142,14 +154,7 @@ namespace Sessions_Uploader
                     serverPath = directoryOutputTextBox.Text;
                 }
 
-                if (Directory.Exists(directoryOutputTextBox.Text))
-                {
-                    uploader.UploadToServer(serverPath);
-                }
-                else
-                {
-                    MessageBox.Show("Please provide output directory");
-                }
+                uploader.UploadToServer(serverPath);
             }
         }
 
