@@ -74,22 +74,7 @@
             // 
             this.comboBoxServers.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxServers.FormattingEnabled = true;
-            this.comboBoxServers.Items.AddRange(new object[] {
-            "",
-            "Examination Creator",
-            "triss-3",
-            "triss-2",
-            "triss-1",
-            "yennefer-3",
-            "yennefer-2",
-            "yennefer-1",
-            "fringilla-3",
-            "fringilla-2",
-            "fringilla-1",
-            "klatch-1",
-            "klatch-2",
-            "uberwald-1",
-            "quirm-1"});
+            this.comboBoxServers.Items.AddRange(new object[] {});
             this.comboBoxServers.Location = new System.Drawing.Point(8, 35);
             this.comboBoxServers.Name = "comboBoxServers";
             this.comboBoxServers.Size = new System.Drawing.Size(227, 21);
