@@ -40,29 +40,57 @@ namespace Sessions_Uploader
             }
         }
 
-        private void btnUploadSession_Click(object sender, EventArgs e)
+
+        private bool ValidateContols()
         {
             if (!Directory.Exists(directorySourceTextBox.Text))
             {
                 MessageBox.Show("Please enter a valid source directory");
+                return false;
             }
-            else
-            {
-                if (string.IsNullOrEmpty(comboBoxServers.Text))
-                {
-                    MessageBox.Show("Please choose server to upload files");
-                }
-                else
-                {
-                    for (int i = 1; i <= howManyTimes.Value; i++)
-                    {
-                        CheckSelectedServer(listOfServers);
 
-                        if (howManyTimes.Value > 1)
-                        {
-                            Task.Delay(1000).Wait();
-                        }
-                    }
+            if (string.IsNullOrEmpty(comboBoxServers.Text))
+            {
+                MessageBox.Show("Please choose server to upload files");
+                return false;
+            }
+
+            string serverpath;
+            listOfServers.TryGetValue((comboBoxServers.Text), out serverpath);
+
+            if (!Directory.Exists(serverpath) && serverpath != "Examination Creator")
+            {
+                MessageBox.Show("There was a problem with connection to selected server.\n" +
+                                "Check your network connection.");
+                return false;
+            }
+
+            if (serverpath == "Examination Creator")
+            {
+                if (!Directory.Exists(directoryOutputTextBox.Text))
+                {
+                    MessageBox.Show("Please provide valid output directory");
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+        private void btnUploadSession_Click(object sender, EventArgs e)
+        {
+            if (!ValidateContols())
+            {
+                return;
+            }
+
+            for (int i = 1; i <= howManyTimes.Value; i++)
+            {
+                CheckSelectedServer(listOfServers);
+
+                if (howManyTimes.Value > 1)
+                {
+                    Task.Delay(1000).Wait();
                 }
             }
 
@@ -71,12 +99,7 @@ namespace Sessions_Uploader
                 ClearTempDirectory();
             }
 
-            if (Directory.Exists(directoryOutputTextBox.Text)
-                || (comboBoxServers.SelectedItem != "Examination Creator"
-                 && comboBoxServers.SelectedItem != null ))
-            {
-                MessageBox.Show("Session(s) successfully uploaded!\n");
-            }
+            MessageBox.Show("Session(s) successfully uploaded!\n");
         }
 
         private void ClearTempDirectory()
@@ -123,10 +146,10 @@ namespace Sessions_Uploader
             MessageBox.Show("Temporary directory does not exist", String.Empty, MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
         }
 
-        
 
 
-        private void CheckSelectedServer(Dictionary<string,string> ListOfServers)
+
+        private void CheckSelectedServer(Dictionary<string, string> ListOfServers)
         {
             {
                 var uploader = new Uploader(
@@ -142,14 +165,7 @@ namespace Sessions_Uploader
                     serverPath = directoryOutputTextBox.Text;
                 }
 
-                if (Directory.Exists(directoryOutputTextBox.Text))
-                {
-                    uploader.UploadToServer(serverPath);
-                }
-                else
-                {
-                    MessageBox.Show("Please provide output directory");
-                }
+                uploader.UploadToServer(serverPath);
             }
         }
 
