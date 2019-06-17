@@ -13,7 +13,7 @@ namespace Sessions_Uploader
 {
     public partial class MainWindow : Form
     {
-        private readonly string tempDirectory;
+        private string tempDirectory;
 
         private readonly string configPath;
         
@@ -286,6 +286,11 @@ namespace Sessions_Uploader
             {
                 MessageBox.Show("Config file does not exist", String.Empty, MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
             }
+        }
+
+        private void tempFolderTekstBox_TextChanged(object sender, EventArgs e)
+        {
+            tempDirectory = $@"{tempFolderTekstBox.Text}\";
         }
     }
 }

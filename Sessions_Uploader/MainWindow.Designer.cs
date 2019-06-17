@@ -250,7 +250,7 @@
             // clearTempOptionCheckBox
             // 
             this.clearTempOptionCheckBox.AutoSize = true;
-            this.clearTempOptionCheckBox.Location = new System.Drawing.Point(8, 186);
+            this.clearTempOptionCheckBox.Location = new System.Drawing.Point(8, 131);
             this.clearTempOptionCheckBox.Name = "clearTempOptionCheckBox";
             this.clearTempOptionCheckBox.Size = new System.Drawing.Size(167, 17);
             this.clearTempOptionCheckBox.TabIndex = 14;
@@ -260,7 +260,7 @@
             // tempFolderCheckBox
             // 
             this.tempFolderCheckBox.AutoSize = true;
-            this.tempFolderCheckBox.Location = new System.Drawing.Point(8, 132);
+            this.tempFolderCheckBox.Location = new System.Drawing.Point(8, 156);
             this.tempFolderCheckBox.Name = "tempFolderCheckBox";
             this.tempFolderCheckBox.Size = new System.Drawing.Size(135, 17);
             this.tempFolderCheckBox.TabIndex = 13;
@@ -271,11 +271,12 @@
             // tempFolderTekstBox
             // 
             this.tempFolderTekstBox.Enabled = false;
-            this.tempFolderTekstBox.Location = new System.Drawing.Point(8, 157);
+            this.tempFolderTekstBox.Location = new System.Drawing.Point(8, 183);
             this.tempFolderTekstBox.Name = "tempFolderTekstBox";
             this.tempFolderTekstBox.Size = new System.Drawing.Size(288, 20);
             this.tempFolderTekstBox.TabIndex = 11;
             this.tempFolderTekstBox.Text = "C:\\ReadyToUpload";
+            this.tempFolderTekstBox.TextChanged += new System.EventHandler(this.tempFolderTekstBox_TextChanged);
             // 
             // automaticIntervalCheckBox
             // 
@@ -321,7 +322,7 @@
             // 
             // openConfigBtn
             // 
-            this.openConfigBtn.Location = new System.Drawing.Point(6, 218);
+            this.openConfigBtn.Location = new System.Drawing.Point(6, 214);
             this.openConfigBtn.Name = "openConfigBtn";
             this.openConfigBtn.Size = new System.Drawing.Size(107, 25);
             this.openConfigBtn.TabIndex = 15;
