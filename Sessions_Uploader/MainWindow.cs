@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Diagnostics;
+using System.Drawing;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -40,6 +41,7 @@ namespace Sessions_Uploader
         {
             if (!Directory.Exists(directorySourceTextBox.Text))
             {
+                directorySourceTextBox.BackColor = Color.LightPink;
                 MessageBox.Show("Please enter a valid source directory","Missing Source directory",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Information);
@@ -72,6 +74,7 @@ namespace Sessions_Uploader
             {
                 if (directoryOutputTextBox.Text == directorySourceTextBox.Text)
                 {
+                    directoryOutputTextBox.BackColor = Color.LightPink;
                     MessageBox.Show("Output directory is the same as source directory",
                         "Invalid outputdirectory",
                         MessageBoxButtons.OK,
@@ -81,8 +84,9 @@ namespace Sessions_Uploader
 
                 if (!Directory.Exists(directoryOutputTextBox.Text))
                 {
+                    directoryOutputTextBox.BackColor = Color.LightPink;
                     MessageBox.Show("Please provide valid output directory",
-                        "Missing Source directory",
+                        "Missing Output directory",
                         MessageBoxButtons.OK,
                         MessageBoxIcon.Asterisk);
                     return false;
@@ -162,6 +166,7 @@ namespace Sessions_Uploader
 
         private void BrowseSource_Click(object sender, EventArgs e)
         {
+            directorySourceTextBox.BackColor = Color.Empty;
             FolderBrowserDialog dialogTree = new FolderBrowserDialog();
             dialogTree.SelectedPath = directorySourceTextBox.Text;
             if (dialogTree.ShowDialog() == DialogResult.OK)
@@ -172,6 +177,7 @@ namespace Sessions_Uploader
 
         private void BrowseOutput_Click(object sender, EventArgs e)
         {
+            directoryOutputTextBox.BackColor = Color.Empty;
             FolderBrowserDialog dialogTree = new FolderBrowserDialog();
             dialogTree.SelectedPath = directoryOutputTextBox.Text;
             if (dialogTree.ShowDialog() == DialogResult.OK)
@@ -196,6 +202,7 @@ namespace Sessions_Uploader
         {
             if (files.Count() < 2)
             {
+                directorySourceTextBox.BackColor = Color.LightPink;
                 MessageBox.Show("Source directory does not contains any .ann files\nPlease provide valid directory.",
                     "Information",
                     MessageBoxButtons.OK,
