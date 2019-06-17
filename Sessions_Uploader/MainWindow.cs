@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -13,6 +14,8 @@ namespace Sessions_Uploader
     public partial class MainWindow : Form
     {
         private readonly string tempDirectory;
+
+        private readonly string configPath;
         
         private readonly IServerConfigurationProvider serverConfigurationProvider;
 
@@ -24,7 +27,7 @@ namespace Sessions_Uploader
             InitializeComponent();
             tempDirectory = $@"{tempFolderTekstBox.Text}\";
 
-            var configPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"Config\servers.json");
+            configPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"Config\servers.json");
             serverConfigurationProvider = new ServerConfigurationFromConfigProvider(configPath);
             listOfServers = serverConfigurationProvider.GetServerConfiguration();
             
@@ -55,6 +58,7 @@ namespace Sessions_Uploader
             {
                 MessageBox.Show("There was a problem with connection to selected server.\n" +
                                 "Check your network connection.");
+                return false;
             }
 
             if (serverpath == "Examination Creator")
@@ -269,6 +273,18 @@ namespace Sessions_Uploader
             else
             {
                 OutputGroupBox.Enabled = false;
+            }
+        }
+
+        private void openConfigBtn_Click(object sender, EventArgs e)
+        {
+            if (File.Exists(configPath))
+            {
+                Process.Start(configPath);
+            }
+            else
+            {
+                MessageBox.Show("Config file does not exist", String.Empty, MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
             }
         }
     }

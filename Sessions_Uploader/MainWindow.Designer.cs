@@ -53,6 +53,7 @@
             this.OutputGroupBox = new System.Windows.Forms.GroupBox();
             this.directoryOutputTextBox = new System.Windows.Forms.TextBox();
             this.BrowseOutput = new System.Windows.Forms.Button();
+            this.openConfigBtn = new System.Windows.Forms.Button();
             this.panelInterval.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.howManyTimes)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -74,7 +75,6 @@
             // 
             this.comboBoxServers.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxServers.FormattingEnabled = true;
-            this.comboBoxServers.Items.AddRange(new object[] {});
             this.comboBoxServers.Location = new System.Drawing.Point(8, 35);
             this.comboBoxServers.Name = "comboBoxServers";
             this.comboBoxServers.Size = new System.Drawing.Size(227, 21);
@@ -84,7 +84,7 @@
             // btnUploadSession
             // 
             this.btnUploadSession.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.btnUploadSession.Location = new System.Drawing.Point(205, 400);
+            this.btnUploadSession.Location = new System.Drawing.Point(205, 441);
             this.btnUploadSession.Name = "btnUploadSession";
             this.btnUploadSession.Size = new System.Drawing.Size(186, 27);
             this.btnUploadSession.TabIndex = 2;
@@ -230,6 +230,7 @@
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.openConfigBtn);
             this.groupBox3.Controls.Add(this.clearTempOptionCheckBox);
             this.groupBox3.Controls.Add(this.tempFolderCheckBox);
             this.groupBox3.Controls.Add(this.tempFolderTekstBox);
@@ -241,7 +242,7 @@
             this.groupBox3.Controls.Add(this.panelInterval);
             this.groupBox3.Location = new System.Drawing.Point(4, 167);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(317, 221);
+            this.groupBox3.Size = new System.Drawing.Size(317, 255);
             this.groupBox3.TabIndex = 16;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Settings";
@@ -318,12 +319,22 @@
             this.BrowseOutput.UseVisualStyleBackColor = true;
             this.BrowseOutput.Click += new System.EventHandler(this.BrowseOutput_Click);
             // 
+            // openConfigBtn
+            // 
+            this.openConfigBtn.Location = new System.Drawing.Point(6, 218);
+            this.openConfigBtn.Name = "openConfigBtn";
+            this.openConfigBtn.Size = new System.Drawing.Size(107, 25);
+            this.openConfigBtn.TabIndex = 15;
+            this.openConfigBtn.Text = "Open config file";
+            this.openConfigBtn.UseVisualStyleBackColor = true;
+            this.openConfigBtn.Click += new System.EventHandler(this.openConfigBtn_Click);
+            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.ClientSize = new System.Drawing.Size(582, 442);
+            this.ClientSize = new System.Drawing.Size(582, 490);
             this.Controls.Add(this.OutputGroupBox);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
@@ -377,6 +388,7 @@
         private System.Windows.Forms.CheckBox tempFolderCheckBox;
         private System.Windows.Forms.TextBox tempFolderTekstBox;
         private System.Windows.Forms.CheckBox clearTempOptionCheckBox;
+        private System.Windows.Forms.Button openConfigBtn;
     }
 }
 
