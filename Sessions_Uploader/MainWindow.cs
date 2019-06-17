@@ -13,27 +13,38 @@ namespace Sessions_Uploader
     public partial class MainWindow : Form
     {
         private string tempDirectory;
-        private Dictionary<string, string> listOfServers = new Dictionary<string, string>()
-        {
-            {"Examination Creator", "Examination Creator"},
-            {"triss-3", @"\\ecgfftt-13hq05.corp.medicalgorithmics.com\Servertriss-3\Root\FTP\PDA"},
-            {"triss-2", @"\\ecgfftt-13hq05.corp.medicalgorithmics.com\Servertriss-2\Root\FTP\PDA"},
-            {"triss-1", @"\\ecgfftt-13hq05.corp.medicalgorithmics.com\Servertriss-1\Root\FTP\PDA"},
-            {"yennefer-2", @"\\ecgfftt-13hq05.corp.medicalgorithmics.com\Serveryennefer-2\Root\FTP\PDA"},
-            {"yennefer-1", @"\\ecgfftt-13hq05.corp.medicalgorithmics.com\Serveryennefer-1\Root\FTP\PDA"},
-            {"fringilla-3", @"\\ecgfftt-13hq05.corp.medicalgorithmics.com\Serverfringilla-3\Root\FTP\PDA"},
-            {"fringilla-2", @"\\ecgfftt-13hq05.corp.medicalgorithmics.com\Serverfringilla-2\Root\FTP\PDA"},
-            {"fringilla-1", @"\\ecgfftt-13hq05.corp.medicalgorithmics.com\Serverfringilla-1\Root\FTP\PDA"},
-            {"klatch-1", @"\\ecgfftt-13hq04.corp.medicalgorithmics.com\Serverklatch-1\Root\FTP\PDA"},
-            {"klatch-2", @"\\ecgfftt-13hq04.corp.medicalgorithmics.com\Serverklatch-2\Root\FTP\PDA"},
-            {"uberwald-1", @"\\ecgfftt-13hq04.corp.medicalgorithmics.com\Serveruberwald-1\Root\FTP\PDA"},
-            {"quirm-1", @"\\ecgfftt-13hq04.corp.medicalgorithmics.com\Serverquirm-1\Root\FTP\PDA"}
-        };
+        //private Dictionary<string, string> listOfServers = new Dictionary<string, string>()
+        //{
+        //    {"Examination Creator", "Examination Creator"},
+        //    {"triss-3", @"\\ecgfftt-13hq05.corp.medicalgorithmics.com\Servertriss-3\Root\FTP\PDA"},
+        //    {"triss-2", @"\\ecgfftt-13hq05.corp.medicalgorithmics.com\Servertriss-2\Root\FTP\PDA"},
+        //    {"triss-1", @"\\ecgfftt-13hq05.corp.medicalgorithmics.com\Servertriss-1\Root\FTP\PDA"},
+        //    {"yennefer-2", @"\\ecgfftt-13hq05.corp.medicalgorithmics.com\Serveryennefer-2\Root\FTP\PDA"},
+        //    {"yennefer-1", @"\\ecgfftt-13hq05.corp.medicalgorithmics.com\Serveryennefer-1\Root\FTP\PDA"},
+        //    {"fringilla-3", @"\\ecgfftt-13hq05.corp.medicalgorithmics.com\Serverfringilla-3\Root\FTP\PDA"},
+        //    {"fringilla-2", @"\\ecgfftt-13hq05.corp.medicalgorithmics.com\Serverfringilla-2\Root\FTP\PDA"},
+        //    {"fringilla-1", @"\\ecgfftt-13hq05.corp.medicalgorithmics.com\Serverfringilla-1\Root\FTP\PDA"},
+        //    {"klatch-1", @"\\ecgfftt-13hq04.corp.medicalgorithmics.com\Serverklatch-1\Root\FTP\PDA"},
+        //    {"klatch-2", @"\\ecgfftt-13hq04.corp.medicalgorithmics.com\Serverklatch-2\Root\FTP\PDA"},
+        //    {"uberwald-1", @"\\ecgfftt-13hq04.corp.medicalgorithmics.com\Serveruberwald-1\Root\FTP\PDA"},
+        //    {"quirm-1", @"\\ecgfftt-13hq04.corp.medicalgorithmics.com\Serverquirm-1\Root\FTP\PDA"}
+        //};
+        
+        private readonly IServerConfigurationProvider serverConfigurationProvider;
+
+        private Dictionary<string, string> listOfServers;
+
 
         public MainWindow()
         {
             InitializeComponent();
             tempDirectory = $@"{tempFolderTekstBox.Text}\";
+
+            var configPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"Config\servers.json");
+            serverConfigurationProvider = new ServerConfigurationFromConfigProvider(configPath);
+            listOfServers = serverConfigurationProvider.GetServerConfiguration();
+
+
             foreach (var key in listOfServers.Keys)
             {
                 comboBoxServers.Items.Add(key);
@@ -46,21 +57,13 @@ namespace Sessions_Uploader
             if (!Directory.Exists(directorySourceTextBox.Text))
             {
                 MessageBox.Show("Please enter a valid source directory");
-<<<<<<< HEAD
-                return;
-=======
                 return false;
->>>>>>> master
             }
 
             if (string.IsNullOrEmpty(comboBoxServers.Text))
             {
                 MessageBox.Show("Please choose server to upload files");
-<<<<<<< HEAD
-                return;
-=======
                 return false;
->>>>>>> master
             }
 
             string serverpath;
@@ -70,11 +73,6 @@ namespace Sessions_Uploader
             {
                 MessageBox.Show("There was a problem with connection to selected server.\n" +
                                 "Check your network connection.");
-<<<<<<< HEAD
-                return;
-=======
-                return false;
->>>>>>> master
             }
 
             if (serverpath == "Examination Creator")
@@ -82,12 +80,6 @@ namespace Sessions_Uploader
                 if (!Directory.Exists(directoryOutputTextBox.Text))
                 {
                     MessageBox.Show("Please provide valid output directory");
-<<<<<<< HEAD
-                    return;
-                }
-            }
-
-=======
                     return false;
                 }
             }
@@ -102,7 +94,6 @@ namespace Sessions_Uploader
                 return;
             }
 
->>>>>>> master
             for (int i = 1; i <= howManyTimes.Value; i++)
             {
                 CheckSelectedServer(listOfServers);
