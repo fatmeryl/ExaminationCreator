@@ -40,13 +40,18 @@ namespace Sessions_Uploader
         {
             if (!Directory.Exists(directorySourceTextBox.Text))
             {
-                MessageBox.Show("Please enter a valid source directory");
+                MessageBox.Show("Please enter a valid source directory","Missing Source directory",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
                 return false;
             }
 
             if (string.IsNullOrEmpty(comboBoxServers.Text))
             {
-                MessageBox.Show("Please choose server to upload files");
+                MessageBox.Show("Please choose server to upload files",
+                    "Missing server destination",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Asterisk);
                 return false;
             }
 
@@ -55,8 +60,11 @@ namespace Sessions_Uploader
 
             if (!Directory.Exists(serverpath) && serverpath != "Examination Creator")
             {
-                MessageBox.Show("There was a problem with connection to selected server.\n" +
-                                "Check your network connection.");
+                MessageBox.Show("There was a problem with connection to selected server." +
+                                "\nCheck your network connection.",
+                    "Connection to server problem",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Asterisk);
                 return false;
             }
 
@@ -64,7 +72,10 @@ namespace Sessions_Uploader
             {
                 if (!Directory.Exists(directoryOutputTextBox.Text))
                 {
-                    MessageBox.Show("Please provide valid output directory");
+                    MessageBox.Show("Please provide valid output directory",
+                        "Missing Source directory",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Asterisk);
                     return false;
                 }
             }
@@ -93,7 +104,10 @@ namespace Sessions_Uploader
                 ClearTempDirectory();
             }
 
-            MessageBox.Show("Session(s) successfully uploaded!\n");
+            MessageBox.Show("Session(s) successfully uploaded!\n",
+                "Information",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Asterisk);
         }
 
         private void ClearTempDirectory()
@@ -113,7 +127,10 @@ namespace Sessions_Uploader
         {
             if (!clearTemp.Checked)
             {
-                MessageBox.Show("Please select checkbox");
+                MessageBox.Show("Please select checkbox",
+                    "Information",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Asterisk);
             }
             else
             {
@@ -125,19 +142,28 @@ namespace Sessions_Uploader
 
                 if (Directory.GetFiles(tempDirectory, "*", SearchOption.AllDirectories).Length == 0)
                 {
-                    MessageBox.Show("Temporary location is empty");
+                    MessageBox.Show("Temporary location is empty",
+                    "Information",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Asterisk);
                 }
                 else
                 {
                     ClearTempDirectory();
-                    MessageBox.Show("All files has been deleted");
+                    MessageBox.Show("All files has been deleted",
+                        "Information",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Asterisk);
                 }
             }
         }
 
         private static void MsgTempDirectoryNotExist()
         {
-            MessageBox.Show("Temporary directory does not exist", String.Empty, MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+            MessageBox.Show("Temporary directory does not exist",
+                "Information",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Asterisk);
         }
 
         private void CheckSelectedServer(Dictionary<string, string> ListOfServers)
@@ -196,7 +222,10 @@ namespace Sessions_Uploader
         {
             if (files.Count() < 2)
             {
-                MessageBox.Show("Source directory does not contains any .ann files\nPlease provide valid directory.");
+                MessageBox.Show("Source directory does not contains any .ann files\nPlease provide valid directory.",
+                    "Information",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Asterisk);
                 return 0;
             }
 
@@ -279,7 +308,10 @@ namespace Sessions_Uploader
             }
             else
             {
-                MessageBox.Show("Config file does not exist", String.Empty, MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                MessageBox.Show("Config file does not exist",
+                    "Information",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Asterisk);
             }
         }
 
