@@ -70,6 +70,15 @@ namespace Sessions_Uploader
 
             if (serverpath == "Examination Creator")
             {
+                if (directoryOutputTextBox.Text == directorySourceTextBox.Text)
+                {
+                    MessageBox.Show("Output directory is the same as source directory",
+                        "Invalid outputdirectory",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Error);
+                    return false;
+                }
+
                 if (!Directory.Exists(directoryOutputTextBox.Text))
                 {
                     MessageBox.Show("Please provide valid output directory",
