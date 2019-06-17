@@ -40,18 +40,27 @@ namespace Sessions_Uploader
             }
         }
 
-        private void btnUploadSession_Click(object sender, EventArgs e)
+
+        private bool ValidateContols()
         {
             if (!Directory.Exists(directorySourceTextBox.Text))
             {
                 MessageBox.Show("Please enter a valid source directory");
+<<<<<<< HEAD
                 return;
+=======
+                return false;
+>>>>>>> master
             }
 
             if (string.IsNullOrEmpty(comboBoxServers.Text))
             {
                 MessageBox.Show("Please choose server to upload files");
+<<<<<<< HEAD
                 return;
+=======
+                return false;
+>>>>>>> master
             }
 
             string serverpath;
@@ -61,7 +70,11 @@ namespace Sessions_Uploader
             {
                 MessageBox.Show("There was a problem with connection to selected server.\n" +
                                 "Check your network connection.");
+<<<<<<< HEAD
                 return;
+=======
+                return false;
+>>>>>>> master
             }
 
             if (serverpath == "Examination Creator")
@@ -69,10 +82,27 @@ namespace Sessions_Uploader
                 if (!Directory.Exists(directoryOutputTextBox.Text))
                 {
                     MessageBox.Show("Please provide valid output directory");
+<<<<<<< HEAD
                     return;
                 }
             }
 
+=======
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+        private void btnUploadSession_Click(object sender, EventArgs e)
+        {
+            if (!ValidateContols())
+            {
+                return;
+            }
+
+>>>>>>> master
             for (int i = 1; i <= howManyTimes.Value; i++)
             {
                 CheckSelectedServer(listOfServers);
