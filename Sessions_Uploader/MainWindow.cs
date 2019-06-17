@@ -243,9 +243,17 @@ namespace Sessions_Uploader
 
         private IEnumerable<string> GetAnnFilesNames()
         {
-            var files = Directory.GetFiles(directorySourceTextBox.Text, "*", SearchOption.AllDirectories)
-                .Where(s => s.EndsWith((".ann"))).ToList();
-            return files;
+            try
+            {
+                var files = Directory.GetFiles(directorySourceTextBox.Text, "*", SearchOption.AllDirectories)
+                    .Where(s => s.EndsWith((".ann"))).ToList();
+                return files;
+            }
+            catch (Exception e)
+            {
+            }
+
+            return new List<string>(); 
         }
 
         private void automaticIntervalCheckBox_CheckedChanged(object sender, EventArgs e)
