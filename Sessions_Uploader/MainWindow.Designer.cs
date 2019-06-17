@@ -38,14 +38,12 @@
             this.labelFilesInterval = new System.Windows.Forms.Label();
             this.howManyTimes = new System.Windows.Forms.NumericUpDown();
             this.label1 = new System.Windows.Forms.Label();
-            this.clearTemp = new System.Windows.Forms.CheckBox();
-            this.clearBtn = new System.Windows.Forms.Button();
             this.BrowseSource = new System.Windows.Forms.Button();
             this.directorySourceTextBox = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.openTempBtn = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.openConfigBtn = new System.Windows.Forms.Button();
             this.clearTempOptionCheckBox = new System.Windows.Forms.CheckBox();
             this.tempFolderCheckBox = new System.Windows.Forms.CheckBox();
             this.tempFolderTekstBox = new System.Windows.Forms.TextBox();
@@ -53,11 +51,9 @@
             this.OutputGroupBox = new System.Windows.Forms.GroupBox();
             this.directoryOutputTextBox = new System.Windows.Forms.TextBox();
             this.BrowseOutput = new System.Windows.Forms.Button();
-            this.openConfigBtn = new System.Windows.Forms.Button();
             this.panelInterval.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.howManyTimes)).BeginInit();
             this.groupBox1.SuspendLayout();
-            this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.OutputGroupBox.SuspendLayout();
             this.SuspendLayout();
@@ -84,7 +80,7 @@
             // btnUploadSession
             // 
             this.btnUploadSession.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.btnUploadSession.Location = new System.Drawing.Point(205, 441);
+            this.btnUploadSession.Location = new System.Drawing.Point(205, 415);
             this.btnUploadSession.Name = "btnUploadSession";
             this.btnUploadSession.Size = new System.Drawing.Size(186, 27);
             this.btnUploadSession.TabIndex = 2;
@@ -156,26 +152,6 @@
             this.label1.TabIndex = 9;
             this.label1.Text = "How many examinations:";
             // 
-            // clearTemp
-            // 
-            this.clearTemp.AutoSize = true;
-            this.clearTemp.Location = new System.Drawing.Point(9, 19);
-            this.clearTemp.Name = "clearTemp";
-            this.clearTemp.Size = new System.Drawing.Size(119, 17);
-            this.clearTemp.TabIndex = 10;
-            this.clearTemp.Text = "Clear temp. location";
-            this.clearTemp.UseVisualStyleBackColor = true;
-            // 
-            // clearBtn
-            // 
-            this.clearBtn.Location = new System.Drawing.Point(134, 14);
-            this.clearBtn.Name = "clearBtn";
-            this.clearBtn.Size = new System.Drawing.Size(75, 23);
-            this.clearBtn.TabIndex = 11;
-            this.clearBtn.Text = "Clear";
-            this.clearBtn.UseVisualStyleBackColor = true;
-            this.clearBtn.Click += new System.EventHandler(this.clearBtn_Click);
-            // 
             // BrowseSource
             // 
             this.BrowseSource.Location = new System.Drawing.Point(485, 17);
@@ -205,22 +181,10 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Source directory";
             // 
-            // groupBox2
-            // 
-            this.groupBox2.Controls.Add(this.openTempBtn);
-            this.groupBox2.Controls.Add(this.clearTemp);
-            this.groupBox2.Controls.Add(this.clearBtn);
-            this.groupBox2.Location = new System.Drawing.Point(327, 167);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(223, 94);
-            this.groupBox2.TabIndex = 15;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Options";
-            // 
             // openTempBtn
             // 
             this.openTempBtn.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.openTempBtn.Location = new System.Drawing.Point(45, 58);
+            this.openTempBtn.Location = new System.Drawing.Point(442, 180);
             this.openTempBtn.Name = "openTempBtn";
             this.openTempBtn.Size = new System.Drawing.Size(118, 23);
             this.openTempBtn.TabIndex = 12;
@@ -230,6 +194,7 @@
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.openTempBtn);
             this.groupBox3.Controls.Add(this.openConfigBtn);
             this.groupBox3.Controls.Add(this.clearTempOptionCheckBox);
             this.groupBox3.Controls.Add(this.tempFolderCheckBox);
@@ -242,14 +207,26 @@
             this.groupBox3.Controls.Add(this.panelInterval);
             this.groupBox3.Location = new System.Drawing.Point(4, 167);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(317, 255);
+            this.groupBox3.Size = new System.Drawing.Size(566, 228);
             this.groupBox3.TabIndex = 16;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Settings";
             // 
+            // openConfigBtn
+            // 
+            this.openConfigBtn.Location = new System.Drawing.Point(453, 35);
+            this.openConfigBtn.Name = "openConfigBtn";
+            this.openConfigBtn.Size = new System.Drawing.Size(107, 25);
+            this.openConfigBtn.TabIndex = 15;
+            this.openConfigBtn.Text = "Open config file";
+            this.openConfigBtn.UseVisualStyleBackColor = true;
+            this.openConfigBtn.Click += new System.EventHandler(this.openConfigBtn_Click);
+            // 
             // clearTempOptionCheckBox
             // 
             this.clearTempOptionCheckBox.AutoSize = true;
+            this.clearTempOptionCheckBox.Checked = true;
+            this.clearTempOptionCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
             this.clearTempOptionCheckBox.Location = new System.Drawing.Point(8, 131);
             this.clearTempOptionCheckBox.Name = "clearTempOptionCheckBox";
             this.clearTempOptionCheckBox.Size = new System.Drawing.Size(167, 17);
@@ -273,7 +250,7 @@
             this.tempFolderTekstBox.Enabled = false;
             this.tempFolderTekstBox.Location = new System.Drawing.Point(8, 183);
             this.tempFolderTekstBox.Name = "tempFolderTekstBox";
-            this.tempFolderTekstBox.Size = new System.Drawing.Size(288, 20);
+            this.tempFolderTekstBox.Size = new System.Drawing.Size(410, 20);
             this.tempFolderTekstBox.TabIndex = 11;
             this.tempFolderTekstBox.Text = "C:\\ReadyToUpload";
             this.tempFolderTekstBox.TextChanged += new System.EventHandler(this.tempFolderTekstBox_TextChanged);
@@ -320,25 +297,14 @@
             this.BrowseOutput.UseVisualStyleBackColor = true;
             this.BrowseOutput.Click += new System.EventHandler(this.BrowseOutput_Click);
             // 
-            // openConfigBtn
-            // 
-            this.openConfigBtn.Location = new System.Drawing.Point(6, 214);
-            this.openConfigBtn.Name = "openConfigBtn";
-            this.openConfigBtn.Size = new System.Drawing.Size(107, 25);
-            this.openConfigBtn.TabIndex = 15;
-            this.openConfigBtn.Text = "Open config file";
-            this.openConfigBtn.UseVisualStyleBackColor = true;
-            this.openConfigBtn.Click += new System.EventHandler(this.openConfigBtn_Click);
-            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.ClientSize = new System.Drawing.Size(582, 490);
+            this.ClientSize = new System.Drawing.Size(582, 464);
             this.Controls.Add(this.OutputGroupBox);
             this.Controls.Add(this.groupBox3);
-            this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.lblStatusChanging);
             this.Controls.Add(this.btnUploadSession);
@@ -352,8 +318,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.howManyTimes)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             this.OutputGroupBox.ResumeLayout(false);
@@ -374,12 +338,9 @@
         private System.Windows.Forms.Label labelFilesInterval;
         private System.Windows.Forms.NumericUpDown howManyTimes;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.CheckBox clearTemp;
-        private System.Windows.Forms.Button clearBtn;
         private System.Windows.Forms.Button BrowseSource;
         private System.Windows.Forms.TextBox directorySourceTextBox;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.GroupBox OutputGroupBox;
         private System.Windows.Forms.TextBox directoryOutputTextBox;

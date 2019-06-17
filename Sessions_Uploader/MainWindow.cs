@@ -122,42 +122,7 @@ namespace Sessions_Uploader
                 dir.Delete(true);
             }
         }
-
-        private void clearBtn_Click(object sender, EventArgs e)
-        {
-            if (!clearTemp.Checked)
-            {
-                MessageBox.Show("Please select checkbox",
-                    "Information",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Asterisk);
-            }
-            else
-            {
-                if (!Directory.Exists(tempDirectory))
-                {
-                    MsgTempDirectoryNotExist();
-                    return;
-                }
-
-                if (Directory.GetFiles(tempDirectory, "*", SearchOption.AllDirectories).Length == 0)
-                {
-                    MessageBox.Show("Temporary location is empty",
-                    "Information",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Asterisk);
-                }
-                else
-                {
-                    ClearTempDirectory();
-                    MessageBox.Show("All files has been deleted",
-                        "Information",
-                        MessageBoxButtons.OK,
-                        MessageBoxIcon.Asterisk);
-                }
-            }
-        }
-
+        
         private static void MsgTempDirectoryNotExist()
         {
             MessageBox.Show("Temporary directory does not exist",
