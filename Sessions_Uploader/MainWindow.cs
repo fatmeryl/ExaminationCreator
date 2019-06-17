@@ -21,7 +21,6 @@ namespace Sessions_Uploader
 
         private Dictionary<string, string> listOfServers;
 
-
         public MainWindow()
         {
             InitializeComponent();
@@ -141,9 +140,6 @@ namespace Sessions_Uploader
             MessageBox.Show("Temporary directory does not exist", String.Empty, MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
         }
 
-
-
-
         private void CheckSelectedServer(Dictionary<string, string> ListOfServers)
         {
             {
@@ -257,7 +253,6 @@ namespace Sessions_Uploader
                 tempFolderTekstBox.Enabled = false;
             }
         }
-
 
         private void textBoxInterval_KeyPress(object sender, KeyPressEventArgs e)
         {

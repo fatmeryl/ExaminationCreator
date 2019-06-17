@@ -30,11 +30,6 @@ namespace Sessions_Uploader
 
         public void UploadToServer(String serverPath)
         {
-            if (!Directory.Exists(serverPath))
-            {
-                return;
-            }
-
             Directory.CreateDirectory(OutExaminationPath);
 
             var files = Directory.GetFiles(InExaminationPath, "*", SearchOption.AllDirectories);

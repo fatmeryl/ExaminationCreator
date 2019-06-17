@@ -1,6 +1,8 @@
-﻿using Newtonsoft.Json;
+﻿using System;
+using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.IO;
+using System.Windows.Forms;
 
 namespace Sessions_Uploader
 {
@@ -15,10 +17,22 @@ namespace Sessions_Uploader
 
         public Dictionary<string, string> GetServerConfiguration()
         {
-            var json = File.ReadAllText(this.configPath);
+            try
+            {
+                var json = File.ReadAllText(this.configPath);
 
-            var values = JsonConvert.DeserializeObject<Dictionary<string, string>>(json);
-            return values;
+                var values = JsonConvert.DeserializeObject<Dictionary<string, string>>(json);
+                return values;
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("Configuration file does not exist." +
+                                "\nPlease provide valid configuration file.", 
+                    "Error", 
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+                throw;
+            }
         }
     }
 }
