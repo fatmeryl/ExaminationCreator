@@ -12,23 +12,7 @@ namespace Sessions_Uploader
 {
     public partial class MainWindow : Form
     {
-        private string tempDirectory;
-        //private Dictionary<string, string> listOfServers = new Dictionary<string, string>()
-        //{
-        //    {"Examination Creator", "Examination Creator"},
-        //    {"triss-3", @"\\ecgfftt-13hq05.corp.medicalgorithmics.com\Servertriss-3\Root\FTP\PDA"},
-        //    {"triss-2", @"\\ecgfftt-13hq05.corp.medicalgorithmics.com\Servertriss-2\Root\FTP\PDA"},
-        //    {"triss-1", @"\\ecgfftt-13hq05.corp.medicalgorithmics.com\Servertriss-1\Root\FTP\PDA"},
-        //    {"yennefer-2", @"\\ecgfftt-13hq05.corp.medicalgorithmics.com\Serveryennefer-2\Root\FTP\PDA"},
-        //    {"yennefer-1", @"\\ecgfftt-13hq05.corp.medicalgorithmics.com\Serveryennefer-1\Root\FTP\PDA"},
-        //    {"fringilla-3", @"\\ecgfftt-13hq05.corp.medicalgorithmics.com\Serverfringilla-3\Root\FTP\PDA"},
-        //    {"fringilla-2", @"\\ecgfftt-13hq05.corp.medicalgorithmics.com\Serverfringilla-2\Root\FTP\PDA"},
-        //    {"fringilla-1", @"\\ecgfftt-13hq05.corp.medicalgorithmics.com\Serverfringilla-1\Root\FTP\PDA"},
-        //    {"klatch-1", @"\\ecgfftt-13hq04.corp.medicalgorithmics.com\Serverklatch-1\Root\FTP\PDA"},
-        //    {"klatch-2", @"\\ecgfftt-13hq04.corp.medicalgorithmics.com\Serverklatch-2\Root\FTP\PDA"},
-        //    {"uberwald-1", @"\\ecgfftt-13hq04.corp.medicalgorithmics.com\Serveruberwald-1\Root\FTP\PDA"},
-        //    {"quirm-1", @"\\ecgfftt-13hq04.corp.medicalgorithmics.com\Serverquirm-1\Root\FTP\PDA"}
-        //};
+        private readonly string tempDirectory;
         
         private readonly IServerConfigurationProvider serverConfigurationProvider;
 
@@ -43,14 +27,12 @@ namespace Sessions_Uploader
             var configPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"Config\servers.json");
             serverConfigurationProvider = new ServerConfigurationFromConfigProvider(configPath);
             listOfServers = serverConfigurationProvider.GetServerConfiguration();
-
-
+            
             foreach (var key in listOfServers.Keys)
             {
                 comboBoxServers.Items.Add(key);
             }
         }
-
 
         private bool ValidateContols()
         {
@@ -83,7 +65,6 @@ namespace Sessions_Uploader
                     return false;
                 }
             }
-
             return true;
         }
 
