@@ -33,9 +33,6 @@
             this.comboBoxServers = new System.Windows.Forms.ComboBox();
             this.btnUploadSession = new System.Windows.Forms.Button();
             this.lblStatusChanging = new System.Windows.Forms.Label();
-            this.textBoxInterval = new System.Windows.Forms.TextBox();
-            this.panelInterval = new System.Windows.Forms.Panel();
-            this.labelFilesInterval = new System.Windows.Forms.Label();
             this.howManyTimes = new System.Windows.Forms.NumericUpDown();
             this.label1 = new System.Windows.Forms.Label();
             this.BrowseSource = new System.Windows.Forms.Button();
@@ -47,11 +44,9 @@
             this.clearTempOptionCheckBox = new System.Windows.Forms.CheckBox();
             this.tempFolderCheckBox = new System.Windows.Forms.CheckBox();
             this.tempFolderTekstBox = new System.Windows.Forms.TextBox();
-            this.automaticIntervalCheckBox = new System.Windows.Forms.CheckBox();
             this.OutputGroupBox = new System.Windows.Forms.GroupBox();
             this.directoryOutputTextBox = new System.Windows.Forms.TextBox();
             this.BrowseOutput = new System.Windows.Forms.Button();
-            this.panelInterval.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.howManyTimes)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -95,35 +90,6 @@
             this.lblStatusChanging.Name = "lblStatusChanging";
             this.lblStatusChanging.Size = new System.Drawing.Size(0, 13);
             this.lblStatusChanging.TabIndex = 4;
-            // 
-            // textBoxInterval
-            // 
-            this.textBoxInterval.Location = new System.Drawing.Point(132, 1);
-            this.textBoxInterval.Name = "textBoxInterval";
-            this.textBoxInterval.Size = new System.Drawing.Size(41, 20);
-            this.textBoxInterval.TabIndex = 6;
-            this.textBoxInterval.Text = "0";
-            this.textBoxInterval.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.textBoxInterval.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxInterval_KeyPress);
-            // 
-            // panelInterval
-            // 
-            this.panelInterval.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.panelInterval.Controls.Add(this.labelFilesInterval);
-            this.panelInterval.Controls.Add(this.textBoxInterval);
-            this.panelInterval.Location = new System.Drawing.Point(8, 62);
-            this.panelInterval.Name = "panelInterval";
-            this.panelInterval.Size = new System.Drawing.Size(186, 26);
-            this.panelInterval.TabIndex = 7;
-            // 
-            // labelFilesInterval
-            // 
-            this.labelFilesInterval.AutoSize = true;
-            this.labelFilesInterval.Location = new System.Drawing.Point(2, 4);
-            this.labelFilesInterval.Name = "labelFilesInterval";
-            this.labelFilesInterval.Size = new System.Drawing.Size(124, 13);
-            this.labelFilesInterval.TabIndex = 8;
-            this.labelFilesInterval.Text = "Files start minus interval: ";
             // 
             // howManyTimes
             // 
@@ -199,12 +165,10 @@
             this.groupBox3.Controls.Add(this.clearTempOptionCheckBox);
             this.groupBox3.Controls.Add(this.tempFolderCheckBox);
             this.groupBox3.Controls.Add(this.tempFolderTekstBox);
-            this.groupBox3.Controls.Add(this.automaticIntervalCheckBox);
             this.groupBox3.Controls.Add(this.lblChooseServer);
             this.groupBox3.Controls.Add(this.comboBoxServers);
             this.groupBox3.Controls.Add(this.label1);
             this.groupBox3.Controls.Add(this.howManyTimes);
-            this.groupBox3.Controls.Add(this.panelInterval);
             this.groupBox3.Location = new System.Drawing.Point(4, 167);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(566, 228);
@@ -255,19 +219,6 @@
             this.tempFolderTekstBox.Text = "C:\\ReadyToUpload";
             this.tempFolderTekstBox.TextChanged += new System.EventHandler(this.tempFolderTekstBox_TextChanged);
             // 
-            // automaticIntervalCheckBox
-            // 
-            this.automaticIntervalCheckBox.AutoSize = true;
-            this.automaticIntervalCheckBox.Checked = true;
-            this.automaticIntervalCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.automaticIntervalCheckBox.Location = new System.Drawing.Point(201, 62);
-            this.automaticIntervalCheckBox.Name = "automaticIntervalCheckBox";
-            this.automaticIntervalCheckBox.Size = new System.Drawing.Size(109, 17);
-            this.automaticIntervalCheckBox.TabIndex = 10;
-            this.automaticIntervalCheckBox.Text = "automatic interval";
-            this.automaticIntervalCheckBox.UseVisualStyleBackColor = true;
-            this.automaticIntervalCheckBox.CheckedChanged += new System.EventHandler(this.automaticIntervalCheckBox_CheckedChanged);
-            // 
             // OutputGroupBox
             // 
             this.OutputGroupBox.Controls.Add(this.directoryOutputTextBox);
@@ -313,8 +264,6 @@
             this.MaximizeBox = false;
             this.Name = "MainWindow";
             this.Text = "Sessions Uploder";
-            this.panelInterval.ResumeLayout(false);
-            this.panelInterval.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.howManyTimes)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
@@ -333,9 +282,6 @@
         private System.Windows.Forms.ComboBox comboBoxServers;
         private System.Windows.Forms.Button btnUploadSession;
         private System.Windows.Forms.Label lblStatusChanging;
-        private System.Windows.Forms.TextBox textBoxInterval;
-        private System.Windows.Forms.Panel panelInterval;
-        private System.Windows.Forms.Label labelFilesInterval;
         private System.Windows.Forms.NumericUpDown howManyTimes;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button BrowseSource;
@@ -346,7 +292,6 @@
         private System.Windows.Forms.TextBox directoryOutputTextBox;
         private System.Windows.Forms.Button BrowseOutput;
         private System.Windows.Forms.Button openTempBtn;
-        private System.Windows.Forms.CheckBox automaticIntervalCheckBox;
         private System.Windows.Forms.CheckBox tempFolderCheckBox;
         private System.Windows.Forms.TextBox tempFolderTekstBox;
         private System.Windows.Forms.CheckBox clearTempOptionCheckBox;

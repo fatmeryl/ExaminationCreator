@@ -22,6 +22,8 @@ namespace Sessions_Uploader
 
         private Dictionary<string, string> listOfServers;
 
+        private string calculatedInterval;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -148,7 +150,7 @@ namespace Sessions_Uploader
         {
             {
                 var uploader = new Uploader(
-                    DateTime.Now.ToLocalTime() - TimeSpan.FromHours(Int32.Parse(textBoxInterval.Text)),
+                    DateTime.Now.ToLocalTime() - TimeSpan.FromHours(Int32.Parse(calculatedInterval)),
                     $@"{directorySourceTextBox.Text}\",
                     tempDirectory);
 
@@ -237,27 +239,22 @@ namespace Sessions_Uploader
             return new List<string>(); 
         }
 
-        private void automaticIntervalCheckBox_CheckedChanged(object sender, EventArgs e)
-        {
-            if (automaticIntervalCheckBox.Checked)
-            {
-                SetAutomatedCalculatedInterval(GetAnnFilesNames());
-            }
-        }
+        
 
         private void directorySourceTextBox_TextChanged(object sender, EventArgs e)
         {
-            if (Directory.Exists(directorySourceTextBox.Text) && automaticIntervalCheckBox.Checked)
+            if (Directory.Exists(directorySourceTextBox.Text) )
             {
                 SetAutomatedCalculatedInterval(GetAnnFilesNames());
             }
         }
 
-        private void SetAutomatedCalculatedInterval(IEnumerable<string> files)
+        private string SetAutomatedCalculatedInterval(IEnumerable<string> files)
         {
             var interval = CalculateExaminationDurationRoundedToHours(files);
 
-            textBoxInterval.Text = (Math.Ceiling(interval).ToString());
+            return calculatedInterval = (Math.Ceiling(interval).ToString());
+            
         }
 
         private void tempFolderCheckBox_CheckedChanged(object sender, EventArgs e)
