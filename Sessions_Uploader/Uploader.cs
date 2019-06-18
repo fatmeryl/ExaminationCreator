@@ -28,7 +28,7 @@ namespace Sessions_Uploader
             OutExaminationPath = outExaminationPath + NewExaminationId + @"\";            
         }
 
-        public void UploadToServer(String serverPath)
+        public string UploadToServer(String serverPath)
         {
             Directory.CreateDirectory(OutExaminationPath);
 
@@ -70,6 +70,7 @@ namespace Sessions_Uploader
 
             CreateFolder(serverPath);
             UploadStudy(serverPath);
+            return NewExaminationId;
         }
 
         private string ShiftDate(string date, string format, TimeSpan interval)

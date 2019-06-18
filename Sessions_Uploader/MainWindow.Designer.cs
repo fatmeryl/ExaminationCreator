@@ -75,7 +75,7 @@
             // btnUploadSession
             // 
             this.btnUploadSession.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.btnUploadSession.Location = new System.Drawing.Point(205, 415);
+            this.btnUploadSession.Location = new System.Drawing.Point(202, 390);
             this.btnUploadSession.Name = "btnUploadSession";
             this.btnUploadSession.Size = new System.Drawing.Size(186, 27);
             this.btnUploadSession.TabIndex = 2;
@@ -93,7 +93,7 @@
             // 
             // howManyTimes
             // 
-            this.howManyTimes.Location = new System.Drawing.Point(144, 103);
+            this.howManyTimes.Location = new System.Drawing.Point(144, 74);
             this.howManyTimes.Minimum = new decimal(new int[] {
             1,
             0,
@@ -108,11 +108,12 @@
             0,
             0,
             0});
+            this.howManyTimes.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.HowManyTimes_KeyPress);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 105);
+            this.label1.Location = new System.Drawing.Point(12, 76);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(124, 13);
             this.label1.TabIndex = 9;
@@ -150,7 +151,7 @@
             // openTempBtn
             // 
             this.openTempBtn.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.openTempBtn.Location = new System.Drawing.Point(442, 180);
+            this.openTempBtn.Location = new System.Drawing.Point(442, 161);
             this.openTempBtn.Name = "openTempBtn";
             this.openTempBtn.Size = new System.Drawing.Size(118, 23);
             this.openTempBtn.TabIndex = 12;
@@ -171,7 +172,7 @@
             this.groupBox3.Controls.Add(this.howManyTimes);
             this.groupBox3.Location = new System.Drawing.Point(4, 167);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(566, 228);
+            this.groupBox3.Size = new System.Drawing.Size(566, 206);
             this.groupBox3.TabIndex = 16;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Settings";
@@ -191,7 +192,7 @@
             this.clearTempOptionCheckBox.AutoSize = true;
             this.clearTempOptionCheckBox.Checked = true;
             this.clearTempOptionCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.clearTempOptionCheckBox.Location = new System.Drawing.Point(8, 131);
+            this.clearTempOptionCheckBox.Location = new System.Drawing.Point(8, 111);
             this.clearTempOptionCheckBox.Name = "clearTempOptionCheckBox";
             this.clearTempOptionCheckBox.Size = new System.Drawing.Size(167, 17);
             this.clearTempOptionCheckBox.TabIndex = 14;
@@ -201,7 +202,7 @@
             // tempFolderCheckBox
             // 
             this.tempFolderCheckBox.AutoSize = true;
-            this.tempFolderCheckBox.Location = new System.Drawing.Point(8, 156);
+            this.tempFolderCheckBox.Location = new System.Drawing.Point(8, 139);
             this.tempFolderCheckBox.Name = "tempFolderCheckBox";
             this.tempFolderCheckBox.Size = new System.Drawing.Size(135, 17);
             this.tempFolderCheckBox.TabIndex = 13;
@@ -212,11 +213,11 @@
             // tempFolderTekstBox
             // 
             this.tempFolderTekstBox.Enabled = false;
-            this.tempFolderTekstBox.Location = new System.Drawing.Point(8, 183);
+            this.tempFolderTekstBox.Location = new System.Drawing.Point(8, 163);
             this.tempFolderTekstBox.Name = "tempFolderTekstBox";
             this.tempFolderTekstBox.Size = new System.Drawing.Size(410, 20);
             this.tempFolderTekstBox.TabIndex = 11;
-            this.tempFolderTekstBox.Text = "C:\\ReadyToUpload";
+            this.tempFolderTekstBox.Text = "C:\\SessionUploader";
             this.tempFolderTekstBox.TextChanged += new System.EventHandler(this.tempFolderTekstBox_TextChanged);
             // 
             // OutputGroupBox
@@ -253,7 +254,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.ClientSize = new System.Drawing.Size(582, 464);
+            this.ClientSize = new System.Drawing.Size(576, 436);
             this.Controls.Add(this.OutputGroupBox);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox1);

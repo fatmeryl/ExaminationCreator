@@ -96,7 +96,7 @@ namespace Sessions_Uploader
             }
             return true;
         }
-
+        
         private void btnUploadSession_Click(object sender, EventArgs e)
         {
             if (!ValidateContols())
@@ -104,13 +104,17 @@ namespace Sessions_Uploader
                 return;
             }
 
-            for (int i = 1; i <= howManyTimes.Value; i++)
+            var logFilePath = $@"{tempDirectory}\Session Uploader Log {DateTime.Now:yyyy-MM-dd HHmmss}.txt";
+            using (var writer = File.CreateText(logFilePath))
             {
-                CheckSelectedServer(listOfServers);
-
-                if (howManyTimes.Value > 1)
+                for (int i = 1; i <= howManyTimes.Value; i++)
                 {
-                    Task.Delay(1000).Wait();
+                    writer.WriteLine($"Examination no.{i}, ID = {CheckSelectedServer(listOfServers)}");
+                    
+                    if (howManyTimes.Value > 1)
+                    {
+                        Task.Delay(1000).Wait();
+                    }
                 }
             }
 
@@ -118,7 +122,7 @@ namespace Sessions_Uploader
             {
                 ClearTempDirectory();
             }
-
+            
             MessageBox.Show("Session(s) successfully uploaded!\n",
                 "Information",
                 MessageBoxButtons.OK,
@@ -128,10 +132,10 @@ namespace Sessions_Uploader
         private void ClearTempDirectory()
         {
             DirectoryInfo di = new DirectoryInfo(tempDirectory);
-            foreach (FileInfo file in di.GetFiles())
-            {
-                file.Delete();
-            }
+            //foreach (FileInfo file in di.GetFiles())
+            //{
+            //    file.Delete();
+            //}
             foreach (DirectoryInfo dir in di.GetDirectories())
             {
                 dir.Delete(true);
@@ -146,7 +150,7 @@ namespace Sessions_Uploader
                 MessageBoxIcon.Asterisk);
         }
 
-        private void CheckSelectedServer(Dictionary<string, string> ListOfServers)
+        private string CheckSelectedServer(Dictionary<string, string> ListOfServers)
         {
             {
                 var uploader = new Uploader(
@@ -162,7 +166,8 @@ namespace Sessions_Uploader
                     serverPath = directoryOutputTextBox.Text;
                 }
 
-                uploader.UploadToServer(serverPath);
+                return uploader.UploadToServer(serverPath);
+                
             }
         }
 
@@ -192,7 +197,7 @@ namespace Sessions_Uploader
         {
             if (Directory.Exists(tempDirectory))
             {
-                System.Diagnostics.Process.Start(tempDirectory);
+                Process.Start(tempDirectory);
             }
             else
             {
@@ -267,11 +272,6 @@ namespace Sessions_Uploader
             {
                 tempFolderTekstBox.Enabled = false;
             }
-        }
-
-        private void textBoxInterval_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            e.Handled = !char.IsDigit((e.KeyChar)) && !char.IsControl(e.KeyChar);
         }
 
         private void comboBoxServers_TextChanged(object sender, EventArgs e)
