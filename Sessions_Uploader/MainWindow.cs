@@ -309,5 +309,10 @@ namespace Sessions_Uploader
         {
             tempDirectory = $@"{tempFolderTekstBox.Text}\";
         }
+
+        private void HowManyTimes_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = !char.IsDigit((e.KeyChar));
+        }
     }
 }
