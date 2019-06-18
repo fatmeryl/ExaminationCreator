@@ -28,6 +28,10 @@ namespace Sessions_Uploader
         {
             InitializeComponent();
             tempDirectory = $@"{tempFolderTekstBox.Text}\";
+            if (!Directory.Exists(tempDirectory))
+            {
+                Directory.CreateDirectory(tempDirectory);
+            }
 
             configPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"Config\servers.json");
             serverConfigurationProvider = new ServerConfigurationFromConfigProvider(configPath);
