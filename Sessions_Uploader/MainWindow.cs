@@ -288,11 +288,11 @@ namespace Sessions_Uploader
         {
             if (comboBoxServers.Text == "Examination Creator")
             {
-                OutputGroupBox.Enabled = true;
+                OutputGroupBox.Visible = true;
             }
             else
             {
-                OutputGroupBox.Enabled = false;
+                OutputGroupBox.Visible = false;
             }
         }
 
