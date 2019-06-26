@@ -54,6 +54,16 @@ namespace Sessions_Uploader
                 return false;
             }
 
+            if (GetAnnFilesNames().Count() < 2)
+            {
+                directorySourceTextBox.BackColor = Color.LightPink;
+                MessageBox.Show("Source directory does not contains any .ann files\nPlease provide valid directory.",
+                    "Information",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Asterisk);
+                return false;
+            }
+
             if (string.IsNullOrEmpty(comboBoxServers.Text))
             {
                 MessageBox.Show("Please choose server to upload files",
@@ -135,11 +145,7 @@ namespace Sessions_Uploader
 
         private void ClearTempDirectory()
         {
-            DirectoryInfo di = new DirectoryInfo(tempDirectory);
-            //foreach (FileInfo file in di.GetFiles())
-            //{
-            //    file.Delete();
-            //}
+            var di = new DirectoryInfo(tempDirectory);
             foreach (DirectoryInfo dir in di.GetDirectories())
             {
                 dir.Delete(true);
