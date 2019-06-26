@@ -1,8 +1,8 @@
 ﻿using System;
-using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.IO;
 using System.Windows.Forms;
+using Newtonsoft.Json;
 
 namespace Sessions_Uploader
 {
@@ -24,11 +24,11 @@ namespace Sessions_Uploader
                 var values = JsonConvert.DeserializeObject<Dictionary<string, string>>(json);
                 return values;
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                MessageBox.Show("Configuration file does not exist." +
-                                "\nPlease provide valid configuration file.", 
-                    "Error", 
+                MessageBox.Show(
+                    "Configuration file does not exist.\nPlease provide valid configuration file.",
+                    "Error",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
                 throw;

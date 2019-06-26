@@ -218,7 +218,7 @@
             this.tempFolderTekstBox.Size = new System.Drawing.Size(410, 20);
             this.tempFolderTekstBox.TabIndex = 11;
             this.tempFolderTekstBox.Text = "C:\\SessionUploader";
-            this.tempFolderTekstBox.TextChanged += new System.EventHandler(this.tempFolderTekstBox_TextChanged);
+            this.tempFolderTekstBox.TextChanged += new System.EventHandler(this.tempFolderTextBox_TextChanged);
             // 
             // OutputGroupBox
             // 
