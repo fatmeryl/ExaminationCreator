@@ -16,19 +16,20 @@ namespace Sessions_Uploader
 
         public Uploader(DateTime newExaminationTime, string inExaminationPath, string outExaminationPath)
         {
-            var examinationId = Path.GetFileName(Path.GetDirectoryName(inExaminationPath));
-            var examinationDateString = examinationId.Substring(0, 14);
+            var examinationID = new SessionId(Path.GetFileName(Path.GetDirectoryName(inExaminationPath)));
+            var examinationDateString = examinationID.GetDate();
             var examinationDate = DateTime.ParseExact(examinationDateString, "yyyyMMddHHmmss", CultureInfo.InvariantCulture, DateTimeStyles.None).ToUniversalTime();
 
-            InExaminationPath = inExaminationPath;         
+            InExaminationPath = inExaminationPath;
             Interval = newExaminationTime - examinationDate;
 
-            NewExaminationId = newExaminationTime.ToString("yyyyMMddHHmmss", CultureInfo.InvariantCulture) + examinationId.Substring(14);
+            NewExaminationId = newExaminationTime.ToString("yyyyMMddHHmmss", CultureInfo.InvariantCulture) +
+                               examinationID.ExaminationIdWithoutDate();
 
-            OutExaminationPath = outExaminationPath + NewExaminationId + @"\";            
+            OutExaminationPath = outExaminationPath + NewExaminationId + @"\";
         }
 
-        public string UploadToServer(String serverPath)
+        public string UploadToServer(string serverPath)
         {
             Directory.CreateDirectory(OutExaminationPath);
 
@@ -51,12 +52,14 @@ namespace Sessions_Uploader
                     {
                         newFileDate = ShiftDate(oldFileDate, "yyyyMMddHHmmssfff", Interval);
                     }
+
                     outFile = OutExaminationPath + Path.GetFileName(file).Replace(oldFileDate, newFileDate);
                 }
                 else
                 {
                     outFile = OutExaminationPath + Path.GetFileName(file);
                 }
+
                 var extension = Path.GetExtension(file);
                 if (extension.EndsWith("msg") || extension.EndsWith("rtl"))
                 {
@@ -84,7 +87,7 @@ namespace Sessions_Uploader
         private void ShiftDates(string xmlFilePath, string outPath, TimeSpan interval)
         {
             var doc = XDocument.Load(xmlFilePath);
-             
+
             var timeNodes = new string[] { "starttime", "endtime", "last_modified_time", "log_time" }.SelectMany(tag => doc.Descendants(tag));
 
             foreach (var node in timeNodes)
@@ -92,12 +95,12 @@ namespace Sessions_Uploader
                 var dateChanged = ShiftDate(node.Value, "yyyy/MM/ddUHH:mm:ss.fff", Interval);
                 node.Value = dateChanged;
             }
-            
+
             foreach (var node in new string[] { "from", "stoprec" }.SelectMany(tag => doc.Descendants(tag)))
             {
                 node.Value = NewExaminationId;
             }
-            
+
             foreach (var node in doc.Descendants("name"))
             {
                 var msgName = Path.GetFileName(outPath);
@@ -107,10 +110,10 @@ namespace Sessions_Uploader
 
             doc.Save(outPath);
         }
-        
-        public void CreateFolder(String ServerPath)
+
+        public void CreateFolder(string ServerPath)
         {
-            string network_path = ServerPath + @"\" + NewExaminationId;
+            var network_path = ServerPath + @"\" + NewExaminationId;
 
             if (!Directory.Exists(network_path))
             {
@@ -118,14 +121,15 @@ namespace Sessions_Uploader
             }
         }
 
-        public void UploadStudy(String ServerPath)
+        public void UploadStudy(string ServerPath)
         {
-            uploadManyFiles("*rtl", ServerPath);
-            uploadManyFiles("*rdl", ServerPath);
-            uploadManyFiles("*ann", ServerPath);
-            uploadManyFiles("*msg", ServerPath);
+            UploadManyFiles("*rtl", ServerPath);
+            UploadManyFiles("*rdl", ServerPath);
+            UploadManyFiles("*ann", ServerPath);
+            UploadManyFiles("*msg", ServerPath);
         }
-        public void uploadManyFiles(string typeOfFiles, String ServerPath)//ototot
+
+        public void UploadManyFiles(string typeOfFiles, string ServerPath)
         {
             DirectoryInfo directory = new DirectoryInfo(OutExaminationPath);
             foreach (var file in directory.GetFiles(typeOfFiles))
@@ -133,12 +137,13 @@ namespace Sessions_Uploader
                 UploadFile(ServerPath, file.Name);
             }
         }
-        public void UploadFile(String ServerPath, string fileName)
+
+        public void UploadFile(string ServerPath, string fileName)
         {
-            string targetPath = ServerPath + @"\" + NewExaminationId;
-            string sourcePath = OutExaminationPath;
-            string sourceFile = Path.Combine(sourcePath, fileName);
-            string destFile = Path.Combine(targetPath, fileName);
+            var targetPath = ServerPath + @"\" + NewExaminationId;
+            var sourcePath = OutExaminationPath;
+            var sourceFile = Path.Combine(sourcePath, fileName);
+            var destFile = Path.Combine(targetPath, fileName);
             File.Copy(sourceFile, destFile, true);
         }
     }

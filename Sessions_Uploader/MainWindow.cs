@@ -234,12 +234,12 @@ namespace Sessions_Uploader
                 return 0;
             }
 
-            var firstAnn = Path.GetFileNameWithoutExtension(files.First());
-            var lastAnn = Path.GetFileNameWithoutExtension(files.Last());
+            var firstAnn = new SessionId(Path.GetFileNameWithoutExtension(files.First()));
+            var lastAnn = new SessionId(Path.GetFileNameWithoutExtension(files.First()));
 
-            var firstAnnDate = DateTime.ParseExact(firstAnn.Substring(0, 14), "yyyyMMddHHmmss", CultureInfo.InvariantCulture)
+            var firstAnnDate = DateTime.ParseExact(firstAnn.GetDate(), "yyyyMMddHHmmss", CultureInfo.InvariantCulture)
                 .ToUniversalTime();
-            var lastAnnDate = DateTime.ParseExact(lastAnn.Substring(0, 14), "yyyyMMddHHmmss", CultureInfo.InvariantCulture)
+            var lastAnnDate = DateTime.ParseExact(lastAnn.GetDate(), "yyyyMMddHHmmss", CultureInfo.InvariantCulture)
                 .ToUniversalTime();
 
             var interval = (lastAnnDate - firstAnnDate).TotalHours;
