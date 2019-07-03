@@ -42,8 +42,10 @@ namespace Sessions_Uploader
             }
         }
 
-        private static void MsgTempDirectoryNotExist()
+        private void MsgTempDirectoryNotExist()
         {
+            tempFolderTekstBox.BackColor = Color.LightPink;
+
             MessageBox.Show(
                 "Temporary directory does not exist",
                 "Information",
@@ -119,6 +121,12 @@ namespace Sessions_Uploader
                         "Missing Output directory",
                         MessageBoxButtons.OK,
                         MessageBoxIcon.Asterisk);
+                    return false;
+                }
+
+                if (!Directory.Exists(tempDirectory))
+                {
+                    MsgTempDirectoryNotExist();
                     return false;
                 }
             }
@@ -277,6 +285,8 @@ namespace Sessions_Uploader
 
         private void tempFolderCheckBox_CheckedChanged(object sender, EventArgs e)
         {
+            tempFolderTekstBox.BackColor = Color.Empty;
+
             if (tempFolderCheckBox.Checked)
             {
                 tempFolderTekstBox.Enabled = true;
