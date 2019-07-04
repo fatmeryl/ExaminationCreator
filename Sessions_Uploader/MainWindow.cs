@@ -243,7 +243,7 @@ namespace Sessions_Uploader
             }
 
             var firstAnn = new SessionId(Path.GetFileNameWithoutExtension(files.First()));
-            var lastAnn = new SessionId(Path.GetFileNameWithoutExtension(files.First()));
+            var lastAnn = new SessionId(Path.GetFileNameWithoutExtension(files.Last()));
 
             var firstAnnDate = DateTime.ParseExact(firstAnn.GetDate(), "yyyyMMddHHmmss", CultureInfo.InvariantCulture)
                 .ToUniversalTime();
