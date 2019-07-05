@@ -276,9 +276,16 @@ namespace Sessions_Uploader
         private double CalculateExaminationDurationRoundedToHours(IEnumerable<string> files)
         {
             var listOfAnn = files.ToList();
-            if (listOfAnn.Count() < 2)
+
+            if (listOfAnn.Count() == 1)
             {
                 GenerateMessage(State.LessThan2AnnFiles);
+                return 0;
+            }
+
+            if (!listOfAnn.Any())
+            {
+                GenerateMessage(State.NoAnnFiles);
                 return 0;
             }
 
