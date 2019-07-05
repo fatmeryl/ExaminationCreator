@@ -44,63 +44,117 @@ namespace Sessions_Uploader
             }
         }
 
-        private void MsgTempDirectoryNotExist()
+        private void GenerateMessage(State state)
         {
-            tempFolderTekstBox.BackColor = Color.LightPink;
-
-            MessageBox.Show(
-                "Temporary directory does not exist",
-                "Information",
-                MessageBoxButtons.OK,
-                MessageBoxIcon.Asterisk);
+            switch (state)
+            {
+                case State.NotValidSourceDir:
+                    directorySourceTextBox.BackColor = Color.LightPink;
+                    MessageBox.Show(
+                        "Please enter a valid source directory",
+                        "Missing Source directory",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Information);
+                    break;
+                case State.NoAnnFiles:
+                    directorySourceTextBox.BackColor = Color.LightPink;
+                    MessageBox.Show(
+                        "Source directory does not contains any .ann files" +
+                        Environment.NewLine + "Please provide valid directory.",
+                        "Information",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Asterisk);
+                    break;
+                case State.NoServerSelected:
+                    MessageBox.Show(
+                        "Please choose server to upload files",
+                        "Missing server destination",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Asterisk);
+                    break;
+                case State.ServerConnectionProblem:
+                    MessageBox.Show(
+                        "There was a problem with connection to selected server." +
+                        Environment.NewLine + "Check your network connection.",
+                        "Connection to server problem",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Asterisk);
+                    break;
+                case State.SourceDirEqualsOutputDir:
+                    directoryOutputTextBox.BackColor = Color.LightPink;
+                    MessageBox.Show(
+                        "Output directory is the same as source directory",
+                        "Invalid outputdirectory",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Error);
+                    break;
+                case State.NotValidOutputDir:
+                    directoryOutputTextBox.BackColor = Color.LightPink;
+                    MessageBox.Show(
+                    "Please provide valid output directory",
+                    "Missing Output directory",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Asterisk);
+                    break;
+                case State.TempDirNotExist:
+                    tempFolderTekstBox.BackColor = Color.LightPink;
+                    MessageBox.Show(
+                        "Temporary directory does not exist",
+                        "Information",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Asterisk);
+                    break;
+                case State.SuccesfulUpload:
+                    MessageBox.Show(
+                        "Session(s) successfully uploaded!",
+                        "Information",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Asterisk);
+                    break;
+                case State.LessThan2AnnFiles:
+                    directorySourceTextBox.BackColor = Color.LightPink;
+                    MessageBox.Show(
+                        "Source directory contains less than two .ann files" +
+                        Environment.NewLine + "Please provide examination with 2 or more .ann files.",
+                        "Information",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Asterisk);
+                    break;
+                case State.NoConfigFile:
+                    MessageBox.Show(
+                        "Config file does not exist",
+                        "Information",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Asterisk);
+                    break;
+            }
         }
 
         private bool ValidateControls()
         {
             if (!Directory.Exists(directorySourceTextBox.Text))
             {
-                directorySourceTextBox.BackColor = Color.LightPink;
-                MessageBox.Show(
-                    "Please enter a valid source directory",
-                    "Missing Source directory",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Information);
+                GenerateMessage(State.NotValidSourceDir);
                 return false;
             }
 
             if (GetAnnFilesNames().Count() < 2)
             {
-                directorySourceTextBox.BackColor = Color.LightPink;
-                MessageBox.Show(
-                    "Source directory does not contains any .ann files" +
-                    Environment.NewLine + "Please provide valid directory.",
-                    "Information",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Asterisk);
+                GenerateMessage(State.NoAnnFiles);
                 return false;
             }
 
             if (string.IsNullOrEmpty(comboBoxServers.Text))
             {
-                MessageBox.Show(
-                    "Please choose server to upload files",
-                    "Missing server destination",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Asterisk);
+                GenerateMessage(State.NoServerSelected);
                 return false;
             }
 
-            string serverpath;
-            listOfServers.TryGetValue(comboBoxServers.Text, out serverpath);
+            listOfServers.TryGetValue(comboBoxServers.Text, out string serverpath);
 
             if (!Directory.Exists(serverpath) && serverpath != ExaminationCreator)
             {
-                MessageBox.Show(
-                    "There was a problem with connection to selected server." +
-                    Environment.NewLine + "Check your network connection.",
-                    "Connection to server problem",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Asterisk);
+                GenerateMessage(State.ServerConnectionProblem);
                 return false;
             }
 
@@ -108,29 +162,19 @@ namespace Sessions_Uploader
             {
                 if (directoryOutputTextBox.Text == directorySourceTextBox.Text)
                 {
-                    directoryOutputTextBox.BackColor = Color.LightPink;
-                    MessageBox.Show(
-                        "Output directory is the same as source directory",
-                        "Invalid outputdirectory",
-                        MessageBoxButtons.OK,
-                        MessageBoxIcon.Error);
+                    GenerateMessage(State.SourceDirEqualsOutputDir);
                     return false;
                 }
 
                 if (!Directory.Exists(directoryOutputTextBox.Text))
                 {
-                    directoryOutputTextBox.BackColor = Color.LightPink;
-                    MessageBox.Show(
-                        "Please provide valid output directory",
-                        "Missing Output directory",
-                        MessageBoxButtons.OK,
-                        MessageBoxIcon.Asterisk);
+                    GenerateMessage(State.NotValidOutputDir);
                     return false;
                 }
 
                 if (!Directory.Exists(tempDirectory))
                 {
-                    MsgTempDirectoryNotExist();
+                    GenerateMessage(State.TempDirNotExist);
                     return false;
                 }
             }
@@ -145,7 +189,6 @@ namespace Sessions_Uploader
                 return;
             }
 
-            //var logFilePath = $@"{tempDirectory}\Session Uploader Log {DateTime.Now:yyyy-MM-dd HHmmss}.txt";
             var logFilePath = Path.Combine(tempDirectory,
                 $"Session Uploader Log {DateTime.Now:yyyy-MM-dd HHmmss}.txt");
             using (var writer = File.CreateText(logFilePath))
@@ -166,11 +209,7 @@ namespace Sessions_Uploader
                 ClearTempDirectory();
             }
 
-            MessageBox.Show(
-                "Session(s) successfully uploaded!",
-                "Information",
-                MessageBoxButtons.OK,
-                MessageBoxIcon.Asterisk);
+            GenerateMessage(State.SuccesfulUpload);
         }
 
         private void ClearTempDirectory()
@@ -229,7 +268,7 @@ namespace Sessions_Uploader
             }
             else
             {
-                MsgTempDirectoryNotExist();
+                GenerateMessage(State.TempDirNotExist);
             }
         }
 
@@ -237,29 +276,11 @@ namespace Sessions_Uploader
         {
             if (files.Count() < 2)
             {
-                directorySourceTextBox.BackColor = Color.LightPink;
-                MessageBox.Show(
-                    "Source directory does not contains any .ann files" +
-                    Environment.NewLine + "Please provide valid directory.",
-                    "Information",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Asterisk);
+                GenerateMessage(State.LessThan2AnnFiles);
                 return 0;
             }
 
-            //var firstAnn = new SessionId(Path.GetFileNameWithoutExtension(files.First()));
-            //var lastAnn = new SessionId(Path.GetFileNameWithoutExtension(files.Last()));
-            //
-            //var firstAnnDate = DateTime.ParseExact(firstAnn.GetDate(), "yyyyMMddHHmmss", CultureInfo.InvariantCulture)
-            //    .ToUniversalTime();
-            //var lastAnnDate = DateTime.ParseExact(lastAnn.GetDate(), "yyyyMMddHHmmss", CultureInfo.InvariantCulture)
-            //    .ToUniversalTime();
-            //
-            //var interval = (lastAnnDate - firstAnnDate).TotalHours;
-            //return interval;
-
-            return (this.GetDate(files.Last()) - this.GetDate(files.First())).TotalHours;
-
+            return (GetDate(files.Last()) - GetDate(files.First())).TotalHours;
         }
 
         private DateTime GetDate(string filename)
@@ -316,11 +337,7 @@ namespace Sessions_Uploader
             }
             else
             {
-                MessageBox.Show(
-                    "Config file does not exist",
-                    "Information",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Asterisk);
+                GenerateMessage(State.NoConfigFile);
             }
         }
 
