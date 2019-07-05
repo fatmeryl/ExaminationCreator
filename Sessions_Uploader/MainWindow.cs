@@ -302,7 +302,7 @@ namespace Sessions_Uploader
         {
             try
             {
-                return Directory.GetFiles(directorySourceTextBox.Text, "*", SearchOption.AllDirectories)
+                return Directory.GetFiles(directorySourceTextBox.Text, "*", SearchOption.TopDirectoryOnly)
                     .Where(s => s.EndsWith(".ann"));
             }
             catch (Exception)
