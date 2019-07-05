@@ -127,6 +127,8 @@ namespace Sessions_Uploader
                         MessageBoxButtons.OK,
                         MessageBoxIcon.Asterisk);
                     break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(state), state, null);
             }
         }
 
@@ -238,26 +240,25 @@ namespace Sessions_Uploader
             return uploader.UploadToServer(serverPath);
         }
 
-        private void BrowseSource_Click(object sender, EventArgs e)
+        private void SetTextBoxPath(ref TextBox textBox)
         {
-            directorySourceTextBox.BackColor = Color.Empty;
+            textBox.BackColor = Color.Empty;
             FolderBrowserDialog dialogTree = new FolderBrowserDialog();
-            dialogTree.SelectedPath = directorySourceTextBox.Text;
+            dialogTree.SelectedPath = textBox.Text;
             if (dialogTree.ShowDialog() == DialogResult.OK)
             {
-                directorySourceTextBox.Text = dialogTree.SelectedPath;
+                textBox.Text = dialogTree.SelectedPath;
             }
+        }
+
+        private void BrowseSource_Click(object sender, EventArgs e)
+        {
+            SetTextBoxPath(ref directorySourceTextBox);
         }
 
         private void BrowseOutput_Click(object sender, EventArgs e)
         {
-            directoryOutputTextBox.BackColor = Color.Empty;
-            FolderBrowserDialog dialogTree = new FolderBrowserDialog();
-            dialogTree.SelectedPath = directoryOutputTextBox.Text;
-            if (dialogTree.ShowDialog() == DialogResult.OK)
-            {
-                directoryOutputTextBox.Text = dialogTree.SelectedPath;
-            }
+            SetTextBoxPath(ref directoryOutputTextBox);
         }
 
         private void openTempBtn_Click(object sender, EventArgs e)
@@ -274,13 +275,14 @@ namespace Sessions_Uploader
 
         private double CalculateExaminationDurationRoundedToHours(IEnumerable<string> files)
         {
-            if (files.Count() < 2)
+            var listOfAnn = files.ToList();
+            if (listOfAnn.Count() < 2)
             {
                 GenerateMessage(State.LessThan2AnnFiles);
                 return 0;
             }
 
-            return (GetDate(files.Last()) - GetDate(files.First())).TotalHours;
+            return (GetDate(listOfAnn.Last()) - GetDate(listOfAnn.First())).TotalHours;
         }
 
         private DateTime GetDate(string filename)

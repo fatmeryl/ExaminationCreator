@@ -8,6 +8,9 @@
         ServerConnectionProblem,
         SourceDirEqualsOutputDir,
         NotValidOutputDir,
-        TempDirNotExist
+        TempDirNotExist,
+        SuccesfulUpload,
+        LessThan2AnnFiles,
+        NoConfigFile
     }
 }
