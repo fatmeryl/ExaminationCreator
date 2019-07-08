@@ -300,6 +300,9 @@ namespace Sessions_Uploader
 
         private IEnumerable<string> GetAnnFilesNames()
         {
+            return Directory.GetFiles(directorySourceTextBox.Text, "*", SearchOption.TopDirectoryOnly)
+                .Where(s => s.EndsWith(".ann")).ToList();
+
             try
             {
                 return Directory.GetFiles(directorySourceTextBox.Text, "*", SearchOption.TopDirectoryOnly)
