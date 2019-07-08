@@ -23,7 +23,7 @@ namespace Sessions_Uploader
 
         private Dictionary<string, string> listOfServers;
 
-        private string calculatedInterval;
+        private TimeSpan calculatedInterval;
 
         public MainWindow()
         {
@@ -226,7 +226,7 @@ namespace Sessions_Uploader
         private string CheckSelectedServer(Dictionary<string, string> listOfServers)
         {
             var uploader = new Uploader(
-                DateTime.Now.ToLocalTime() - TimeSpan.FromHours(int.Parse(calculatedInterval)),
+                DateTime.Now.ToLocalTime() - calculatedInterval,
                 $@"{directorySourceTextBox.Text}\",
                 tempDirectory);
 
@@ -273,23 +273,23 @@ namespace Sessions_Uploader
             }
         }
 
-        private double CalculateExaminationDurationRoundedToHours(IEnumerable<string> files)
+        private TimeSpan CalculateExaminationTime(IEnumerable<string> files)
         {
             var listOfAnn = files.ToList();
 
             if (listOfAnn.Count() == 1)
             {
                 GenerateMessage(State.LessThan2AnnFiles);
-                return 0;
+                return new TimeSpan(0);
             }
 
             if (!listOfAnn.Any())
             {
                 GenerateMessage(State.NoAnnFiles);
-                return 0;
+                return new TimeSpan(0);
             }
 
-            return (GetDate(listOfAnn.Last()) - GetDate(listOfAnn.First())).TotalHours;
+            return (GetDate(listOfAnn.Last()) - GetDate(listOfAnn.First()));
         }
 
         private DateTime GetDate(string filename)
@@ -308,15 +308,19 @@ namespace Sessions_Uploader
         {
             if (Directory.Exists(directorySourceTextBox.Text))
             {
-                SetAutomatedCalculatedInterval(GetAnnFilesNames());
+                CalculateAndEnsureIntervalIsAtLeaseOneHourLong(GetAnnFilesNames());
             }
         }
 
-        private string SetAutomatedCalculatedInterval(IEnumerable<string> files)
+        private TimeSpan CalculateAndEnsureIntervalIsAtLeaseOneHourLong(IEnumerable<string> files)
         {
-            var interval = CalculateExaminationDurationRoundedToHours(files);
+            var interval = CalculateExaminationTime(files);
+            if (interval < TimeSpan.FromHours(1))
+            {
+                interval = TimeSpan.FromHours(1);
+            }
 
-            return calculatedInterval = Math.Ceiling(interval).ToString();
+            return calculatedInterval = interval;
         }
 
         private void tempFolderCheckBox_CheckedChanged(object sender, EventArgs e)
