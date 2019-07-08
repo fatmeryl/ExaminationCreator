@@ -1,15 +1,15 @@
 {
   "Examination Creator": "Examination Creator",
-   "triss-1": "\\ecgfftt-13hq05.corp.medicalgorithmics.com\\Servertriss-1\\Root\\FTP\\PDA",
-   "triss-2": "\\ecgfftt-13hq05.corp.medicalgorithmics.com\\Servertriss-2\\Root\\FTP\\PDA",
-   "triss-3": "\\ecgfftt-13hq05.corp.medicalgorithmics.com\\Servertriss-3\\Root\\FTP\\PDA\\",
-   "yennefer-1": "\\ecgfftt-13hq05.corp.medicalgorithmics.com\\Serveryennefer-1\\Root\\FTP\\PDA",
-   "yennefer-2": "\\ecgfftt-13hq05.corp.medicalgorithmics.com\\Serveryennefer-2\\Root\\FTP\\PDA\\",
-   "fringilla-1": "\\ecgfftt-13hq05.corp.medicalgorithmics.com\\Serverfringilla-1\\Root\\FTP\\PDA",
-   "fringilla-2": "\\ecgfftt-13hq05.corp.medicalgorithmics.com\\Serverfringilla-2\\Root\\FTP\\PDA",
-   "fringilla-3": "\\ecgfftt-13hq05.corp.medicalgorithmics.com\\Serverfringilla-3\\Root\\FTP\\PDA",
-   "klatch-1": "\\ecgfftt-13hq04.corp.medicalgorithmics.com\\Serverklatch-1\\Root\\FTP\\PDA",
-   "klatch-2": "\\ecgfftt-13hq04.corp.medicalgorithmics.com\\Serverklatch-2\\Root\\FTP\\PDA",
-   "uberwald-1": "\\ecgfftt-13hq04.corp.medicalgorithmics.com\\Serveruberwald-1\\Root\\FTP\\PDA",
-   "quirm-1": "\\ecgfftt-13hq04.corp.medicalgorithmics.com\\Serverquirm-1\\Root\\FTP\\PDA"
+  "triss-1": "\\\\ecgfftt-13hq05\\Servertriss-1\\Root\\FTP\\PDA",
+  "triss-2": "\\\\ecgfftt-13hq05\\Servertriss-2\\Root\\FTP\\PDA",
+  "triss-3": "\\\\ecgfftt-13hq05\\Servertriss-3\\Root\\FTP\\PDA\\",
+  "yennefer-1": "\\\\ecgfftt-13hq05\\Serveryennefer-1\\Root\\FTP\\PDA",
+  "yennefer-2": "\\\\ecgfftt-13hq05\\Serveryennefer-2\\Root\\FTP\\PDA\\",
+  "fringilla-1": "\\\\ecgfftt-13hq05\\Serverfringilla-1\\Root\\FTP\\PDA",
+  "fringilla-2": "\\\\ecgfftt-13hq05\\Serverfringilla-2\\Root\\FTP\\PDA",
+  "fringilla-3": "\\\\ecgfftt-13hq05\\Serverfringilla-3\\Root\\FTP\\PDA",
+  "klatch-1": "\\\\ecgfftt-13hq04\\Serverklatch-1\\Root\\FTP\\PDA",
+  "klatch-2": "\\\\ecgfftt-13hq04\\Serverklatch-2\\Root\\FTP\\PDA",
+  "uberwald-1": "\\\\ecgfftt-13hq04\\Serveruberwald-1\\Root\\FTP\\PDA",
+  "quirm-1": "\\\\ecgfftt-13hq04\\Serverquirm-1\\Root\\FTP\\PDA"
 }

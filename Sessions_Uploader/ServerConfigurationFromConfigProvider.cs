@@ -27,7 +27,8 @@ namespace Sessions_Uploader
             catch (Exception)
             {
                 MessageBox.Show(
-                    "Configuration file does not exist.\nPlease provide valid configuration file.",
+                    "Configuration file does not exist." +
+                    Environment.NewLine + "Please provide valid configuration file.",
                     "Error",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error);

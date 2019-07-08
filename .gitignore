@@ -350,3 +350,4 @@ healthchecksdb
 
 # server config
 AliasChanger/Config/
+code.ruleset

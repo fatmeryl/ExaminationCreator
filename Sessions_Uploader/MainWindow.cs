@@ -13,6 +13,8 @@ namespace Sessions_Uploader
 {
     public partial class MainWindow : Form
     {
+        private const string ExaminationCreator = "Examination Creator";
+
         private readonly string configPath;
 
         private readonly IServerConfigurationProvider serverConfigurationProvider;
@@ -26,7 +28,7 @@ namespace Sessions_Uploader
         public MainWindow()
         {
             InitializeComponent();
-            tempDirectory = $@"{tempFolderTekstBox.Text}\";
+            tempDirectory = tempFolderTekstBox.Text + Path.DirectorySeparatorChar;
             if (!Directory.Exists(tempDirectory))
             {
                 Directory.CreateDirectory(tempDirectory);
@@ -42,91 +44,139 @@ namespace Sessions_Uploader
             }
         }
 
-        private void MsgTempDirectoryNotExist()
+        private void GenerateMessage(State state)
         {
-            tempFolderTekstBox.BackColor = Color.LightPink;
-
-            MessageBox.Show(
-                "Temporary directory does not exist",
-                "Information",
-                MessageBoxButtons.OK,
-                MessageBoxIcon.Asterisk);
-        }
-
-        private bool ValidateControls()
-        {
-            if (!Directory.Exists(directorySourceTextBox.Text))
+            switch (state)
             {
-                directorySourceTextBox.BackColor = Color.LightPink;
-                MessageBox.Show(
-                    "Please enter a valid source directory",
-                    "Missing Source directory",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Information);
-                return false;
-            }
-
-            if (GetAnnFilesNames().Count() < 2)
-            {
-                directorySourceTextBox.BackColor = Color.LightPink;
-                MessageBox.Show(
-                    "Source directory does not contains any .ann files\nPlease provide valid directory.",
-                    "Information",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Asterisk);
-                return false;
-            }
-
-            if (string.IsNullOrEmpty(comboBoxServers.Text))
-            {
-                MessageBox.Show(
-                    "Please choose server to upload files",
-                    "Missing server destination",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Asterisk);
-                return false;
-            }
-
-            string serverpath;
-            listOfServers.TryGetValue(comboBoxServers.Text, out serverpath);
-
-            if (!Directory.Exists(serverpath) && serverpath != "Examination Creator")
-            {
-                MessageBox.Show(
-                    "There was a problem with connection to selected server.\nCheck your network connection.",
-                    "Connection to server problem",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Asterisk);
-                return false;
-            }
-
-            if (serverpath == "Examination Creator")
-            {
-                if (directoryOutputTextBox.Text == directorySourceTextBox.Text)
-                {
+                case State.NotValidSourceDir:
+                    directorySourceTextBox.BackColor = Color.LightPink;
+                    MessageBox.Show(
+                        "Please enter a valid source directory",
+                        "Missing Source directory",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Information);
+                    break;
+                case State.NoAnnFiles:
+                    directorySourceTextBox.BackColor = Color.LightPink;
+                    MessageBox.Show(
+                        "Source directory does not contains any .ann files" +
+                        Environment.NewLine + "Please provide valid directory.",
+                        "Information",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Asterisk);
+                    break;
+                case State.NoServerSelected:
+                    MessageBox.Show(
+                        "Please choose server to upload files",
+                        "Missing server destination",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Asterisk);
+                    break;
+                case State.ServerConnectionProblem:
+                    MessageBox.Show(
+                        "There was a problem with connection to selected server." +
+                        Environment.NewLine + "Check your network connection.",
+                        "Connection to server problem",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Asterisk);
+                    break;
+                case State.SourceDirEqualsOutputDir:
                     directoryOutputTextBox.BackColor = Color.LightPink;
                     MessageBox.Show(
                         "Output directory is the same as source directory",
                         "Invalid outputdirectory",
                         MessageBoxButtons.OK,
                         MessageBoxIcon.Error);
+                    break;
+                case State.NotValidOutputDir:
+                    directoryOutputTextBox.BackColor = Color.LightPink;
+                    MessageBox.Show(
+                    "Please provide valid output directory",
+                    "Missing Output directory",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Asterisk);
+                    break;
+                case State.TempDirNotExist:
+                    tempFolderTekstBox.BackColor = Color.LightPink;
+                    MessageBox.Show(
+                        "Temporary directory does not exist",
+                        "Information",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Asterisk);
+                    break;
+                case State.SuccesfulUpload:
+                    MessageBox.Show(
+                        "Session(s) successfully uploaded!",
+                        "Information",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Asterisk);
+                    break;
+                case State.LessThan2AnnFiles:
+                    directorySourceTextBox.BackColor = Color.LightPink;
+                    MessageBox.Show(
+                        "Source directory contains less than two .ann files" +
+                        Environment.NewLine + "Please provide examination with 2 or more .ann files.",
+                        "Information",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Asterisk);
+                    break;
+                case State.NoConfigFile:
+                    MessageBox.Show(
+                        "Config file does not exist",
+                        "Information",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Asterisk);
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(state), state, null);
+            }
+        }
+
+        private bool ValidateControls()
+        {
+            if (!Directory.Exists(directorySourceTextBox.Text))
+            {
+                GenerateMessage(State.NotValidSourceDir);
+                return false;
+            }
+
+            if (GetAnnFilesNames().Count() < 2)
+            {
+                GenerateMessage(State.NoAnnFiles);
+                return false;
+            }
+
+            if (string.IsNullOrEmpty(comboBoxServers.Text))
+            {
+                GenerateMessage(State.NoServerSelected);
+                return false;
+            }
+
+            listOfServers.TryGetValue(comboBoxServers.Text, out string serverpath);
+
+            if (!Directory.Exists(serverpath) && serverpath != ExaminationCreator)
+            {
+                GenerateMessage(State.ServerConnectionProblem);
+                return false;
+            }
+
+            if (serverpath == ExaminationCreator)
+            {
+                if (directoryOutputTextBox.Text == directorySourceTextBox.Text)
+                {
+                    GenerateMessage(State.SourceDirEqualsOutputDir);
                     return false;
                 }
 
                 if (!Directory.Exists(directoryOutputTextBox.Text))
                 {
-                    directoryOutputTextBox.BackColor = Color.LightPink;
-                    MessageBox.Show(
-                        "Please provide valid output directory",
-                        "Missing Output directory",
-                        MessageBoxButtons.OK,
-                        MessageBoxIcon.Asterisk);
+                    GenerateMessage(State.NotValidOutputDir);
                     return false;
                 }
 
                 if (!Directory.Exists(tempDirectory))
                 {
-                    MsgTempDirectoryNotExist();
+                    GenerateMessage(State.TempDirNotExist);
                     return false;
                 }
             }
@@ -141,7 +191,8 @@ namespace Sessions_Uploader
                 return;
             }
 
-            var logFilePath = $@"{tempDirectory}\Session Uploader Log {DateTime.Now:yyyy-MM-dd HHmmss}.txt";
+            var logFilePath = Path.Combine(tempDirectory,
+                $"Session Uploader Log {DateTime.Now:yyyy-MM-dd HHmmss}.txt");
             using (var writer = File.CreateText(logFilePath))
             {
                 for (int i = 1; i <= howManyTimes.Value; i++)
@@ -160,11 +211,7 @@ namespace Sessions_Uploader
                 ClearTempDirectory();
             }
 
-            MessageBox.Show(
-                "Session(s) successfully uploaded!\n",
-                "Information",
-                MessageBoxButtons.OK,
-                MessageBoxIcon.Asterisk);
+            GenerateMessage(State.SuccesfulUpload);
         }
 
         private void ClearTempDirectory()
@@ -178,43 +225,40 @@ namespace Sessions_Uploader
 
         private string CheckSelectedServer(Dictionary<string, string> listOfServers)
         {
+            var uploader = new Uploader(
+                DateTime.Now.ToLocalTime() - TimeSpan.FromHours(int.Parse(calculatedInterval)),
+                $@"{directorySourceTextBox.Text}\",
+                tempDirectory);
+
+            listOfServers.TryGetValue(comboBoxServers.Text, out var serverPath);
+
+            if (serverPath == ExaminationCreator)
             {
-                var uploader = new Uploader(
-                    DateTime.Now.ToLocalTime() - TimeSpan.FromHours(int.Parse(calculatedInterval)),
-                    $@"{directorySourceTextBox.Text}\",
-                    tempDirectory);
+                serverPath = directoryOutputTextBox.Text;
+            }
 
-                listOfServers.TryGetValue(comboBoxServers.Text, out var serverPath);
+            return uploader.UploadToServer(serverPath);
+        }
 
-                if (serverPath == "Examination Creator")
-                {
-                    serverPath = directoryOutputTextBox.Text;
-                }
-
-                return uploader.UploadToServer(serverPath);
+        private void SetTextBoxPath(ref TextBox textBox)
+        {
+            textBox.BackColor = Color.Empty;
+            FolderBrowserDialog dialogTree = new FolderBrowserDialog();
+            dialogTree.SelectedPath = textBox.Text;
+            if (dialogTree.ShowDialog() == DialogResult.OK)
+            {
+                textBox.Text = dialogTree.SelectedPath;
             }
         }
 
         private void BrowseSource_Click(object sender, EventArgs e)
         {
-            directorySourceTextBox.BackColor = Color.Empty;
-            FolderBrowserDialog dialogTree = new FolderBrowserDialog();
-            dialogTree.SelectedPath = directorySourceTextBox.Text;
-            if (dialogTree.ShowDialog() == DialogResult.OK)
-            {
-                directorySourceTextBox.Text = dialogTree.SelectedPath;
-            }
+            SetTextBoxPath(ref directorySourceTextBox);
         }
 
         private void BrowseOutput_Click(object sender, EventArgs e)
         {
-            directoryOutputTextBox.BackColor = Color.Empty;
-            FolderBrowserDialog dialogTree = new FolderBrowserDialog();
-            dialogTree.SelectedPath = directoryOutputTextBox.Text;
-            if (dialogTree.ShowDialog() == DialogResult.OK)
-            {
-                directoryOutputTextBox.Text = dialogTree.SelectedPath;
-            }
+            SetTextBoxPath(ref directoryOutputTextBox);
         }
 
         private void openTempBtn_Click(object sender, EventArgs e)
@@ -225,42 +269,44 @@ namespace Sessions_Uploader
             }
             else
             {
-                MsgTempDirectoryNotExist();
+                GenerateMessage(State.TempDirNotExist);
             }
         }
 
         private double CalculateExaminationDurationRoundedToHours(IEnumerable<string> files)
         {
-            if (files.Count() < 2)
+            var listOfAnn = files.ToList();
+
+            if (listOfAnn.Count() == 1)
             {
-                directorySourceTextBox.BackColor = Color.LightPink;
-                MessageBox.Show(
-                    "Source directory does not contains any .ann files\nPlease provide valid directory.",
-                    "Information",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Asterisk);
+                GenerateMessage(State.LessThan2AnnFiles);
                 return 0;
             }
 
-            var firstAnn = new SessionId(Path.GetFileNameWithoutExtension(files.First()));
-            var lastAnn = new SessionId(Path.GetFileNameWithoutExtension(files.First()));
+            if (!listOfAnn.Any())
+            {
+                GenerateMessage(State.NoAnnFiles);
+                return 0;
+            }
 
-            var firstAnnDate = DateTime.ParseExact(firstAnn.GetDate(), "yyyyMMddHHmmss", CultureInfo.InvariantCulture)
-                .ToUniversalTime();
-            var lastAnnDate = DateTime.ParseExact(lastAnn.GetDate(), "yyyyMMddHHmmss", CultureInfo.InvariantCulture)
-                .ToUniversalTime();
+            return (GetDate(listOfAnn.Last()) - GetDate(listOfAnn.First())).TotalHours;
+        }
 
-            var interval = (lastAnnDate - firstAnnDate).TotalHours;
-            return interval;
+        private DateTime GetDate(string filename)
+        {
+            var ann = new SessionId(Path.GetFileNameWithoutExtension(filename));
+            return DateTime.ParseExact(ann.GetDate(), "yyyyMMddHHmmss", CultureInfo.InvariantCulture);
         }
 
         private IEnumerable<string> GetAnnFilesNames()
         {
+            return Directory.GetFiles(directorySourceTextBox.Text, "*", SearchOption.TopDirectoryOnly)
+                .Where(s => s.EndsWith(".ann")).ToList();
+
             try
             {
-                var files = Directory.GetFiles(directorySourceTextBox.Text, "*", SearchOption.AllDirectories)
-                    .Where(s => s.EndsWith(".ann")).ToList();
-                return files;
+                return Directory.GetFiles(directorySourceTextBox.Text, "*", SearchOption.TopDirectoryOnly)
+                    .Where(s => s.EndsWith(".ann"));
             }
             catch (Exception)
             {
@@ -287,26 +333,12 @@ namespace Sessions_Uploader
         {
             tempFolderTekstBox.BackColor = Color.Empty;
 
-            if (tempFolderCheckBox.Checked)
-            {
-                tempFolderTekstBox.Enabled = true;
-            }
-            else
-            {
-                tempFolderTekstBox.Enabled = false;
-            }
+            tempFolderTekstBox.Enabled = tempFolderCheckBox.Checked;
         }
 
         private void comboBoxServers_TextChanged(object sender, EventArgs e)
         {
-            if (comboBoxServers.Text == "Examination Creator")
-            {
-                OutputGroupBox.Visible = true;
-            }
-            else
-            {
-                OutputGroupBox.Visible = false;
-            }
+            OutputGroupBox.Visible = comboBoxServers.Text == ExaminationCreator;
         }
 
         private void openConfigBtn_Click(object sender, EventArgs e)
@@ -317,17 +349,13 @@ namespace Sessions_Uploader
             }
             else
             {
-                MessageBox.Show(
-                    "Config file does not exist",
-                    "Information",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Asterisk);
+                GenerateMessage(State.NoConfigFile);
             }
         }
 
         private void tempFolderTextBox_TextChanged(object sender, EventArgs e)
         {
-            tempDirectory = $@"{tempFolderTekstBox.Text}\";
+            tempDirectory = tempFolderTekstBox.Text + Path.DirectorySeparatorChar;
         }
 
         private void HowManyTimes_KeyPress(object sender, KeyPressEventArgs e)
