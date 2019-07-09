@@ -8,6 +8,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Sessions_Uploader.Config;
 
 namespace Sessions_Uploader
 {
@@ -42,113 +43,28 @@ namespace Sessions_Uploader
             {
                 comboBoxServers.Items.Add(key);
             }
-        }
 
-        private void GenerateMessage(State state)
-        {
-            switch (state)
-            {
-                case State.NotValidSourceDir:
-                    directorySourceTextBox.BackColor = Color.LightPink;
-                    MessageBox.Show(
-                        "Please enter a valid source directory",
-                        "Missing Source directory",
-                        MessageBoxButtons.OK,
-                        MessageBoxIcon.Information);
-                    break;
-                case State.NoAnnFiles:
-                    directorySourceTextBox.BackColor = Color.LightPink;
-                    MessageBox.Show(
-                        "Source directory does not contains any .ann files" +
-                        Environment.NewLine + "Please provide valid directory.",
-                        "Information",
-                        MessageBoxButtons.OK,
-                        MessageBoxIcon.Asterisk);
-                    break;
-                case State.NoServerSelected:
-                    MessageBox.Show(
-                        "Please choose server to upload files",
-                        "Missing server destination",
-                        MessageBoxButtons.OK,
-                        MessageBoxIcon.Asterisk);
-                    break;
-                case State.ServerConnectionProblem:
-                    MessageBox.Show(
-                        "There was a problem with connection to selected server." +
-                        Environment.NewLine + "Check your network connection.",
-                        "Connection to server problem",
-                        MessageBoxButtons.OK,
-                        MessageBoxIcon.Asterisk);
-                    break;
-                case State.SourceDirEqualsOutputDir:
-                    directoryOutputTextBox.BackColor = Color.LightPink;
-                    MessageBox.Show(
-                        "Output directory is the same as source directory",
-                        "Invalid outputdirectory",
-                        MessageBoxButtons.OK,
-                        MessageBoxIcon.Error);
-                    break;
-                case State.NotValidOutputDir:
-                    directoryOutputTextBox.BackColor = Color.LightPink;
-                    MessageBox.Show(
-                    "Please provide valid output directory",
-                    "Missing Output directory",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Asterisk);
-                    break;
-                case State.TempDirNotExist:
-                    tempFolderTekstBox.BackColor = Color.LightPink;
-                    MessageBox.Show(
-                        "Temporary directory does not exist",
-                        "Information",
-                        MessageBoxButtons.OK,
-                        MessageBoxIcon.Asterisk);
-                    break;
-                case State.SuccesfulUpload:
-                    MessageBox.Show(
-                        "Session(s) successfully uploaded!",
-                        "Information",
-                        MessageBoxButtons.OK,
-                        MessageBoxIcon.Asterisk);
-                    break;
-                case State.LessThan2AnnFiles:
-                    directorySourceTextBox.BackColor = Color.LightPink;
-                    MessageBox.Show(
-                        "Source directory contains less than two .ann files" +
-                        Environment.NewLine + "Please provide examination with 2 or more .ann files.",
-                        "Information",
-                        MessageBoxButtons.OK,
-                        MessageBoxIcon.Asterisk);
-                    break;
-                case State.NoConfigFile:
-                    MessageBox.Show(
-                        "Config file does not exist",
-                        "Information",
-                        MessageBoxButtons.OK,
-                        MessageBoxIcon.Asterisk);
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException(nameof(state), state, null);
-            }
         }
 
         private bool ValidateControls()
         {
+            var msgGenerator = new MessageGenerator(directorySourceTextBox, directoryOutputTextBox, tempFolderTekstBox);
+
             if (!Directory.Exists(directorySourceTextBox.Text))
             {
-                GenerateMessage(State.NotValidSourceDir);
+                msgGenerator.GenerateMessage(State.NotValidSourceDir);
                 return false;
             }
 
             if (GetAnnFilesNames().Count() < 2)
             {
-                GenerateMessage(State.NoAnnFiles);
+                msgGenerator.GenerateMessage(State.NoAnnFiles);
                 return false;
             }
 
             if (string.IsNullOrEmpty(comboBoxServers.Text))
             {
-                GenerateMessage(State.NoServerSelected);
+                msgGenerator.GenerateMessage(State.NoServerSelected);
                 return false;
             }
 
@@ -156,7 +72,7 @@ namespace Sessions_Uploader
 
             if (!Directory.Exists(serverpath) && serverpath != ExaminationCreator)
             {
-                GenerateMessage(State.ServerConnectionProblem);
+                msgGenerator.GenerateMessage(State.ServerConnectionProblem);
                 return false;
             }
 
@@ -164,19 +80,19 @@ namespace Sessions_Uploader
             {
                 if (directoryOutputTextBox.Text == directorySourceTextBox.Text)
                 {
-                    GenerateMessage(State.SourceDirEqualsOutputDir);
+                    msgGenerator.GenerateMessage(State.SourceDirEqualsOutputDir);
                     return false;
                 }
 
                 if (!Directory.Exists(directoryOutputTextBox.Text))
                 {
-                    GenerateMessage(State.NotValidOutputDir);
+                    msgGenerator.GenerateMessage(State.NotValidOutputDir);
                     return false;
                 }
 
                 if (!Directory.Exists(tempDirectory))
                 {
-                    GenerateMessage(State.TempDirNotExist);
+                    msgGenerator.GenerateMessage(State.TempDirNotExist);
                     return false;
                 }
             }
@@ -211,7 +127,8 @@ namespace Sessions_Uploader
                 ClearTempDirectory();
             }
 
-            GenerateMessage(State.SuccesfulUpload);
+            var msgGenerator = new MessageGenerator();
+            msgGenerator.GenerateMessage(State.SuccesfulUpload);
         }
 
         private void ClearTempDirectory()
@@ -269,7 +186,8 @@ namespace Sessions_Uploader
             }
             else
             {
-                GenerateMessage(State.TempDirNotExist);
+                var msgGenerator = new MessageGenerator();
+                msgGenerator.GenerateMessage(State.TempDirNotExist);
             }
         }
 
@@ -279,13 +197,15 @@ namespace Sessions_Uploader
 
             if (listOfAnn.Count() == 1)
             {
-                GenerateMessage(State.LessThan2AnnFiles);
+                var msgGenerator = new MessageGenerator();
+                msgGenerator.GenerateMessage(State.LessThan2AnnFiles);
                 return new TimeSpan(0);
             }
 
             if (!listOfAnn.Any())
             {
-                GenerateMessage(State.NoAnnFiles);
+                var msgGenerator = new MessageGenerator();
+                msgGenerator.GenerateMessage(State.NoAnnFiles);
                 return new TimeSpan(0);
             }
 
@@ -343,7 +263,8 @@ namespace Sessions_Uploader
             }
             else
             {
-                GenerateMessage(State.NoConfigFile);
+                var msgGenerator = new MessageGenerator();
+                msgGenerator.GenerateMessage(State.NoConfigFile);
             }
         }
 
