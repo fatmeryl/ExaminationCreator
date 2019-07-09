@@ -1,6 +1,6 @@
 ﻿namespace Sessions_Uploader
 {
-    enum State
+    public enum State
     {
         NotValidSourceDir,
         NoAnnFiles,

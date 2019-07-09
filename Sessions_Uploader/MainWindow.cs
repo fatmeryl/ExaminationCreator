@@ -14,15 +14,15 @@ namespace Sessions_Uploader
 {
     public partial class MainWindow : Form
     {
-        private const string ExaminationCreator = "Examination Creator";
+        internal const string ExaminationCreator = "Examination Creator";
 
         private readonly string configPath;
 
         private readonly IServerConfigurationProvider serverConfigurationProvider;
 
-        private string tempDirectory;
+        internal string tempDirectory;
 
-        private Dictionary<string, string> listOfServers;
+        internal Dictionary<string, string> listOfServers;
 
         private TimeSpan calculatedInterval;
 
@@ -43,66 +43,19 @@ namespace Sessions_Uploader
             {
                 comboBoxServers.Items.Add(key);
             }
-
-        }
-
-        private bool ValidateControls()
-        {
-            var msgGenerator = new MessageGenerator(directorySourceTextBox, directoryOutputTextBox, tempFolderTekstBox);
-
-            if (!Directory.Exists(directorySourceTextBox.Text))
-            {
-                msgGenerator.GenerateMessage(State.NotValidSourceDir);
-                return false;
-            }
-
-            if (GetAnnFilesNames().Count() < 2)
-            {
-                msgGenerator.GenerateMessage(State.NoAnnFiles);
-                return false;
-            }
-
-            if (string.IsNullOrEmpty(comboBoxServers.Text))
-            {
-                msgGenerator.GenerateMessage(State.NoServerSelected);
-                return false;
-            }
-
-            listOfServers.TryGetValue(comboBoxServers.Text, out string serverpath);
-
-            if (!Directory.Exists(serverpath) && serverpath != ExaminationCreator)
-            {
-                msgGenerator.GenerateMessage(State.ServerConnectionProblem);
-                return false;
-            }
-
-            if (serverpath == ExaminationCreator)
-            {
-                if (directoryOutputTextBox.Text == directorySourceTextBox.Text)
-                {
-                    msgGenerator.GenerateMessage(State.SourceDirEqualsOutputDir);
-                    return false;
-                }
-
-                if (!Directory.Exists(directoryOutputTextBox.Text))
-                {
-                    msgGenerator.GenerateMessage(State.NotValidOutputDir);
-                    return false;
-                }
-
-                if (!Directory.Exists(tempDirectory))
-                {
-                    msgGenerator.GenerateMessage(State.TempDirNotExist);
-                    return false;
-                }
-            }
-
-            return true;
         }
 
         private void btnUploadSession_Click(object sender, EventArgs e)
         {
-            if (!ValidateControls())
+            Validator validator = new Validator(
+                directorySourceTextBox,
+                directoryOutputTextBox,
+                tempFolderTekstBox,
+                comboBoxServers,
+                listOfServers,
+                tempDirectory);
+
+            if (!validator.ValidateControls())
             {
                 return;
             }
@@ -218,7 +171,7 @@ namespace Sessions_Uploader
             return DateTime.ParseExact(ann.GetDate(), "yyyyMMddHHmmss", CultureInfo.InvariantCulture);
         }
 
-        private IEnumerable<string> GetAnnFilesNames()
+        internal IEnumerable<string> GetAnnFilesNames()
         {
             return Directory.GetFiles(directorySourceTextBox.Text, "*", SearchOption.TopDirectoryOnly)
                 .Where(s => s.EndsWith(".ann"));
