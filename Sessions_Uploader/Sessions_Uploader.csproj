@@ -66,6 +66,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MessageGenerator.cs" />
     <Compile Include="ServerConfigurationFromConfigProvider.cs" />
     <Compile Include="IServerConfigurationProvider.cs" />
     <Compile Include="MainWindow.cs">
@@ -79,6 +80,7 @@
     <Compile Include="SessionId.cs" />
     <Compile Include="State.cs" />
     <Compile Include="Uploader.cs" />
+    <Compile Include="Validator.cs" />
     <EmbeddedResource Include="MainWindow.resx">
       <DependentUpon>MainWindow.cs</DependentUpon>
     </EmbeddedResource>
