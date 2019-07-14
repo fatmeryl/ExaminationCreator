@@ -47,7 +47,9 @@ namespace Sessions_Uploader
 
         private void btnUploadSession_Click(object sender, EventArgs e)
         {
-            Validator validator = new Validator(
+            var msgGenerator = new MessageGenerator(directorySourceTextBox, directoryOutputTextBox, tempFolderTekstBox);
+            var validator = new Validator(
+                msgGenerator,
                 directorySourceTextBox,
                 directoryOutputTextBox,
                 tempFolderTekstBox,
@@ -80,8 +82,8 @@ namespace Sessions_Uploader
                 ClearTempDirectory();
             }
 
-            var msgGenerator = new MessageGenerator();
-            msgGenerator.GenerateMessage(State.SuccesfulUpload);
+            var msgGenerator2 = new MessageGenerator();
+            msgGenerator2.GenerateMessage(State.SuccesfulUpload);
         }
 
         private void ClearTempDirectory()

@@ -11,35 +11,37 @@ namespace Sessions_Uploader
 {
     class Validator
     {
-            TextBox directorySourceTextBox;
-            TextBox directoryOutputTextBox;
-            TextBox tempFolderTekstBox;
-            private ComboBox comboBoxServers;
-            private Dictionary<string, string> listOfServers;
-            private string tempDirectory;
+        private readonly MessageGenerator msgGenerator;
+        private TextBox directorySourceTextBox;
+        private TextBox directoryOutputTextBox;
+        private TextBox tempFolderTekstBox;
+        private ComboBox comboBoxServers;
+        private Dictionary<string, string> listOfServers;
+        private string tempDirectory;
 
 
-            public Validator(
-                TextBox directorySourceTextBox,
-                TextBox directoryOutputTextBox,
-                TextBox tempFolderTekstBox,
-                ComboBox comboBoxServers,
-                Dictionary<string, string> listOfServers,
-                string tempDirectory)
-            {
-                this.directorySourceTextBox = directorySourceTextBox;
-                this.directoryOutputTextBox = directoryOutputTextBox;
-                this.tempFolderTekstBox = tempFolderTekstBox;
-                this.comboBoxServers = comboBoxServers;
-                this.listOfServers = listOfServers;
-                this.tempDirectory = tempDirectory;
-            }
-        
+        public Validator(
+            MessageGenerator msgGenerator,
+            TextBox directorySourceTextBox,
+            TextBox directoryOutputTextBox,
+            TextBox tempFolderTekstBox,
+            ComboBox comboBoxServers,
+            Dictionary<string, string> listOfServers,
+            string tempDirectory)
+        {
+            this.msgGenerator = msgGenerator;
+            this.directorySourceTextBox = directorySourceTextBox;
+            this.directoryOutputTextBox = directoryOutputTextBox;
+            this.tempFolderTekstBox = tempFolderTekstBox;
+            this.comboBoxServers = comboBoxServers;
+            this.listOfServers = listOfServers;
+            this.tempDirectory = tempDirectory;
+        }
+
 
 
         public bool ValidateControls()
         {
-            var msgGenerator = new MessageGenerator(directorySourceTextBox, directoryOutputTextBox, tempFolderTekstBox);
 
             if (!Directory.Exists(directorySourceTextBox.Text))
             {
