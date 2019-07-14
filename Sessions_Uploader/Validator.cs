@@ -38,7 +38,15 @@ namespace Sessions_Uploader
             this.tempDirectory = tempDirectory;
         }
 
+        public State Validate()
+        {
+            if (!Directory.Exists(directorySourceTextBox.Text))
+            {
+                return State.Testowy;
+            }
 
+            return State.Ok;
+        }
 
         public bool ValidateControls()
         {

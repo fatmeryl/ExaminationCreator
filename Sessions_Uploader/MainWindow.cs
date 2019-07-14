@@ -57,12 +57,22 @@ namespace Sessions_Uploader
                 listOfServers,
                 tempDirectory);
 
+            
+            var validation = validator.Validate();
+
+            if (validation != State.Ok)
+            {
+                msgGenerator.GenerateTestMsg(validation);
+                return;
+            }
+
             if (!validator.ValidateControls())
             {
                 return;
             }
 
-            var logFilePath = Path.Combine(tempDirectory,
+            var logFilePath = Path.Combine(
+                tempDirectory,
                 $"Session Uploader Log {DateTime.Now:yyyy-MM-dd HHmmss}.txt");
             using (var writer = File.CreateText(logFilePath))
             {
@@ -115,7 +125,7 @@ namespace Sessions_Uploader
         private void SetTextBoxPath(ref TextBox textBox)
         {
             textBox.BackColor = Color.Empty;
-            FolderBrowserDialog dialogTree = new FolderBrowserDialog();
+            var dialogTree = new FolderBrowserDialog();
             dialogTree.SelectedPath = textBox.Text;
             if (dialogTree.ShowDialog() == DialogResult.OK)
             {
@@ -164,7 +174,7 @@ namespace Sessions_Uploader
                 return new TimeSpan(0);
             }
 
-            return (GetDate(listOfAnn.Last()) - GetDate(listOfAnn.First()));
+            return GetDate(listOfAnn.Last()) - GetDate(listOfAnn.First());
         }
 
         private DateTime GetDate(string filename)
