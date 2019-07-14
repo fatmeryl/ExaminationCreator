@@ -11,86 +11,86 @@ namespace Sessions_Uploader
 {
     class Validator
     {
-            TextBox directorySourceTextBox;
-            TextBox directoryOutputTextBox;
-            TextBox tempFolderTekstBox;
-            private ComboBox comboBoxServers;
-            private Dictionary<string, string> listOfServers;
-            private string tempDirectory;
+        private TextBox directorySourceTextBox;
+        private TextBox directoryOutputTextBox;
+        private TextBox tempFolderTekstBox;
+        private ComboBox comboBoxServers;
+        private Dictionary<string, string> listOfServers;
+        private string tempDirectory;
 
 
-            public Validator(
-                TextBox directorySourceTextBox,
-                TextBox directoryOutputTextBox,
-                TextBox tempFolderTekstBox,
-                ComboBox comboBoxServers,
-                Dictionary<string, string> listOfServers,
-                string tempDirectory)
-            {
-                this.directorySourceTextBox = directorySourceTextBox;
-                this.directoryOutputTextBox = directoryOutputTextBox;
-                this.tempFolderTekstBox = tempFolderTekstBox;
-                this.comboBoxServers = comboBoxServers;
-                this.listOfServers = listOfServers;
-                this.tempDirectory = tempDirectory;
-            }
-        
-
-
-        public bool ValidateControls()
+        public Validator(
+            TextBox directorySourceTextBox,
+            TextBox directoryOutputTextBox,
+            TextBox tempFolderTekstBox,
+            ComboBox comboBoxServers,
+            Dictionary<string, string> listOfServers,
+            string tempDirectory)
         {
-            var msgGenerator = new MessageGenerator(directorySourceTextBox, directoryOutputTextBox, tempFolderTekstBox);
+            this.directorySourceTextBox = directorySourceTextBox;
+            this.directoryOutputTextBox = directoryOutputTextBox;
+            this.tempFolderTekstBox = tempFolderTekstBox;
+            this.comboBoxServers = comboBoxServers;
+            this.listOfServers = listOfServers;
+            this.tempDirectory = tempDirectory;
+        }
 
+        public Tuple<State, Control> ValidateNew()
+        {
             if (!Directory.Exists(directorySourceTextBox.Text))
             {
-                msgGenerator.GenerateMessage(State.NotValidSourceDir);
-                return false;
+                return new Tuple<State, Control>(State.NotValidSourceDir, directorySourceTextBox);
             }
 
-            var getAnnFilesNames = Directory.GetFiles(directorySourceTextBox.Text, "*", SearchOption.TopDirectoryOnly)
-                .Where(s => s.EndsWith(".ann"));
-            if (getAnnFilesNames.Count() < 2)
-            {
-                msgGenerator.GenerateMessage(State.NoAnnFiles);
-                return false;
-            }
+            return new Tuple<State, Control>(State.Ok, null);
+        }
 
-            if (string.IsNullOrEmpty(comboBoxServers.Text))
+        public State Validate()
             {
-                msgGenerator.GenerateMessage(State.NoServerSelected);
-                return false;
-            }
 
-            listOfServers.TryGetValue(comboBoxServers.Text, out string serverpath);
-
-            if (!Directory.Exists(serverpath) && serverpath != MainWindow.ExaminationCreator)
-            {
-                msgGenerator.GenerateMessage(State.ServerConnectionProblem);
-                return false;
-            }
-
-            if (serverpath == MainWindow.ExaminationCreator)
-            {
-                if (directoryOutputTextBox.Text == directorySourceTextBox.Text)
+                if (!Directory.Exists(directorySourceTextBox.Text))
                 {
-                    msgGenerator.GenerateMessage(State.SourceDirEqualsOutputDir);
-                    return false;
+                    return State.NotValidSourceDir;
                 }
 
-                if (!Directory.Exists(directoryOutputTextBox.Text))
+                var getAnnFilesNames = Directory.GetFiles(directorySourceTextBox.Text, "*", SearchOption.TopDirectoryOnly)
+                    .Where(s => s.EndsWith(".ann"));
+                if (getAnnFilesNames.Count() < 2)
                 {
-                    msgGenerator.GenerateMessage(State.NotValidOutputDir);
-                    return false;
+                    return State.NoAnnFiles;
                 }
 
-                if (!Directory.Exists(tempDirectory))
+                if (string.IsNullOrEmpty(comboBoxServers.Text))
                 {
-                    msgGenerator.GenerateMessage(State.TempDirNotExist);
-                    return false;
+                    return State.NoServerSelected;
                 }
+
+                listOfServers.TryGetValue(comboBoxServers.Text, out string serverpath);
+
+                if (!Directory.Exists(serverpath) && serverpath != MainWindow.ExaminationCreator)
+                {
+                    return State.ServerConnectionProblem;
+                }
+
+                if (serverpath == MainWindow.ExaminationCreator)
+                {
+                    if (directoryOutputTextBox.Text == directorySourceTextBox.Text)
+                    {
+                        return State.SourceDirEqualsOutputDir;
+                    }
+
+                    if (!Directory.Exists(directoryOutputTextBox.Text))
+                    {
+                        return State.NotValidOutputDir;
+                    }
+
+                    if (!Directory.Exists(tempDirectory))
+                    {
+                        return State.TempDirNotExist;
+                    }
+                }
+
+                return State.Ok;
             }
-
-            return true;
         }
     }
-}

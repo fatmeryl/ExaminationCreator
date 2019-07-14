@@ -47,7 +47,9 @@ namespace Sessions_Uploader
 
         private void btnUploadSession_Click(object sender, EventArgs e)
         {
-            Validator validator = new Validator(
+            //var msgGenerator = new MessageGenerator(directorySourceTextBox, directoryOutputTextBox, tempFolderTekstBox);
+            var msgGenerator = new MessageGenerator();
+            var validator = new Validator(
                 directorySourceTextBox,
                 directoryOutputTextBox,
                 tempFolderTekstBox,
@@ -55,12 +57,15 @@ namespace Sessions_Uploader
                 listOfServers,
                 tempDirectory);
 
-            if (!validator.ValidateControls())
+            (State validation, Control control) = validator.ValidateNew();
+            if (validation != State.Ok)
             {
+                msgGenerator.GenerateMessageNew(validation, control);
                 return;
             }
 
-            var logFilePath = Path.Combine(tempDirectory,
+            var logFilePath = Path.Combine(
+                tempDirectory,
                 $"Session Uploader Log {DateTime.Now:yyyy-MM-dd HHmmss}.txt");
             using (var writer = File.CreateText(logFilePath))
             {
@@ -80,8 +85,8 @@ namespace Sessions_Uploader
                 ClearTempDirectory();
             }
 
-            var msgGenerator = new MessageGenerator();
-            msgGenerator.GenerateMessage(State.SuccesfulUpload);
+            var msgGenerator2 = new MessageGenerator();
+            msgGenerator2.GenerateMessage(State.SuccesfulUpload);
         }
 
         private void ClearTempDirectory()
@@ -113,7 +118,7 @@ namespace Sessions_Uploader
         private void SetTextBoxPath(ref TextBox textBox)
         {
             textBox.BackColor = Color.Empty;
-            FolderBrowserDialog dialogTree = new FolderBrowserDialog();
+            var dialogTree = new FolderBrowserDialog();
             dialogTree.SelectedPath = textBox.Text;
             if (dialogTree.ShowDialog() == DialogResult.OK)
             {
@@ -162,7 +167,7 @@ namespace Sessions_Uploader
                 return new TimeSpan(0);
             }
 
-            return (GetDate(listOfAnn.Last()) - GetDate(listOfAnn.First()));
+            return GetDate(listOfAnn.Last()) - GetDate(listOfAnn.First());
         }
 
         private DateTime GetDate(string filename)
