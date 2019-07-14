@@ -49,7 +49,6 @@ namespace Sessions_Uploader
         {
             var msgGenerator = new MessageGenerator(directorySourceTextBox, directoryOutputTextBox, tempFolderTekstBox);
             var validator = new Validator(
-                msgGenerator,
                 directorySourceTextBox,
                 directoryOutputTextBox,
                 tempFolderTekstBox,
@@ -57,17 +56,10 @@ namespace Sessions_Uploader
                 listOfServers,
                 tempDirectory);
 
-            
             var validation = validator.Validate();
-
             if (validation != State.Ok)
             {
-                msgGenerator.GenerateTestMsg(validation);
-                return;
-            }
-
-            if (!validator.ValidateControls())
-            {
+                msgGenerator.GenerateMessage(validation);
                 return;
             }
 

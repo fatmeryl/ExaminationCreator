@@ -21,23 +21,6 @@ namespace Sessions_Uploader.Config
         {
         }
 
-        public bool GenerateTestMsg(State state)
-        {
-            switch (state)
-            {
-                case State.Testowy:
-                    directorySourceTextBox.BackColor = Color.LightPink;
-                    MessageBox.Show(
-                        "Please enter a valid source directory",
-                        "Missing Source directory",
-                        MessageBoxButtons.OK,
-                        MessageBoxIcon.Information);
-                    return false;
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException(nameof(state), state, null);
-            }
-        }
         public void GenerateMessage(State state)
         {
             switch (state)

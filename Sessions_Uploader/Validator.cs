@@ -11,7 +11,6 @@ namespace Sessions_Uploader
 {
     class Validator
     {
-        private readonly MessageGenerator msgGenerator;
         private TextBox directorySourceTextBox;
         private TextBox directoryOutputTextBox;
         private TextBox tempFolderTekstBox;
@@ -21,7 +20,6 @@ namespace Sessions_Uploader
 
 
         public Validator(
-            MessageGenerator msgGenerator,
             TextBox directorySourceTextBox,
             TextBox directoryOutputTextBox,
             TextBox tempFolderTekstBox,
@@ -29,7 +27,6 @@ namespace Sessions_Uploader
             Dictionary<string, string> listOfServers,
             string tempDirectory)
         {
-            this.msgGenerator = msgGenerator;
             this.directorySourceTextBox = directorySourceTextBox;
             this.directoryOutputTextBox = directoryOutputTextBox;
             this.tempFolderTekstBox = tempFolderTekstBox;
@@ -40,67 +37,50 @@ namespace Sessions_Uploader
 
         public State Validate()
         {
-            if (!Directory.Exists(directorySourceTextBox.Text))
-            {
-                return State.Testowy;
-            }
-
-            return State.Ok;
-        }
-
-        public bool ValidateControls()
-        {
 
             if (!Directory.Exists(directorySourceTextBox.Text))
             {
-                msgGenerator.GenerateMessage(State.NotValidSourceDir);
-                return false;
+                return State.NotValidSourceDir;
             }
 
             var getAnnFilesNames = Directory.GetFiles(directorySourceTextBox.Text, "*", SearchOption.TopDirectoryOnly)
                 .Where(s => s.EndsWith(".ann"));
             if (getAnnFilesNames.Count() < 2)
             {
-                msgGenerator.GenerateMessage(State.NoAnnFiles);
-                return false;
+                return State.NoAnnFiles;
             }
 
             if (string.IsNullOrEmpty(comboBoxServers.Text))
             {
-                msgGenerator.GenerateMessage(State.NoServerSelected);
-                return false;
+                return State.NoServerSelected;
             }
 
             listOfServers.TryGetValue(comboBoxServers.Text, out string serverpath);
 
             if (!Directory.Exists(serverpath) && serverpath != MainWindow.ExaminationCreator)
             {
-                msgGenerator.GenerateMessage(State.ServerConnectionProblem);
-                return false;
+                return State.ServerConnectionProblem;
             }
 
             if (serverpath == MainWindow.ExaminationCreator)
             {
                 if (directoryOutputTextBox.Text == directorySourceTextBox.Text)
                 {
-                    msgGenerator.GenerateMessage(State.SourceDirEqualsOutputDir);
-                    return false;
+                    return State.SourceDirEqualsOutputDir;
                 }
 
                 if (!Directory.Exists(directoryOutputTextBox.Text))
                 {
-                    msgGenerator.GenerateMessage(State.NotValidOutputDir);
-                    return false;
+                    return State.NotValidOutputDir;
                 }
 
                 if (!Directory.Exists(tempDirectory))
                 {
-                    msgGenerator.GenerateMessage(State.TempDirNotExist);
-                    return false;
+                    return State.TempDirNotExist;
                 }
             }
 
-            return true;
+            return State.Ok;
         }
     }
 }
