@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -37,9 +38,18 @@ namespace Sessions_Uploader
 
             foreach (var file in files)
             {
+                var checkOtherThanAnnMsg = Path.GetExtension(file);
+
                 var fileDate = Path.GetFileNameWithoutExtension(file);
                 var matches = new Regex(@"(20\d+)").Matches(fileDate);
                 string outFile;
+                if (checkOtherThanAnnMsg.Contains("snp"))
+                {
+                    outFile = OutExaminationPath + Path.GetFileName(file);
+                    File.Copy(file, outFile);
+                    continue;
+                }
+
                 if (matches.Count == 1)
                 {
                     var oldFileDate = matches[0].Value;
