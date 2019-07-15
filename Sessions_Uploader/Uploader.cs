@@ -127,8 +127,17 @@ namespace Sessions_Uploader
             UploadManyFiles("*rdl", ServerPath);
             UploadManyFiles("*ann", ServerPath);
             UploadManyFiles("*msg", ServerPath);
-            UploadManyFiles("*txt", $"{ServerPath.Substring(0,ServerPath.Length - 7)}Repository");
-            UploadManyFiles("*snp", $"{ServerPath.Substring(0,ServerPath.Length - 7)}Repository");
+
+            if (ServerPath.Contains("ecgfftt"))
+            {
+                UploadManyFiles("*txt", $"{ServerPath.Substring(0, ServerPath.Length - 7)}Repository");
+                UploadManyFiles("*snp", $"{ServerPath.Substring(0, ServerPath.Length - 7)}Repository");
+            }
+            else
+            {
+                UploadManyFiles("*txt", ServerPath);
+                UploadManyFiles("*snp", ServerPath);
+            }
         }
 
         public void UploadManyFiles(string typeOfFiles, string ServerPath)
