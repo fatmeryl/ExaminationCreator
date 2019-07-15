@@ -35,52 +35,62 @@ namespace Sessions_Uploader
             this.tempDirectory = tempDirectory;
         }
 
-        public State Validate()
+        public Tuple<State, Control> ValidateNew()
         {
-
             if (!Directory.Exists(directorySourceTextBox.Text))
             {
-                return State.NotValidSourceDir;
+                return new Tuple<State, Control>(State.NotValidSourceDir, directorySourceTextBox);
             }
 
-            var getAnnFilesNames = Directory.GetFiles(directorySourceTextBox.Text, "*", SearchOption.TopDirectoryOnly)
-                .Where(s => s.EndsWith(".ann"));
-            if (getAnnFilesNames.Count() < 2)
-            {
-                return State.NoAnnFiles;
-            }
+            return new Tuple<State, Control>(State.Ok, null);
+        }
 
-            if (string.IsNullOrEmpty(comboBoxServers.Text))
+        public State Validate()
             {
-                return State.NoServerSelected;
-            }
 
-            listOfServers.TryGetValue(comboBoxServers.Text, out string serverpath);
-
-            if (!Directory.Exists(serverpath) && serverpath != MainWindow.ExaminationCreator)
-            {
-                return State.ServerConnectionProblem;
-            }
-
-            if (serverpath == MainWindow.ExaminationCreator)
-            {
-                if (directoryOutputTextBox.Text == directorySourceTextBox.Text)
+                if (!Directory.Exists(directorySourceTextBox.Text))
                 {
-                    return State.SourceDirEqualsOutputDir;
+                    return State.NotValidSourceDir;
                 }
 
-                if (!Directory.Exists(directoryOutputTextBox.Text))
+                var getAnnFilesNames = Directory.GetFiles(directorySourceTextBox.Text, "*", SearchOption.TopDirectoryOnly)
+                    .Where(s => s.EndsWith(".ann"));
+                if (getAnnFilesNames.Count() < 2)
                 {
-                    return State.NotValidOutputDir;
+                    return State.NoAnnFiles;
                 }
 
-                if (!Directory.Exists(tempDirectory))
+                if (string.IsNullOrEmpty(comboBoxServers.Text))
                 {
-                    return State.TempDirNotExist;
+                    return State.NoServerSelected;
                 }
+
+                listOfServers.TryGetValue(comboBoxServers.Text, out string serverpath);
+
+                if (!Directory.Exists(serverpath) && serverpath != MainWindow.ExaminationCreator)
+                {
+                    return State.ServerConnectionProblem;
+                }
+
+                if (serverpath == MainWindow.ExaminationCreator)
+                {
+                    if (directoryOutputTextBox.Text == directorySourceTextBox.Text)
+                    {
+                        return State.SourceDirEqualsOutputDir;
+                    }
+
+                    if (!Directory.Exists(directoryOutputTextBox.Text))
+                    {
+                        return State.NotValidOutputDir;
+                    }
+
+                    if (!Directory.Exists(tempDirectory))
+                    {
+                        return State.TempDirNotExist;
+                    }
+                }
+
+                return State.Ok;
             }
-
-            return State.Ok;
         }
     }
-}

@@ -21,12 +21,12 @@ namespace Sessions_Uploader.Config
         {
         }
 
-        public void GenerateMessageNew(State state, TextBox directorySourceTextBox, TextBox directoryOutputTextBox, TextBox tempFolderTekstBox)
+        public void GenerateMessageNew(State state, Control control)
         {
             switch (state)
             {
                 case State.NotValidSourceDir:
-                    directorySourceTextBox.BackColor = Color.LightPink;
+                    control.BackColor = Color.LightPink;
                     MessageBox.Show(
                         "Please enter a valid source directory",
                         "Missing Source directory",
@@ -36,7 +36,7 @@ namespace Sessions_Uploader.Config
                 case State.NoAnnFiles:
                     directorySourceTextBox.BackColor = Color.LightPink;
                     MessageBox.Show(
-                        "Source directory does not contains any .ann files" +
+                        "Source directory does not contain any .ann files" +
                         Environment.NewLine + "Please provide valid directory.",
                         "Information",
                         MessageBoxButtons.OK,

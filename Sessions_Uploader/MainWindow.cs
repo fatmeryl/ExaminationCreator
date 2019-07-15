@@ -57,10 +57,10 @@ namespace Sessions_Uploader
                 listOfServers,
                 tempDirectory);
 
-            var validation = validator.Validate();
+            (State validation, Control control) = validator.ValidateNew();
             if (validation != State.Ok)
             {
-                msgGenerator.GenerateMessageNew(validation, directorySourceTextBox, directoryOutputTextBox, tempFolderTekstBox);
+                msgGenerator.GenerateMessageNew(validation, control);
                 return;
             }
 
