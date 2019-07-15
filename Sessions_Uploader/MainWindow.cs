@@ -47,7 +47,8 @@ namespace Sessions_Uploader
 
         private void btnUploadSession_Click(object sender, EventArgs e)
         {
-            var msgGenerator = new MessageGenerator(directorySourceTextBox, directoryOutputTextBox, tempFolderTekstBox);
+            //var msgGenerator = new MessageGenerator(directorySourceTextBox, directoryOutputTextBox, tempFolderTekstBox);
+            var msgGenerator = new MessageGenerator();
             var validator = new Validator(
                 directorySourceTextBox,
                 directoryOutputTextBox,
@@ -59,7 +60,7 @@ namespace Sessions_Uploader
             var validation = validator.Validate();
             if (validation != State.Ok)
             {
-                msgGenerator.GenerateMessage(validation);
+                msgGenerator.GenerateMessageNew(validation, directorySourceTextBox, directoryOutputTextBox, tempFolderTekstBox);
                 return;
             }
 
