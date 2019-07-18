@@ -26,6 +26,10 @@ namespace Sessions_Uploader
 
         private TimeSpan calculatedInterval;
 
+        private MessageGenerator msgGenerator;
+
+        private Validator validator;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -43,24 +47,23 @@ namespace Sessions_Uploader
             {
                 comboBoxServers.Items.Add(key);
             }
-        }
 
-        private void btnUploadSession_Click(object sender, EventArgs e)
-        {
-            //var msgGenerator = new MessageGenerator(directorySourceTextBox, directoryOutputTextBox, tempFolderTekstBox);
-            var msgGenerator = new MessageGenerator();
-            var validator = new Validator(
+            msgGenerator = new MessageGenerator();
+            validator = new Validator(
                 directorySourceTextBox,
                 directoryOutputTextBox,
                 tempFolderTekstBox,
                 comboBoxServers,
                 listOfServers,
                 tempDirectory);
+        }
 
-            (State validation, Control control) = validator.ValidateNew();
+        private void btnUploadSession_Click(object sender, EventArgs e)
+        {
+            (State validation, Control control) = validator.Validate();
             if (validation != State.Ok)
             {
-                msgGenerator.GenerateMessageNew(validation, control);
+                msgGenerator.GenerateMessage(validation, control);
                 return;
             }
 
@@ -85,8 +88,7 @@ namespace Sessions_Uploader
                 ClearTempDirectory();
             }
 
-            var msgGenerator2 = new MessageGenerator();
-            msgGenerator2.GenerateMessage(State.SuccesfulUpload);
+            msgGenerator.GenerateMessage(validation, control);
         }
 
         private void ClearTempDirectory()
@@ -144,8 +146,7 @@ namespace Sessions_Uploader
             }
             else
             {
-                var msgGenerator = new MessageGenerator();
-                msgGenerator.GenerateMessage(State.TempDirNotExist);
+                msgGenerator.GenerateMessage(State.TempDirNotExist, tempFolderTekstBox);
             }
         }
 
@@ -155,15 +156,13 @@ namespace Sessions_Uploader
 
             if (listOfAnn.Count() == 1)
             {
-                var msgGenerator = new MessageGenerator();
-                msgGenerator.GenerateMessage(State.LessThan2AnnFiles);
+                msgGenerator.GenerateMessage(State.LessThan2AnnFiles, directorySourceTextBox);
                 return new TimeSpan(0);
             }
 
             if (!listOfAnn.Any())
             {
-                var msgGenerator = new MessageGenerator();
-                msgGenerator.GenerateMessage(State.NoAnnFiles);
+                msgGenerator.GenerateMessage(State.NoAnnFiles, directorySourceTextBox);
                 return new TimeSpan(0);
             }
 
@@ -221,8 +220,7 @@ namespace Sessions_Uploader
             }
             else
             {
-                var msgGenerator = new MessageGenerator();
-                msgGenerator.GenerateMessage(State.NoConfigFile);
+                msgGenerator.GenerateMessage(State.NoConfigFile, null);
             }
         }
 

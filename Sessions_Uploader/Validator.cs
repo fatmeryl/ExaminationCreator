@@ -18,7 +18,6 @@ namespace Sessions_Uploader
         private Dictionary<string, string> listOfServers;
         private string tempDirectory;
 
-
         public Validator(
             TextBox directorySourceTextBox,
             TextBox directoryOutputTextBox,
@@ -35,62 +34,46 @@ namespace Sessions_Uploader
             this.tempDirectory = tempDirectory;
         }
 
-        public Tuple<State, Control> ValidateNew()
+        public Tuple<State, Control> Validate()
         {
             if (!Directory.Exists(directorySourceTextBox.Text))
             {
                 return new Tuple<State, Control>(State.NotValidSourceDir, directorySourceTextBox);
             }
 
+            var getAnnFilesNames = Directory.GetFiles(directorySourceTextBox.Text, "*", SearchOption.TopDirectoryOnly)
+                .Where(s => s.EndsWith(".ann"));
+            if (getAnnFilesNames.Count() < 2)
+            {
+                return new Tuple<State, Control>(State.NoAnnFiles, directorySourceTextBox);
+            }
+
+            if (string.IsNullOrEmpty(comboBoxServers.Text))
+            {
+                return new Tuple<State, Control>(State.NoServerSelected, comboBoxServers);
+            }
+
+            listOfServers.TryGetValue(comboBoxServers.Text, out string serverpath);
+
+            if (serverpath == MainWindow.ExaminationCreator)
+            {
+                if (directoryOutputTextBox.Text == directorySourceTextBox.Text)
+                {
+                    return new Tuple<State, Control>(State.SourceDirEqualsOutputDir, directoryOutputTextBox);
+                }
+
+                if (!Directory.Exists(directoryOutputTextBox.Text))
+                {
+                    return new Tuple<State, Control>(State.NotValidOutputDir, directoryOutputTextBox);
+                }
+
+                if (!Directory.Exists(tempDirectory))
+                {
+                    return new Tuple<State, Control>(State.TempDirNotExist, tempFolderTekstBox);
+                }
+            }
+
             return new Tuple<State, Control>(State.Ok, null);
         }
-
-        public State Validate()
-            {
-
-                if (!Directory.Exists(directorySourceTextBox.Text))
-                {
-                    return State.NotValidSourceDir;
-                }
-
-                var getAnnFilesNames = Directory.GetFiles(directorySourceTextBox.Text, "*", SearchOption.TopDirectoryOnly)
-                    .Where(s => s.EndsWith(".ann"));
-                if (getAnnFilesNames.Count() < 2)
-                {
-                    return State.NoAnnFiles;
-                }
-
-                if (string.IsNullOrEmpty(comboBoxServers.Text))
-                {
-                    return State.NoServerSelected;
-                }
-
-                listOfServers.TryGetValue(comboBoxServers.Text, out string serverpath);
-
-                if (!Directory.Exists(serverpath) && serverpath != MainWindow.ExaminationCreator)
-                {
-                    return State.ServerConnectionProblem;
-                }
-
-                if (serverpath == MainWindow.ExaminationCreator)
-                {
-                    if (directoryOutputTextBox.Text == directorySourceTextBox.Text)
-                    {
-                        return State.SourceDirEqualsOutputDir;
-                    }
-
-                    if (!Directory.Exists(directoryOutputTextBox.Text))
-                    {
-                        return State.NotValidOutputDir;
-                    }
-
-                    if (!Directory.Exists(tempDirectory))
-                    {
-                        return State.TempDirNotExist;
-                    }
-                }
-
-                return State.Ok;
-            }
-        }
     }
+}

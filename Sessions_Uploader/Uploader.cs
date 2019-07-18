@@ -127,8 +127,8 @@ namespace Sessions_Uploader
             UploadManyFiles("*rdl", ServerPath);
             UploadManyFiles("*ann", ServerPath);
             UploadManyFiles("*msg", ServerPath);
-            UploadManyFiles("*txt", $"{ServerPath.Substring(0,ServerPath.Length - 7)}Repository");
-            UploadManyFiles("*snp", $"{ServerPath.Substring(0,ServerPath.Length - 7)}Repository");
+            //UploadManyFiles("*txt", $"{ServerPath.Substring(0,ServerPath.Length - 7)}Repository");
+            //UploadManyFiles("*snp", $"{ServerPath.Substring(0,ServerPath.Length - 7)}Repository");
         }
 
         public void UploadManyFiles(string typeOfFiles, string ServerPath)
