@@ -9,10 +9,8 @@
         SourceDirEqualsOutputDir,
         NotValidOutputDir,
         TempDirNotExist,
-        SuccesfulUpload,
         LessThan2AnnFiles,
         NoConfigFile,
         Ok,
-        Testowy,
     }
 }
