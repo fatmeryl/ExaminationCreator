@@ -15,19 +15,12 @@ namespace Sessions_Uploader
     public partial class MainWindow : Form
     {
         internal const string ExaminationCreator = "Examination Creator";
-
         private readonly string configPath;
-
         private readonly IServerConfigurationProvider serverConfigurationProvider;
-
         internal string tempDirectory;
-
         internal Dictionary<string, string> listOfServers;
-
         private TimeSpan calculatedInterval;
-
         private MessageGenerator msgGenerator;
-
         private Validator validator;
 
         public MainWindow()
@@ -140,13 +133,14 @@ namespace Sessions_Uploader
 
         private void openTempBtn_Click(object sender, EventArgs e)
         {
-            if (Directory.Exists(tempDirectory))
+            State validation = validator.Validate2(tempFolderTekstBox);
+            if (validation == State.TempDirNotExist)
             {
-                Process.Start(tempDirectory);
+                msgGenerator.GenerateMessage(validation, tempFolderTekstBox);
             }
             else
             {
-                msgGenerator.GenerateMessage(State.TempDirNotExist, tempFolderTekstBox);
+                Process.Start(tempDirectory);
             }
         }
 

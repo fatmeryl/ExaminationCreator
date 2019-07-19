@@ -34,6 +34,19 @@ namespace Sessions_Uploader
             this.tempDirectory = tempDirectory;
         }
 
+        public State Validate2(Control control)
+        {
+            if (control == tempFolderTekstBox)
+            {
+                if (!Directory.Exists(tempDirectory))
+                {
+                    return State.TempDirNotExist;
+                }
+            }
+
+            return State.Ok;
+        }
+
         public Tuple<State, Control> Validate()
         {
             if (!Directory.Exists(directorySourceTextBox.Text))
