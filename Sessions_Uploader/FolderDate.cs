@@ -24,12 +24,7 @@ namespace Sessions_Uploader
 
         public string GetDate()
         {
-            if (string.IsNullOrWhiteSpace(Folderdate))
-            {
-                throw new Exception("Invalid session ID");
-            }
-
-            return Folderdate.Substring(0, 14);
+            return SessionUtility.GetDateStringFromSessionID(Folderdate);
         }
 
         public string ExaminationIdWithoutDate()

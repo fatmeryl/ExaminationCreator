@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Sessions_Uploader
+﻿namespace Sessions_Uploader
 {
     public class SessionId
     {
@@ -13,12 +11,7 @@ namespace Sessions_Uploader
 
         public string GetDate()
         {
-            if (string.IsNullOrWhiteSpace(SessionID))
-            {
-                throw new Exception("Invalid session ID");
-            }
-
-            return SessionID.Substring(0, 14);
+            return SessionUtility.GetDateStringFromSessionID(SessionID);
         }
     }
 }
