@@ -17,7 +17,7 @@ namespace Sessions_Uploader
 
         public Uploader(DateTime newExaminationTime, string inExaminationPath, string outExaminationPath)
         {
-            var examinationID = new SessionId(Path.GetFileName(Path.GetDirectoryName(inExaminationPath)));
+            var examinationID = new FolderDate(Path.GetFileName(Path.GetDirectoryName(inExaminationPath)));
             var examinationDateString = examinationID.GetDate();
             var examinationDate = DateTime.ParseExact(examinationDateString, "yyyyMMddHHmmss", CultureInfo.InvariantCulture, DateTimeStyles.None).ToUniversalTime();
 

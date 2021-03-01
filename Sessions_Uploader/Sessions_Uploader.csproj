@@ -66,6 +66,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FolderDate.cs" />
     <Compile Include="ServerConfigurationFromConfigProvider.cs" />
     <Compile Include="IServerConfigurationProvider.cs" />
     <Compile Include="MainWindow.cs">

@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Sessions_Uploader
 {
@@ -19,20 +15,10 @@ namespace Sessions_Uploader
         {
             if (string.IsNullOrWhiteSpace(SessionID))
             {
-                throw new Exception ("Invalid session ID");
-            }
-
-            return SessionID.Substring(0, 14);
-        }
-
-        public string ExaminationIdWithoutDate()
-        {
-            if (string.IsNullOrWhiteSpace(SessionID))
-            {
                 throw new Exception("Invalid session ID");
             }
 
-            return SessionID.Substring(14);
+            return SessionID.Substring(0, 14);
         }
     }
 }
