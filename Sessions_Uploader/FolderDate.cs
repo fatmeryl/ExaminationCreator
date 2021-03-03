@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Text.RegularExpressions;
 
-namespace Sessions_Uploader
+namespace ExaminationCreator
 {
     class FolderDate
     {

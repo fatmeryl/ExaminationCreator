@@ -1,4 +1,4 @@
-﻿namespace Sessions_Uploader
+﻿namespace ExaminationCreator
 {
     enum State
     {

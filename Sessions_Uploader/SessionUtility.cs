@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Sessions_Uploader
+namespace ExaminationCreator
 {
     public static class SessionUtility
     {

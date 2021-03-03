@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Sessions_Uploader.Properties
+namespace ExaminationCreator.Properties
 {
 
 

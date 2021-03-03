@@ -1,4 +1,4 @@
-﻿namespace Sessions_Uploader
+﻿namespace ExaminationCreator
 {
     partial class MainWindow
     {
@@ -56,9 +56,10 @@
             // lblChooseServer
             // 
             this.lblChooseServer.AutoSize = true;
-            this.lblChooseServer.Location = new System.Drawing.Point(8, 19);
+            this.lblChooseServer.Location = new System.Drawing.Point(11, 23);
+            this.lblChooseServer.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblChooseServer.Name = "lblChooseServer";
-            this.lblChooseServer.Size = new System.Drawing.Size(78, 13);
+            this.lblChooseServer.Size = new System.Drawing.Size(104, 17);
             this.lblChooseServer.TabIndex = 0;
             this.lblChooseServer.Text = "Choose server:";
             // 
@@ -66,18 +67,20 @@
             // 
             this.comboBoxServers.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxServers.FormattingEnabled = true;
-            this.comboBoxServers.Location = new System.Drawing.Point(8, 35);
+            this.comboBoxServers.Location = new System.Drawing.Point(11, 43);
+            this.comboBoxServers.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.comboBoxServers.Name = "comboBoxServers";
-            this.comboBoxServers.Size = new System.Drawing.Size(227, 21);
+            this.comboBoxServers.Size = new System.Drawing.Size(301, 24);
             this.comboBoxServers.TabIndex = 1;
             this.comboBoxServers.TextChanged += new System.EventHandler(this.comboBoxServers_TextChanged);
             // 
             // btnUploadSession
             // 
             this.btnUploadSession.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.btnUploadSession.Location = new System.Drawing.Point(195, 387);
+            this.btnUploadSession.Location = new System.Drawing.Point(260, 476);
+            this.btnUploadSession.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnUploadSession.Name = "btnUploadSession";
-            this.btnUploadSession.Size = new System.Drawing.Size(186, 25);
+            this.btnUploadSession.Size = new System.Drawing.Size(248, 31);
             this.btnUploadSession.TabIndex = 2;
             this.btnUploadSession.Text = "Upload Files";
             this.btnUploadSession.UseVisualStyleBackColor = false;
@@ -86,21 +89,23 @@
             // lblStatusChanging
             // 
             this.lblStatusChanging.AutoSize = true;
-            this.lblStatusChanging.Location = new System.Drawing.Point(171, 71);
+            this.lblStatusChanging.Location = new System.Drawing.Point(228, 87);
+            this.lblStatusChanging.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblStatusChanging.Name = "lblStatusChanging";
-            this.lblStatusChanging.Size = new System.Drawing.Size(0, 13);
+            this.lblStatusChanging.Size = new System.Drawing.Size(0, 17);
             this.lblStatusChanging.TabIndex = 4;
             // 
             // howManyTimes
             // 
-            this.howManyTimes.Location = new System.Drawing.Point(144, 74);
+            this.howManyTimes.Location = new System.Drawing.Point(192, 91);
+            this.howManyTimes.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.howManyTimes.Minimum = new decimal(new int[] {
             1,
             0,
             0,
             0});
             this.howManyTimes.Name = "howManyTimes";
-            this.howManyTimes.Size = new System.Drawing.Size(39, 20);
+            this.howManyTimes.Size = new System.Drawing.Size(52, 22);
             this.howManyTimes.TabIndex = 8;
             this.howManyTimes.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.howManyTimes.Value = new decimal(new int[] {
@@ -113,17 +118,19 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(8, 76);
+            this.label1.Location = new System.Drawing.Point(11, 94);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(124, 13);
+            this.label1.Size = new System.Drawing.Size(163, 17);
             this.label1.TabIndex = 9;
             this.label1.Text = "How many examinations:";
             // 
             // BrowseSource
             // 
-            this.BrowseSource.Location = new System.Drawing.Point(485, 16);
+            this.BrowseSource.Location = new System.Drawing.Point(647, 20);
+            this.BrowseSource.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.BrowseSource.Name = "BrowseSource";
-            this.BrowseSource.Size = new System.Drawing.Size(75, 25);
+            this.BrowseSource.Size = new System.Drawing.Size(100, 31);
             this.BrowseSource.TabIndex = 12;
             this.BrowseSource.Text = "Browse";
             this.BrowseSource.UseVisualStyleBackColor = true;
@@ -131,9 +138,10 @@
             // 
             // directorySourceTextBox
             // 
-            this.directorySourceTextBox.Location = new System.Drawing.Point(6, 19);
+            this.directorySourceTextBox.Location = new System.Drawing.Point(8, 23);
+            this.directorySourceTextBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.directorySourceTextBox.Name = "directorySourceTextBox";
-            this.directorySourceTextBox.Size = new System.Drawing.Size(473, 20);
+            this.directorySourceTextBox.Size = new System.Drawing.Size(629, 22);
             this.directorySourceTextBox.TabIndex = 13;
             this.directorySourceTextBox.TextChanged += new System.EventHandler(this.directorySourceTextBox_TextChanged);
             // 
@@ -141,9 +149,11 @@
             // 
             this.groupBox1.Controls.Add(this.directorySourceTextBox);
             this.groupBox1.Controls.Add(this.BrowseSource);
-            this.groupBox1.Location = new System.Drawing.Point(4, 225);
+            this.groupBox1.Location = new System.Drawing.Point(5, 277);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(566, 54);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox1.Size = new System.Drawing.Size(755, 66);
             this.groupBox1.TabIndex = 14;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Source directory";
@@ -151,9 +161,10 @@
             // openTempBtn
             // 
             this.openTempBtn.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.openTempBtn.Location = new System.Drawing.Point(442, 160);
+            this.openTempBtn.Location = new System.Drawing.Point(589, 197);
+            this.openTempBtn.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.openTempBtn.Name = "openTempBtn";
-            this.openTempBtn.Size = new System.Drawing.Size(118, 25);
+            this.openTempBtn.Size = new System.Drawing.Size(157, 31);
             this.openTempBtn.TabIndex = 12;
             this.openTempBtn.Text = "Open temp location";
             this.openTempBtn.UseVisualStyleBackColor = false;
@@ -170,18 +181,21 @@
             this.groupBox3.Controls.Add(this.comboBoxServers);
             this.groupBox3.Controls.Add(this.label1);
             this.groupBox3.Controls.Add(this.howManyTimes);
-            this.groupBox3.Location = new System.Drawing.Point(4, 7);
+            this.groupBox3.Location = new System.Drawing.Point(5, 9);
+            this.groupBox3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(566, 206);
+            this.groupBox3.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox3.Size = new System.Drawing.Size(755, 254);
             this.groupBox3.TabIndex = 16;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Settings";
             // 
             // openConfigBtn
             // 
-            this.openConfigBtn.Location = new System.Drawing.Point(453, 35);
+            this.openConfigBtn.Location = new System.Drawing.Point(604, 43);
+            this.openConfigBtn.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.openConfigBtn.Name = "openConfigBtn";
-            this.openConfigBtn.Size = new System.Drawing.Size(107, 25);
+            this.openConfigBtn.Size = new System.Drawing.Size(143, 31);
             this.openConfigBtn.TabIndex = 15;
             this.openConfigBtn.Text = "Open config file";
             this.openConfigBtn.UseVisualStyleBackColor = true;
@@ -192,9 +206,10 @@
             this.clearTempOptionCheckBox.AutoSize = true;
             this.clearTempOptionCheckBox.Checked = true;
             this.clearTempOptionCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.clearTempOptionCheckBox.Location = new System.Drawing.Point(8, 111);
+            this.clearTempOptionCheckBox.Location = new System.Drawing.Point(11, 137);
+            this.clearTempOptionCheckBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.clearTempOptionCheckBox.Name = "clearTempOptionCheckBox";
-            this.clearTempOptionCheckBox.Size = new System.Drawing.Size(167, 17);
+            this.clearTempOptionCheckBox.Size = new System.Drawing.Size(222, 21);
             this.clearTempOptionCheckBox.TabIndex = 14;
             this.clearTempOptionCheckBox.Text = "Clear temp. folder after upload";
             this.clearTempOptionCheckBox.UseVisualStyleBackColor = true;
@@ -202,9 +217,10 @@
             // tempFolderCheckBox
             // 
             this.tempFolderCheckBox.AutoSize = true;
-            this.tempFolderCheckBox.Location = new System.Drawing.Point(8, 139);
+            this.tempFolderCheckBox.Location = new System.Drawing.Point(11, 171);
+            this.tempFolderCheckBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tempFolderCheckBox.Name = "tempFolderCheckBox";
-            this.tempFolderCheckBox.Size = new System.Drawing.Size(135, 17);
+            this.tempFolderCheckBox.Size = new System.Drawing.Size(179, 21);
             this.tempFolderCheckBox.TabIndex = 13;
             this.tempFolderCheckBox.Text = "Temoporary folder path";
             this.tempFolderCheckBox.UseVisualStyleBackColor = true;
@@ -213,9 +229,10 @@
             // tempFolderTekstBox
             // 
             this.tempFolderTekstBox.Enabled = false;
-            this.tempFolderTekstBox.Location = new System.Drawing.Point(8, 163);
+            this.tempFolderTekstBox.Location = new System.Drawing.Point(11, 201);
+            this.tempFolderTekstBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tempFolderTekstBox.Name = "tempFolderTekstBox";
-            this.tempFolderTekstBox.Size = new System.Drawing.Size(410, 20);
+            this.tempFolderTekstBox.Size = new System.Drawing.Size(545, 22);
             this.tempFolderTekstBox.TabIndex = 11;
             this.tempFolderTekstBox.Text = "C:\\SessionUploader";
             this.tempFolderTekstBox.TextChanged += new System.EventHandler(this.tempFolderTextBox_TextChanged);
@@ -224,9 +241,11 @@
             // 
             this.OutputGroupBox.Controls.Add(this.directoryOutputTextBox);
             this.OutputGroupBox.Controls.Add(this.BrowseOutput);
-            this.OutputGroupBox.Location = new System.Drawing.Point(4, 296);
+            this.OutputGroupBox.Location = new System.Drawing.Point(5, 364);
+            this.OutputGroupBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.OutputGroupBox.Name = "OutputGroupBox";
-            this.OutputGroupBox.Size = new System.Drawing.Size(566, 54);
+            this.OutputGroupBox.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.OutputGroupBox.Size = new System.Drawing.Size(755, 66);
             this.OutputGroupBox.TabIndex = 17;
             this.OutputGroupBox.TabStop = false;
             this.OutputGroupBox.Text = "Output directory for examination creator";
@@ -234,16 +253,18 @@
             // 
             // directoryOutputTextBox
             // 
-            this.directoryOutputTextBox.Location = new System.Drawing.Point(6, 19);
+            this.directoryOutputTextBox.Location = new System.Drawing.Point(8, 23);
+            this.directoryOutputTextBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.directoryOutputTextBox.Name = "directoryOutputTextBox";
-            this.directoryOutputTextBox.Size = new System.Drawing.Size(473, 20);
+            this.directoryOutputTextBox.Size = new System.Drawing.Size(629, 22);
             this.directoryOutputTextBox.TabIndex = 13;
             // 
             // BrowseOutput
             // 
-            this.BrowseOutput.Location = new System.Drawing.Point(485, 16);
+            this.BrowseOutput.Location = new System.Drawing.Point(647, 20);
+            this.BrowseOutput.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.BrowseOutput.Name = "BrowseOutput";
-            this.BrowseOutput.Size = new System.Drawing.Size(75, 25);
+            this.BrowseOutput.Size = new System.Drawing.Size(100, 31);
             this.BrowseOutput.TabIndex = 12;
             this.BrowseOutput.Text = "Browse";
             this.BrowseOutput.UseVisualStyleBackColor = true;
@@ -251,10 +272,10 @@
             // 
             // MainWindow
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.ClientSize = new System.Drawing.Size(576, 436);
+            this.ClientSize = new System.Drawing.Size(768, 537);
             this.Controls.Add(this.OutputGroupBox);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox1);
@@ -262,9 +283,10 @@
             this.Controls.Add(this.btnUploadSession);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.MaximizeBox = false;
             this.Name = "MainWindow";
-            this.Text = "Sessions Uploder";
+            this.Text = "Examination Creator";
             ((System.ComponentModel.ISupportInitialize)(this.howManyTimes)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();

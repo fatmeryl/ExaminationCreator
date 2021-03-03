@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Sessions_Uploader
+namespace ExaminationCreator
 {
     public interface IServerConfigurationProvider
     {

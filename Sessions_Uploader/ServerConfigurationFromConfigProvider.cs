@@ -4,7 +4,7 @@ using System.IO;
 using System.Windows.Forms;
 using Newtonsoft.Json;
 
-namespace Sessions_Uploader
+namespace ExaminationCreator
 {
     public class ServerConfigurationFromConfigProvider : IServerConfigurationProvider
     {
