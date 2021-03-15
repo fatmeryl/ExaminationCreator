@@ -226,7 +226,7 @@ namespace ExaminationCreator
         private string CheckSelectedServer(Dictionary<string, string> listOfServers)
         {
             var uploader = new Uploader(
-                DateTime.Now.ToLocalTime() - calculatedInterval,
+                SetStartDate.GetSelectedTimeAndDate() - calculatedInterval,
                 $@"{directorySourceTextBox.Text}\",
                 tempDirectory);
 
