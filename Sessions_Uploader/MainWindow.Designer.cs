@@ -47,6 +47,8 @@
             this.OutputGroupBox = new System.Windows.Forms.GroupBox();
             this.directoryOutputTextBox = new System.Windows.Forms.TextBox();
             this.BrowseOutput = new System.Windows.Forms.Button();
+            this.dateTimePicker = new System.Windows.Forms.DateTimePicker();
+            this.label2 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.howManyTimes)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -68,7 +70,7 @@
             this.comboBoxServers.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxServers.FormattingEnabled = true;
             this.comboBoxServers.Location = new System.Drawing.Point(11, 43);
-            this.comboBoxServers.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.comboBoxServers.Margin = new System.Windows.Forms.Padding(4);
             this.comboBoxServers.Name = "comboBoxServers";
             this.comboBoxServers.Size = new System.Drawing.Size(301, 24);
             this.comboBoxServers.TabIndex = 1;
@@ -78,7 +80,7 @@
             // 
             this.btnUploadSession.BackColor = System.Drawing.SystemColors.ControlLight;
             this.btnUploadSession.Location = new System.Drawing.Point(260, 476);
-            this.btnUploadSession.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnUploadSession.Margin = new System.Windows.Forms.Padding(4);
             this.btnUploadSession.Name = "btnUploadSession";
             this.btnUploadSession.Size = new System.Drawing.Size(248, 31);
             this.btnUploadSession.TabIndex = 2;
@@ -98,7 +100,7 @@
             // howManyTimes
             // 
             this.howManyTimes.Location = new System.Drawing.Point(192, 91);
-            this.howManyTimes.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.howManyTimes.Margin = new System.Windows.Forms.Padding(4);
             this.howManyTimes.Minimum = new decimal(new int[] {
             1,
             0,
@@ -128,7 +130,7 @@
             // BrowseSource
             // 
             this.BrowseSource.Location = new System.Drawing.Point(647, 20);
-            this.BrowseSource.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.BrowseSource.Margin = new System.Windows.Forms.Padding(4);
             this.BrowseSource.Name = "BrowseSource";
             this.BrowseSource.Size = new System.Drawing.Size(100, 31);
             this.BrowseSource.TabIndex = 12;
@@ -139,7 +141,7 @@
             // directorySourceTextBox
             // 
             this.directorySourceTextBox.Location = new System.Drawing.Point(8, 23);
-            this.directorySourceTextBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.directorySourceTextBox.Margin = new System.Windows.Forms.Padding(4);
             this.directorySourceTextBox.Name = "directorySourceTextBox";
             this.directorySourceTextBox.Size = new System.Drawing.Size(629, 22);
             this.directorySourceTextBox.TabIndex = 13;
@@ -150,9 +152,9 @@
             this.groupBox1.Controls.Add(this.directorySourceTextBox);
             this.groupBox1.Controls.Add(this.BrowseSource);
             this.groupBox1.Location = new System.Drawing.Point(5, 277);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(4);
             this.groupBox1.Size = new System.Drawing.Size(755, 66);
             this.groupBox1.TabIndex = 14;
             this.groupBox1.TabStop = false;
@@ -162,7 +164,7 @@
             // 
             this.openTempBtn.BackColor = System.Drawing.SystemColors.ControlLight;
             this.openTempBtn.Location = new System.Drawing.Point(589, 197);
-            this.openTempBtn.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.openTempBtn.Margin = new System.Windows.Forms.Padding(4);
             this.openTempBtn.Name = "openTempBtn";
             this.openTempBtn.Size = new System.Drawing.Size(157, 31);
             this.openTempBtn.TabIndex = 12;
@@ -172,6 +174,8 @@
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.label2);
+            this.groupBox3.Controls.Add(this.dateTimePicker);
             this.groupBox3.Controls.Add(this.openTempBtn);
             this.groupBox3.Controls.Add(this.openConfigBtn);
             this.groupBox3.Controls.Add(this.clearTempOptionCheckBox);
@@ -182,9 +186,9 @@
             this.groupBox3.Controls.Add(this.label1);
             this.groupBox3.Controls.Add(this.howManyTimes);
             this.groupBox3.Location = new System.Drawing.Point(5, 9);
-            this.groupBox3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox3.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox3.Padding = new System.Windows.Forms.Padding(4);
             this.groupBox3.Size = new System.Drawing.Size(755, 254);
             this.groupBox3.TabIndex = 16;
             this.groupBox3.TabStop = false;
@@ -193,7 +197,7 @@
             // openConfigBtn
             // 
             this.openConfigBtn.Location = new System.Drawing.Point(604, 43);
-            this.openConfigBtn.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.openConfigBtn.Margin = new System.Windows.Forms.Padding(4);
             this.openConfigBtn.Name = "openConfigBtn";
             this.openConfigBtn.Size = new System.Drawing.Size(143, 31);
             this.openConfigBtn.TabIndex = 15;
@@ -207,7 +211,7 @@
             this.clearTempOptionCheckBox.Checked = true;
             this.clearTempOptionCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
             this.clearTempOptionCheckBox.Location = new System.Drawing.Point(11, 137);
-            this.clearTempOptionCheckBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.clearTempOptionCheckBox.Margin = new System.Windows.Forms.Padding(4);
             this.clearTempOptionCheckBox.Name = "clearTempOptionCheckBox";
             this.clearTempOptionCheckBox.Size = new System.Drawing.Size(222, 21);
             this.clearTempOptionCheckBox.TabIndex = 14;
@@ -218,7 +222,7 @@
             // 
             this.tempFolderCheckBox.AutoSize = true;
             this.tempFolderCheckBox.Location = new System.Drawing.Point(11, 171);
-            this.tempFolderCheckBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tempFolderCheckBox.Margin = new System.Windows.Forms.Padding(4);
             this.tempFolderCheckBox.Name = "tempFolderCheckBox";
             this.tempFolderCheckBox.Size = new System.Drawing.Size(179, 21);
             this.tempFolderCheckBox.TabIndex = 13;
@@ -230,7 +234,7 @@
             // 
             this.tempFolderTekstBox.Enabled = false;
             this.tempFolderTekstBox.Location = new System.Drawing.Point(11, 201);
-            this.tempFolderTekstBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tempFolderTekstBox.Margin = new System.Windows.Forms.Padding(4);
             this.tempFolderTekstBox.Name = "tempFolderTekstBox";
             this.tempFolderTekstBox.Size = new System.Drawing.Size(545, 22);
             this.tempFolderTekstBox.TabIndex = 11;
@@ -242,9 +246,9 @@
             this.OutputGroupBox.Controls.Add(this.directoryOutputTextBox);
             this.OutputGroupBox.Controls.Add(this.BrowseOutput);
             this.OutputGroupBox.Location = new System.Drawing.Point(5, 364);
-            this.OutputGroupBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.OutputGroupBox.Margin = new System.Windows.Forms.Padding(4);
             this.OutputGroupBox.Name = "OutputGroupBox";
-            this.OutputGroupBox.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.OutputGroupBox.Padding = new System.Windows.Forms.Padding(4);
             this.OutputGroupBox.Size = new System.Drawing.Size(755, 66);
             this.OutputGroupBox.TabIndex = 17;
             this.OutputGroupBox.TabStop = false;
@@ -254,7 +258,7 @@
             // directoryOutputTextBox
             // 
             this.directoryOutputTextBox.Location = new System.Drawing.Point(8, 23);
-            this.directoryOutputTextBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.directoryOutputTextBox.Margin = new System.Windows.Forms.Padding(4);
             this.directoryOutputTextBox.Name = "directoryOutputTextBox";
             this.directoryOutputTextBox.Size = new System.Drawing.Size(629, 22);
             this.directoryOutputTextBox.TabIndex = 13;
@@ -262,13 +266,32 @@
             // BrowseOutput
             // 
             this.BrowseOutput.Location = new System.Drawing.Point(647, 20);
-            this.BrowseOutput.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.BrowseOutput.Margin = new System.Windows.Forms.Padding(4);
             this.BrowseOutput.Name = "BrowseOutput";
             this.BrowseOutput.Size = new System.Drawing.Size(100, 31);
             this.BrowseOutput.TabIndex = 12;
             this.BrowseOutput.Text = "Browse";
             this.BrowseOutput.UseVisualStyleBackColor = true;
             this.BrowseOutput.Click += new System.EventHandler(this.BrowseOutput_Click);
+            // 
+            // dateTimePicker
+            // 
+            this.dateTimePicker.CustomFormat = "dd.MM.yyyy";
+            this.dateTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dateTimePicker.MaxDate = System.DateTime.Today;
+            this.dateTimePicker.Location = new System.Drawing.Point(546, 133);
+            this.dateTimePicker.Name = "dateTimePicker";
+            this.dateTimePicker.Size = new System.Drawing.Size(200, 22);
+            this.dateTimePicker.TabIndex = 16;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(543, 113);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(72, 17);
+            this.label2.TabIndex = 17;
+            this.label2.Text = "Start Date";
             // 
             // MainWindow
             // 
@@ -283,7 +306,7 @@
             this.Controls.Add(this.btnUploadSession);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximizeBox = false;
             this.Name = "MainWindow";
             this.Text = "Examination Creator";
@@ -319,6 +342,8 @@
         private System.Windows.Forms.TextBox tempFolderTekstBox;
         private System.Windows.Forms.CheckBox clearTempOptionCheckBox;
         private System.Windows.Forms.Button openConfigBtn;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.DateTimePicker dateTimePicker;
     }
 }
 
