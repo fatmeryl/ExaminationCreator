@@ -5,14 +5,14 @@ namespace ExaminationCreator
 {
     public static class SetStartDate
     {
-        public static DateTime GetSelectedTimeAndDate()
+        public static DateTime GetSelectedTimeAndDate(string picketDate)
         {
-            var time = DateTime.Now.ToString("hh:mm:ss");
-            var date = DateTime.Now.ToString("dd.MM.yyyy");
+            var time = DateTime.Now.ToString("HH:mm:ss");
+            var date = picketDate;
             var space = " ";
             DateTime myDate = DateTime.ParseExact($"{date}{space}{time}", "dd.MM.yyyy HH:mm:ss",
-                CultureInfo.InvariantCulture, DateTimeStyles.None).ToUniversalTime();
-            DateTime date2 = myDate.ToLocalTime();
+                CultureInfo.CurrentCulture, DateTimeStyles.None);
+            var test = DateTime.Now.ToLocalTime();
             return DateTime.Now.ToLocalTime();
         }
     }
